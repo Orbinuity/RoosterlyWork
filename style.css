@@ -48,7 +48,7 @@ body {
   padding: 2.5rem;
   border-radius: 8px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   border: 1px solid var(--border);
 }
 
@@ -70,7 +70,14 @@ body {
 
 .auth-box h2 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.tfa-instructions {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
 input, select {
@@ -131,15 +138,27 @@ input:focus, select:focus {
   justify-content: center;
 }
 
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .toggle-auth {
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-muted);
 }
 
-.toggle-auth span {
+.toggle-auth a, .toggle-auth span {
   color: var(--primary);
   cursor: pointer;
+  text-decoration: none;
+}
+
+.toggle-auth a:hover, .toggle-auth span:hover {
+  text-decoration: underline;
 }
 
 .error-msg {
