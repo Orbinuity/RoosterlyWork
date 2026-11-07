@@ -1,6 +1,8 @@
 const API_BASE = 'https://api.orbinuity.nl:34430/api';
 const APP_KEY = 'roosterlywork';
+const TOKEN_KEY = 'roosterly_token';
 
+let authToken = localStorage.getItem(TOKEN_KEY) || getCookie(TOKEN_KEY) || null;
 let currentUser = null;
 let currentRoomId = null;
 let rooms = [];
@@ -21,11 +23,9 @@ const elements = {
   authContainer: document.getElementById('auth-container'),
   appContainer: document.getElementById('app-container'),
   loginForm: document.getElementById('login-form'),
-  registerForm: document.getElementById('register-form'),
   tfaForm: document.getElementById('tfa-form'),
   authError: document.getElementById('auth-error'),
-  showRegister: document.getElementById('show-register'),
-  showLogin: document.getElementById('show-login'),
+  btnCancelTfa: document.getElementById('btn-cancel-tfa'),
   
   workspaceSelect: document.getElementById('workspace-select'),
   btnCreateWorkspace: document.getElementById('btn-create-workspace'),
@@ -88,11 +88,23 @@ function getCookie(name) {
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-  document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
+  document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/;SameSite=Lax`;
 }
 
 function deleteCookie(name) {
-  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
+}
+
+function persistToken(token) {
+  authToken = token;
+  localStorage.setItem(TOKEN_KEY, token);
+  setCookie(TOKEN_KEY, token, 7);
+}
+
+function clearPersistedToken() {
+  authToken = null;
+  localStorage.removeItem(TOKEN_KEY);
+  deleteCookie(TOKEN_KEY);
 }
 
 function getMonday(d) {
@@ -107,69 +119,39 @@ function formatISODate(date) {
 }
 
 function showAuthError(msg) {
-  elements.authError.textContent = msg;
+  elements.authError.textContent = msg || '';
 }
 
 async function apiCall(endpoint, method = 'GET', body = null) {
-  const token = getCookie('roosterly_token');
+  const token = authToken || localStorage.getItem(TOKEN_KEY) || getCookie(TOKEN_KEY);
   const headers = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
   const options = { method, headers };
   if (body) options.body = JSON.stringify(body);
 
-  try {
-    const res = await fetch(`${API_BASE}${endpoint}`, options);
-    if (res.status === 404 && method === 'GET') return null;
-    if (res.status === 401) {
+  const res = await fetch(`${API_BASE}${endpoint}`, options);
+  if (res.status === 404 && method === 'GET') return null;
+
+  if (res.status === 401) {
+    if (!endpoint.startsWith('/auth/')) {
       handleLogout();
-      throw new Error('Unauthorized');
     }
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-    return data;
-  } catch (err) {
-    throw err;
+    const errData = await res.json().catch(() => ({ error: 'Unauthorized' }));
+    throw new Error(errData.error || 'Unauthorized');
   }
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
 }
-
-elements.showRegister.addEventListener('click', () => {
-  elements.loginForm.classList.remove('active');
-  elements.registerForm.classList.add('active');
-  showAuthError('');
-});
-
-elements.showLogin.addEventListener('click', () => {
-  elements.registerForm.classList.remove('active');
-  elements.loginForm.classList.add('active');
-  showAuthError('');
-});
-
-elements.registerForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const payload = {
-    username: document.getElementById('reg-username').value,
-    email: document.getElementById('reg-email').value,
-    displayName: document.getElementById('reg-displayname').value,
-    password: document.getElementById('reg-password').value,
-    acceptedTerms: true
-  };
-
-  try {
-    await apiCall('/auth/register', 'POST', payload);
-    elements.registerForm.classList.remove('active');
-    elements.loginForm.classList.add('active');
-    showAuthError('Registration successful. Verify email to login.');
-  } catch (err) {
-    showAuthError(err.message);
-  }
-});
 
 let tempUserId = null;
 
 elements.loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const identifier = document.getElementById('login-identifier').value;
+  showAuthError('');
+  const identifier = document.getElementById('login-identifier').value.trim();
   const password = document.getElementById('login-password').value;
 
   try {
@@ -178,9 +160,10 @@ elements.loginForm.addEventListener('submit', async (e) => {
       tempUserId = data.userId;
       elements.loginForm.classList.remove('active');
       elements.tfaForm.classList.add('active');
+      document.getElementById('tfa-code').value = '';
     } else {
-      setCookie('roosterly_token', data.token, 7);
-      initializeApp();
+      persistToken(data.token);
+      await initializeApp();
     }
   } catch (err) {
     showAuthError(err.message);
@@ -189,36 +172,67 @@ elements.loginForm.addEventListener('submit', async (e) => {
 
 elements.tfaForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const code = document.getElementById('tfa-code').value;
+  showAuthError('');
+  const code = document.getElementById('tfa-code').value.trim();
+  
+  if (!tempUserId) {
+    showAuthError('Session expired. Please sign in again.');
+    resetToLoginView();
+    return;
+  }
+
   try {
     const data = await apiCall('/auth/login/2fa', 'POST', { userId: tempUserId, code });
-    setCookie('roosterly_token', data.token, 7);
-    initializeApp();
+    if (!data.token) {
+      throw new Error('Authentication failed: Missing session token.');
+    }
+    persistToken(data.token);
+    tempUserId = null;
+    await initializeApp();
   } catch (err) {
-    showAuthError(err.message);
+    showAuthError(err.message || 'Invalid 2FA code.');
   }
 });
 
-function handleLogout() {
-  deleteCookie('roosterly_token');
-  elements.appContainer.classList.remove('active');
-  elements.authContainer.classList.add('active');
-  elements.loginForm.classList.add('active');
+elements.btnCancelTfa.addEventListener('click', () => {
+  tempUserId = null;
+  resetToLoginView();
+});
+
+function resetToLoginView() {
   elements.tfaForm.classList.remove('active');
-  elements.registerForm.classList.remove('active');
+  elements.loginForm.classList.add('active');
+  showAuthError('');
+}
+
+function handleLogout() {
+  clearPersistedToken();
   tempUserId = null;
   currentUser = null;
   rooms = [];
+  currentRoomId = null;
+  elements.appContainer.classList.remove('active');
+  elements.authContainer.classList.add('active');
+  resetToLoginView();
 }
 
 elements.btnLogout.addEventListener('click', handleLogout);
 
 async function initializeApp() {
   try {
-    currentUser = await apiCall('/account/me');
+    const profile = await apiCall('/account/me');
+    if (!profile) throw new Error('Failed to retrieve user profile.');
+    
+    currentUser = profile.user || profile;
+    if (!currentUser.id) {
+      currentUser.id = currentUser.userId || currentUser._id;
+    }
+
     elements.authContainer.classList.remove('active');
+    elements.tfaForm.classList.remove('active');
+    elements.loginForm.classList.add('active');
     elements.appContainer.classList.add('active');
-    elements.currentUserDisplay.textContent = currentUser.displayName;
+    elements.currentUserDisplay.textContent = currentUser.displayName || currentUser.username;
     
     await pullPersonalData();
     await pullRooms();
@@ -229,17 +243,25 @@ async function initializeApp() {
       renderEmptyState();
     }
     
-    setInterval(autoSync, 10000);
     renderEarnings();
   } catch (err) {
+    showAuthError(err.message || 'Failed to initialize session.');
     handleLogout();
   }
 }
 
 async function pullPersonalData() {
-  const data = await apiCall(`/external/${APP_KEY}`);
-  if (data && data.data) {
-    localData.personal = { ...localData.personal, ...data.data };
+  try {
+    const data = await apiCall(`/external/${APP_KEY}`);
+    if (data) {
+      const payload = data.data || data;
+      if (typeof payload === 'object') {
+        localData.personal.hourlyRate = Number(payload.hourlyRate) || 0;
+        localData.personal.timeLogs = Array.isArray(payload.timeLogs) ? payload.timeLogs : [];
+      }
+    }
+  } catch (err) {
+    localData.personal = { hourlyRate: 0, timeLogs: [] };
   }
 }
 
@@ -248,15 +270,20 @@ async function pushPersonalData() {
 }
 
 async function pullRooms() {
-  rooms = await apiCall(`/external/rooms?appId=${APP_KEY}`);
-  elements.workspaceSelect.innerHTML = '';
-  rooms.forEach(room => {
-    const opt = document.createElement('option');
-    opt.value = room.roomId;
-    opt.textContent = room.name;
-    elements.workspaceSelect.appendChild(opt);
-  });
-  if (currentRoomId) elements.workspaceSelect.value = currentRoomId;
+  try {
+    const res = await apiCall(`/external/rooms?appId=${APP_KEY}`);
+    rooms = Array.isArray(res) ? res : (res && res.rooms) ? res.rooms : [];
+    elements.workspaceSelect.innerHTML = '';
+    rooms.forEach(room => {
+      const opt = document.createElement('option');
+      opt.value = room.roomId;
+      opt.textContent = room.name;
+      elements.workspaceSelect.appendChild(opt);
+    });
+    if (currentRoomId) elements.workspaceSelect.value = currentRoomId;
+  } catch (err) {
+    rooms = [];
+  }
 }
 
 elements.workspaceSelect.addEventListener('change', (e) => {
@@ -268,8 +295,14 @@ function selectRoom(roomId) {
   const room = rooms.find(r => r.roomId === roomId);
   if (!room) return;
   
-  if (room.cases && room.cases.length > 0) {
-    localData.roomState = JSON.parse(room.cases[0].blocks[0] || '{"shifts":[],"messages":[]}');
+  if (room.cases && room.cases.length > 0 && room.cases[0].blocks && room.cases[0].blocks[0]) {
+    try {
+      localData.roomState = JSON.parse(room.cases[0].blocks[0]);
+      if (!Array.isArray(localData.roomState.shifts)) localData.roomState.shifts = [];
+      if (!Array.isArray(localData.roomState.messages)) localData.roomState.messages = [];
+    } catch (e) {
+      localData.roomState = { shifts: [], messages: [] };
+    }
   } else {
     localData.roomState = { shifts: [], messages: [] };
   }
@@ -310,16 +343,18 @@ async function pushRoomData() {
 
   await apiCall(`/external/rooms/${currentRoomId}`, 'PUT', {
     name: room.name,
-    description: room.description,
+    description: room.description || '',
     cases
   });
 }
 
 async function autoSync() {
-  if (!currentUser) return;
+  if (!currentUser || !authToken) return;
   await pullRooms();
   if (currentRoomId) selectRoom(currentRoomId);
 }
+
+setInterval(autoSync, 10000);
 
 elements.navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
@@ -346,8 +381,8 @@ elements.closeModals.forEach(btn => {
 elements.createWorkspaceForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const payload = {
-    name: elements.workspaceName.value,
-    description: elements.workspaceDesc.value,
+    name: elements.workspaceName.value.trim(),
+    description: elements.workspaceDesc.value.trim(),
     appId: APP_KEY
   };
   try {
@@ -357,7 +392,7 @@ elements.createWorkspaceForm.addEventListener('submit', async (e) => {
     await pullRooms();
     selectRoom(newRoom.roomId);
   } catch (err) {
-    console.error(err);
+    alert(err.message);
   }
 });
 
@@ -418,10 +453,11 @@ elements.btnAddShift.addEventListener('click', () => {
 
 function populateShiftUserSelect(room) {
   elements.shiftUser.innerHTML = '';
-  room.members.forEach(m => {
+  const members = Array.isArray(room.members) ? room.members : [];
+  members.forEach(m => {
     const opt = document.createElement('option');
     opt.value = m.username;
-    opt.textContent = m.displayName;
+    opt.textContent = m.displayName || m.username;
     elements.shiftUser.appendChild(opt);
   });
 }
@@ -514,7 +550,7 @@ elements.chatForm.addEventListener('submit', async (e) => {
   const msg = {
     id: Date.now().toString(),
     userId: currentUser.id,
-    author: currentUser.displayName,
+    author: currentUser.displayName || currentUser.username,
     text: text,
     timestamp: new Date().toISOString()
   };
@@ -541,7 +577,7 @@ elements.logHoursForm.addEventListener('submit', async (e) => {
   const log = {
     id: Date.now().toString(),
     date: elements.logDate.value,
-    duration: parseFloat(elements.logDuration.value)
+    duration: parseFloat(elements.logDuration.value) || 0
   };
   
   if (!localData.personal.timeLogs) localData.personal.timeLogs = [];
@@ -564,7 +600,7 @@ function renderEarnings() {
   let wHours = 0;
   let mHours = 0;
   
-  logs.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(log => {
+  logs.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(log => {
     const d = new Date(log.date);
     if (d >= weekStart) wHours += log.duration;
     if (d >= monthStart) mHours += log.duration;
@@ -586,12 +622,13 @@ function renderEarnings() {
 
 function renderSettings(room) {
   elements.memberList.innerHTML = '';
-  room.members.forEach(m => {
+  const members = Array.isArray(room.members) ? room.members : [];
+  members.forEach(m => {
     const li = document.createElement('li');
     li.className = 'log-item';
     
     const info = document.createElement('span');
-    info.textContent = `${m.displayName} (@${m.username})`;
+    info.textContent = `${m.displayName || m.username} (@${m.username})`;
     li.appendChild(info);
     
     if (room.hostId === currentUser.id && m.userId !== currentUser.id) {
@@ -608,14 +645,14 @@ function renderSettings(room) {
 
 elements.inviteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const username = elements.inviteUsername.value;
+  const username = elements.inviteUsername.value.trim();
   try {
     await apiCall(`/external/rooms/${currentRoomId}/members`, 'POST', { username });
     elements.inviteUsername.value = '';
     await pullRooms();
     selectRoom(currentRoomId);
   } catch (err) {
-    console.error(err);
+    alert(err.message);
   }
 });
 
@@ -625,15 +662,17 @@ async function removeMember(roomId, userId) {
     await pullRooms();
     selectRoom(currentRoomId);
   } catch (err) {
-    console.error(err);
+    alert(err.message);
   }
 }
 
 function renderEmptyState() {
   elements.calendarGrid.innerHTML = '<div style="padding: 2rem; grid-column: 1 / -1; text-align: center; color: var(--text-muted);">No workspace selected. Create or join one.</div>';
   elements.chatMessages.innerHTML = '';
+  elements.scheduleRoleBadge.textContent = '';
+  elements.btnAddShift.classList.add('hidden');
 }
 
-if (getCookie('roosterly_token')) {
+if (authToken) {
   initializeApp();
 }
