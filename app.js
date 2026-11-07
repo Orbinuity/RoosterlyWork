@@ -78,6 +78,16 @@ const elements = {
   closeModals: document.querySelectorAll('.close-modal')
 };
 
+function getRoomKey(room) {
+  if (!room) return null;
+  return room.roomId || room.id || room._id || null;
+}
+
+function getUserId(user) {
+  if (!user) return null;
+  return user.id || user.userId || user._id || null;
+}
+
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -224,7 +234,7 @@ async function initializeApp() {
     if (!profile) throw new Error('Failed to retrieve user profile.');
     
     currentUser = profile.user || profile;
-    if (!currentUser.id) {
+    if (!getUserId(currentUser)) {
       currentUser.id = currentUser.userId || currentUser._id;
     }
 
@@ -238,7 +248,8 @@ async function initializeApp() {
     await pullRooms();
     
     if (rooms.length > 0) {
-      selectRoom(rooms[0].roomId);
+      const activeId = currentRoomId || getRoomKey(rooms[0]);
+      selectRoom(activeId);
     } else {
       renderEmptyState();
     }
@@ -275,12 +286,15 @@ async function pullRooms() {
     rooms = Array.isArray(res) ? res : (res && res.rooms) ? res.rooms : [];
     elements.workspaceSelect.innerHTML = '';
     rooms.forEach(room => {
+      const id = getRoomKey(room);
       const opt = document.createElement('option');
-      opt.value = room.roomId;
+      opt.value = id;
       opt.textContent = room.name;
       elements.workspaceSelect.appendChild(opt);
     });
-    if (currentRoomId) elements.workspaceSelect.value = currentRoomId;
+    if (currentRoomId) {
+      elements.workspaceSelect.value = currentRoomId;
+    }
   } catch (err) {
     rooms = [];
   }
@@ -291,8 +305,11 @@ elements.workspaceSelect.addEventListener('change', (e) => {
 });
 
 function selectRoom(roomId) {
+  if (!roomId) return;
   currentRoomId = roomId;
-  const room = rooms.find(r => r.roomId === roomId);
+  elements.workspaceSelect.value = roomId;
+
+  const room = rooms.find(r => getRoomKey(r) === roomId);
   if (!room) return;
   
   if (room.cases && room.cases.length > 0 && room.cases[0].blocks && room.cases[0].blocks[0]) {
@@ -314,7 +331,10 @@ function selectRoom(roomId) {
 }
 
 function updateRoleUI(room) {
-  const isHost = room.hostId === currentUser.id;
+  const hostId = room.hostId || room.ownerId || room.userId || (room.host && getUserId(room.host));
+  const activeUserId = getUserId(currentUser);
+  const isHost = hostId === activeUserId;
+
   elements.scheduleRoleBadge.textContent = isHost ? 'Admin' : 'Member';
   
   if (isHost) {
@@ -331,7 +351,7 @@ function updateRoleUI(room) {
 
 async function pushRoomData() {
   if (!currentRoomId) return;
-  const room = rooms.find(r => r.roomId === currentRoomId);
+  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
   if (!room) return;
 
   const cases = [{
@@ -390,7 +410,10 @@ elements.createWorkspaceForm.addEventListener('submit', async (e) => {
     elements.modalCreateWorkspace.classList.remove('active');
     elements.createWorkspaceForm.reset();
     await pullRooms();
-    selectRoom(newRoom.roomId);
+    const newId = getRoomKey(newRoom) || (newRoom.room && getRoomKey(newRoom.room));
+    if (newId) {
+      selectRoom(newId);
+    }
   } catch (err) {
     alert(err.message);
   }
@@ -513,9 +536,10 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.7) {
 
 function renderChat() {
   elements.chatMessages.innerHTML = '';
+  const activeUserId = getUserId(currentUser);
   localData.roomState.messages.forEach(msg => {
     const wrapper = document.createElement('div');
-    wrapper.className = `chat-msg ${msg.userId === currentUser.id ? 'self' : ''}`;
+    wrapper.className = `chat-msg ${msg.userId === activeUserId ? 'self' : ''}`;
     
     const author = document.createElement('span');
     author.className = 'msg-author';
@@ -549,7 +573,7 @@ elements.chatForm.addEventListener('submit', async (e) => {
 
   const msg = {
     id: Date.now().toString(),
-    userId: currentUser.id,
+    userId: getUserId(currentUser),
     author: currentUser.displayName || currentUser.username,
     text: text,
     timestamp: new Date().toISOString()
@@ -622,7 +646,12 @@ function renderEarnings() {
 
 function renderSettings(room) {
   elements.memberList.innerHTML = '';
+  const roomId = getRoomKey(room);
+  const activeUserId = getUserId(currentUser);
+  const hostId = room.hostId || room.ownerId || room.userId || (room.host && getUserId(room.host));
+  const isHost = hostId === activeUserId;
   const members = Array.isArray(room.members) ? room.members : [];
+
   members.forEach(m => {
     const li = document.createElement('li');
     li.className = 'log-item';
@@ -631,11 +660,12 @@ function renderSettings(room) {
     info.textContent = `${m.displayName || m.username} (@${m.username})`;
     li.appendChild(info);
     
-    if (room.hostId === currentUser.id && m.userId !== currentUser.id) {
+    const memberId = getUserId(m);
+    if (isHost && memberId !== activeUserId) {
       const btn = document.createElement('button');
       btn.className = 'btn-secondary';
       btn.textContent = 'Remove';
-      btn.onclick = () => removeMember(room.roomId, m.userId);
+      btn.onclick = () => removeMember(roomId, memberId);
       li.appendChild(btn);
     }
     
@@ -646,6 +676,10 @@ function renderSettings(room) {
 elements.inviteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = elements.inviteUsername.value.trim();
+  if (!currentRoomId) {
+    alert('No active workspace selected.');
+    return;
+  }
   try {
     await apiCall(`/external/rooms/${currentRoomId}/members`, 'POST', { username });
     elements.inviteUsername.value = '';
