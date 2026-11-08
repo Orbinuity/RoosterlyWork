@@ -128,8 +128,8 @@ input:focus, select:focus {
 }
 
 .btn-sm {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.85rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
 }
 
 .btn-icon {
@@ -310,7 +310,7 @@ input:focus, select:focus {
   border-radius: 4px;
   font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   font-weight: 600;
   display: inline-block;
   white-space: nowrap;
@@ -408,11 +408,8 @@ input:focus, select:focus {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  transition: transform 0.1s, border-color 0.15s;
-}
-
-.shift-card:hover {
-  border-color: var(--primary);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .shift-card.completed {
@@ -435,39 +432,41 @@ input:focus, select:focus {
 
 .shift-card-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
+  width: 100%;
 }
 
 .shift-card-name {
   font-weight: 600;
   font-size: 0.85rem;
+  color: var(--text-main);
+  width: 100%;
   word-break: break-word;
+  line-height: 1.25;
 }
 
 .shift-card-time {
   font-size: 0.8rem;
   color: var(--text-muted);
+  width: 100%;
 }
 
-.btn-shift-manage {
+.shift-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
   margin-top: 0.25rem;
-  padding: 0.35rem 0.6rem;
-  background-color: var(--bg-surface-hover);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.15s, border-color 0.15s;
+  width: 100%;
 }
 
-.btn-shift-manage:hover {
-  background-color: var(--border);
-  border-color: var(--primary);
+.shift-card-actions button {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
 }
 
 .shift-detail-info {
