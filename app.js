@@ -67,6 +67,7 @@ const i18n = {
     invite: 'Invite',
     membersPermissions: 'Workspace Members & Permissions',
     workspaceMembers: 'Workspace Members',
+    notInWorkspace: 'You are not a member of this workspace.',
     createNewWorkspace: 'Create New Workspace',
     cancel: 'Cancel',
     create: 'Create',
@@ -82,6 +83,12 @@ const i18n = {
     sendTradeOffer: 'Send Offer',
     roleAdmin: 'Admin',
     roleMember: 'Member',
+    shiftDetails: 'Shift Details',
+    manageShift: 'Manage Shift',
+    assignedToLabel: 'Assigned to',
+    shiftDateLabel: 'Date',
+    shiftTimeLabel: 'Time',
+    shiftStatusLabel: 'Status',
     shiftStatusAssigned: 'Assigned',
     shiftStatusConfirmed: 'Attending',
     shiftStatusNotNeeded: 'You Don\'t Have to Come',
@@ -89,10 +96,10 @@ const i18n = {
     shiftStatusCompleted: 'Finished',
     confirmAttendance: 'Confirm Attendance',
     btnNoWork: 'You Don\'t Have to Come',
-    btnUndoNoWork: 'Undo (Reinstate Shift)',
+    btnUndoNoWork: 'Reinstate Shift',
     offerTrade: 'Trade Shift',
     markFinished: 'Mark Finished',
-    unfinishShiftBtn: 'Unfinish',
+    unfinishShiftBtn: 'Mark as Unfinished',
     takeShiftBtn: 'Take Shift',
     acceptTrade: 'Accept Trade',
     declineTrade: 'Decline Trade',
@@ -192,6 +199,7 @@ const i18n = {
     invite: 'Uitnodigen',
     membersPermissions: 'Leden & Beheerdersrechten',
     workspaceMembers: 'Leden van deze werkplek',
+    notInWorkspace: 'Je bent geen lid van deze werkplek.',
     createNewWorkspace: 'Nieuwe werkplek aanmaken',
     cancel: 'Annuleren',
     create: 'Aanmaken',
@@ -207,6 +215,12 @@ const i18n = {
     sendTradeOffer: 'Aanbod versturen',
     roleAdmin: 'Beheerder',
     roleMember: 'Medewerker',
+    shiftDetails: 'Dienstdetails',
+    manageShift: 'Dienst beheren',
+    assignedToLabel: 'Toegewezen aan',
+    shiftDateLabel: 'Datum',
+    shiftTimeLabel: 'Tijd',
+    shiftStatusLabel: 'Status',
     shiftStatusAssigned: 'Ingepland',
     shiftStatusConfirmed: 'Aanwezig',
     shiftStatusNotNeeded: 'Je hoeft niet te komen',
@@ -214,7 +228,7 @@ const i18n = {
     shiftStatusCompleted: 'Gewerkt',
     confirmAttendance: 'Aanwezigheid bevestigen',
     btnNoWork: 'Je hoeft niet te komen',
-    btnUndoNoWork: 'Herstellen (Dienst actief)',
+    btnUndoNoWork: 'Dienst herstellen',
     offerTrade: 'Dienst ruilen',
     markFinished: 'Afronden als gewerkt',
     unfinishShiftBtn: 'Markeer als niet afgerond',
@@ -317,6 +331,7 @@ const i18n = {
     invite: 'Einladen',
     membersPermissions: 'Mitglieder & Berechtigungen',
     workspaceMembers: 'Mitglieder',
+    notInWorkspace: 'Sie sind kein Mitglied dieses Arbeitsbereichs.',
     createNewWorkspace: 'Neuen Arbeitsbereich erstellen',
     cancel: 'Abbrechen',
     create: 'Erstellen',
@@ -332,6 +347,12 @@ const i18n = {
     sendTradeOffer: 'Angebot senden',
     roleAdmin: 'Administrator',
     roleMember: 'Mitarbeiter',
+    shiftDetails: 'Schichtdetails',
+    manageShift: 'Schicht verwalten',
+    assignedToLabel: 'Zugewiesen an',
+    shiftDateLabel: 'Datum',
+    shiftTimeLabel: 'Zeit',
+    shiftStatusLabel: 'Status',
     shiftStatusAssigned: 'Eingeteilt',
     shiftStatusConfirmed: 'Bestätigt',
     shiftStatusNotNeeded: 'Du musst nicht kommen',
@@ -442,6 +463,7 @@ const i18n = {
     invite: 'Invitar',
     membersPermissions: 'Miembros y Permisos',
     workspaceMembers: 'Miembros del espacio',
+    notInWorkspace: 'No eres miembro de este espacio de trabajo.',
     createNewWorkspace: 'Crear nuevo espacio',
     cancel: 'Cancelar',
     create: 'Crear',
@@ -457,6 +479,12 @@ const i18n = {
     sendTradeOffer: 'Enviar oferta',
     roleAdmin: 'Administrador',
     roleMember: 'Miembro',
+    shiftDetails: 'Detalles del turno',
+    manageShift: 'Gestionar turno',
+    assignedToLabel: 'Asignado a',
+    shiftDateLabel: 'Fecha',
+    shiftTimeLabel: 'Horario',
+    shiftStatusLabel: 'Estado',
     shiftStatusAssigned: 'Asignado',
     shiftStatusConfirmed: 'Confirmado',
     shiftStatusNotNeeded: 'No tienes que venir',
@@ -567,6 +595,7 @@ const i18n = {
     invite: 'Inviter',
     membersPermissions: 'Membres et Permissions',
     workspaceMembers: 'Membres de l\'espace',
+    notInWorkspace: 'Vous n\'êtes pas membre de cet espace.',
     createNewWorkspace: 'Nouvel espace',
     cancel: 'Annuler',
     create: 'Créer',
@@ -582,6 +611,12 @@ const i18n = {
     sendTradeOffer: 'Envoyer l\'offre',
     roleAdmin: 'Administrateur',
     roleMember: 'Membre',
+    shiftDetails: 'Détails du quart',
+    manageShift: 'Gérer le quart',
+    assignedToLabel: 'Attribué à',
+    shiftDateLabel: 'Date',
+    shiftTimeLabel: 'Heure',
+    shiftStatusLabel: 'Statut',
     shiftStatusAssigned: 'Planifié',
     shiftStatusConfirmed: 'Présent',
     shiftStatusNotNeeded: 'Tu n\'as pas besoin de venir',
@@ -794,6 +829,10 @@ const elements = {
   editShiftDate: document.getElementById('edit-shift-date'),
   editShiftTime: document.getElementById('edit-shift-time'),
   editShiftRepeat: document.getElementById('edit-shift-repeat'),
+  
+  modalShiftDetails: document.getElementById('modal-shift-details'),
+  shiftDetailInfo: document.getElementById('shift-detail-info'),
+  shiftModalActions: document.getElementById('shift-modal-actions'),
   
   modalAddUnavailable: document.getElementById('modal-add-unavailable'),
   addUnavailableForm: document.getElementById('add-unavailable-form'),
@@ -1038,7 +1077,7 @@ elements.languageSelect.addEventListener('change', async (e) => {
   applyLanguage(chosen);
   await pushPersonalData();
   const room = rooms.find(r => getRoomKey(r) === currentRoomId);
-  if (room) {
+  if (room && isUserInRoom(room, getUserId(currentUser))) {
     updateRoleUI(room);
     renderSchedule();
     renderCompanyChat();
@@ -1047,13 +1086,26 @@ elements.languageSelect.addEventListener('change', async (e) => {
     renderSettings(room);
     renderDmMembersList();
     if (activeDmRoomId) renderDmMessages();
+  } else {
+    renderEmptyState();
   }
 });
+
+function isUserInRoom(room, userId) {
+  if (!room || !userId) return false;
+  const hostId = room.hostId || room.ownerId || room.userId || (room.host && getUserId(room.host));
+  if (hostId === userId) return true;
+  const members = Array.isArray(room.members) ? room.members : [];
+  return members.some(m => getUserId(m) === userId);
+}
 
 async function pullRooms() {
   try {
     const res = await apiCall(`/external/rooms?appId=${APP_KEY}`);
-    rooms = Array.isArray(res) ? res : (res && res.rooms) ? res.rooms : [];
+    const rawRooms = Array.isArray(res) ? res : (res && res.rooms) ? res.rooms : [];
+    const activeUserId = getUserId(currentUser);
+    rooms = rawRooms.filter(r => isUserInRoom(r, activeUserId));
+
     elements.workspaceSelect.innerHTML = '';
     rooms.forEach(room => {
       const id = getRoomKey(room);
@@ -1062,11 +1114,18 @@ async function pullRooms() {
       opt.textContent = room.name;
       elements.workspaceSelect.appendChild(opt);
     });
-    if (currentRoomId) {
+
+    if (currentRoomId && rooms.some(r => getRoomKey(r) === currentRoomId)) {
       elements.workspaceSelect.value = currentRoomId;
+    } else if (rooms.length > 0) {
+      currentRoomId = getRoomKey(rooms[0]);
+      elements.workspaceSelect.value = currentRoomId;
+    } else {
+      currentRoomId = null;
     }
   } catch (err) {
     rooms = [];
+    currentRoomId = null;
   }
 }
 
@@ -1090,13 +1149,22 @@ function isUserAdmin(room, userId) {
 }
 
 function selectRoom(roomId) {
-  if (!roomId) return;
+  if (!roomId) {
+    renderEmptyState();
+    return;
+  }
+
+  const room = rooms.find(r => getRoomKey(r) === roomId);
+  const activeUserId = getUserId(currentUser);
+  if (!room || !isUserInRoom(room, activeUserId)) {
+    currentRoomId = null;
+    renderEmptyState();
+    return;
+  }
+
   currentRoomId = roomId;
   elements.workspaceSelect.value = roomId;
 
-  const room = rooms.find(r => getRoomKey(r) === roomId);
-  if (!room) return;
-  
   if (room.cases && room.cases.length > 0 && room.cases[0].blocks && room.cases[0].blocks[0]) {
     try {
       const parsed = JSON.parse(room.cases[0].blocks[0]);
@@ -1197,6 +1265,7 @@ elements.closeModals.forEach(btn => {
     elements.modalCreateWorkspace.classList.remove('active');
     elements.modalAddShift.classList.remove('active');
     elements.modalEditShift.classList.remove('active');
+    elements.modalShiftDetails.classList.remove('active');
     elements.modalAddUnavailable.classList.remove('active');
     elements.modalTradeShift.classList.remove('active');
     activeTradeShiftId = null;
@@ -1227,9 +1296,6 @@ elements.createWorkspaceForm.addEventListener('submit', async (e) => {
 function renderSchedule() {
   elements.calendarGrid.innerHTML = '';
   const days = t('daysList') || ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const activeUserId = getUserId(currentUser);
-  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
-  const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
   
   const weekEnd = new Date(currentWeekStart);
   weekEnd.setDate(currentWeekStart.getDate() + 6);
@@ -1268,9 +1334,12 @@ function renderSchedule() {
       const card = document.createElement('div');
       card.className = `shift-card ${shift.status}`;
       
-      const titleSpan = document.createElement('span');
-      titleSpan.innerHTML = `<strong>${shift.displayName}</strong><br>${shift.time}`;
-      card.appendChild(titleSpan);
+      const cardHeader = document.createElement('div');
+      cardHeader.className = 'shift-card-header';
+
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'shift-card-name';
+      nameSpan.textContent = shift.displayName;
 
       const statusBadge = document.createElement('span');
       const statusKey = shift.status === 'confirmed' ? 'shiftStatusConfirmed' :
@@ -1279,98 +1348,171 @@ function renderSchedule() {
                         shift.status === 'completed' ? 'shiftStatusCompleted' : 'shiftStatusAssigned';
       statusBadge.className = `status-badge ${shift.status}`;
       statusBadge.textContent = t(statusKey);
-      card.appendChild(statusBadge);
 
-      const actionsDiv = document.createElement('div');
-      actionsDiv.className = 'shift-actions';
+      cardHeader.appendChild(nameSpan);
+      cardHeader.appendChild(statusBadge);
+      card.appendChild(cardHeader);
 
-      const isMyShift = shift.userId === activeUserId;
-      const isOpenOffer = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.mode === 'open';
-      const isDirectOfferToMe = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.toUserId === activeUserId;
+      const timeSpan = document.createElement('span');
+      timeSpan.className = 'shift-card-time';
+      timeSpan.textContent = shift.time;
+      card.appendChild(timeSpan);
 
-      if (isMyShift && shift.status !== 'completed' && shift.status !== 'not_needed') {
-        if (shift.status !== 'confirmed') {
-          const btnConfirm = document.createElement('button');
-          btnConfirm.className = 'btn-secondary';
-          btnConfirm.textContent = t('confirmAttendance');
-          btnConfirm.onclick = () => updateShiftStatus(shift.id, 'confirmed');
-          actionsDiv.appendChild(btnConfirm);
-        }
-
-        const btnTrade = document.createElement('button');
-        btnTrade.className = 'btn-secondary';
-        btnTrade.textContent = t('offerTrade');
-        btnTrade.onclick = () => openTradeModal(shift);
-        actionsDiv.appendChild(btnTrade);
-
-        const btnFinish = document.createElement('button');
-        btnFinish.className = 'btn-primary';
-        btnFinish.textContent = t('markFinished');
-        btnFinish.onclick = () => completeShift(shift);
-        actionsDiv.appendChild(btnFinish);
-      }
-
-      if ((isMyShift || amAdmin) && shift.status === 'completed') {
-        const btnUndoFinish = document.createElement('button');
-        btnUndoFinish.className = 'btn-secondary';
-        btnUndoFinish.textContent = t('unfinishShiftBtn');
-        btnUndoFinish.onclick = () => unfinishShift(shift);
-        actionsDiv.appendChild(btnUndoFinish);
-      }
-
-      if (!isMyShift && (isOpenOffer || isDirectOfferToMe)) {
-        const btnTake = document.createElement('button');
-        btnTake.className = 'btn-primary';
-        btnTake.textContent = t('takeShiftBtn');
-        btnTake.onclick = () => claimShift(shift.id);
-        actionsDiv.appendChild(btnTake);
-
-        if (isDirectOfferToMe) {
-          const btnDeclineTrade = document.createElement('button');
-          btnDeclineTrade.className = 'btn-secondary';
-          btnDeclineTrade.textContent = t('declineTrade');
-          btnDeclineTrade.onclick = () => declineShiftTrade(shift.id);
-          actionsDiv.appendChild(btnDeclineTrade);
-        }
-      }
-
-      if (amAdmin) {
-        if (shift.status !== 'completed' && shift.status !== 'not_needed') {
-          const btnNoWork = document.createElement('button');
-          btnNoWork.className = 'btn-secondary';
-          btnNoWork.textContent = t('btnNoWork');
-          btnNoWork.onclick = () => updateShiftStatus(shift.id, 'not_needed');
-          actionsDiv.appendChild(btnNoWork);
-        } else if (shift.status === 'not_needed') {
-          const btnUndoNoWork = document.createElement('button');
-          btnUndoNoWork.className = 'btn-secondary';
-          btnUndoNoWork.textContent = t('btnUndoNoWork');
-          btnUndoNoWork.onclick = () => updateShiftStatus(shift.id, 'assigned');
-          actionsDiv.appendChild(btnUndoNoWork);
-        }
-
-        const btnEdit = document.createElement('button');
-        btnEdit.className = 'btn-secondary';
-        btnEdit.textContent = t('editShiftBtn');
-        btnEdit.onclick = () => openEditShiftModal(shift);
-        actionsDiv.appendChild(btnEdit);
-
-        const btnDel = document.createElement('button');
-        btnDel.className = 'btn-secondary';
-        btnDel.textContent = t('deleteShift');
-        btnDel.onclick = () => deleteShift(shift.id);
-        actionsDiv.appendChild(btnDel);
-      }
-
-      if (actionsDiv.children.length > 0) {
-        card.appendChild(actionsDiv);
-      }
+      const manageBtn = document.createElement('button');
+      manageBtn.className = 'btn-shift-manage';
+      manageBtn.textContent = t('manageShift');
+      manageBtn.onclick = (e) => {
+        e.stopPropagation();
+        openShiftDetailsModal(shift);
+      };
+      card.appendChild(manageBtn);
 
       dayDiv.appendChild(card);
     });
 
     elements.calendarGrid.appendChild(dayDiv);
   }
+}
+
+function openShiftDetailsModal(shift) {
+  const activeUserId = getUserId(currentUser);
+  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
+  const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
+  const isMyShift = shift.userId === activeUserId;
+  const isOpenOffer = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.mode === 'open';
+  const isDirectOfferToMe = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.toUserId === activeUserId;
+
+  const statusKey = shift.status === 'confirmed' ? 'shiftStatusConfirmed' :
+                    shift.status === 'not_needed' ? 'shiftStatusNotNeeded' :
+                    shift.status === 'offered' ? 'shiftStatusOffered' :
+                    shift.status === 'completed' ? 'shiftStatusCompleted' : 'shiftStatusAssigned';
+
+  elements.shiftDetailInfo.innerHTML = `
+    <div class="shift-detail-row">
+      <span class="shift-detail-label">${t('assignedToLabel')}:</span>
+      <strong>${shift.displayName}</strong>
+    </div>
+    <div class="shift-detail-row">
+      <span class="shift-detail-label">${t('shiftDateLabel')}:</span>
+      <span>${shift.date}</span>
+    </div>
+    <div class="shift-detail-row">
+      <span class="shift-detail-label">${t('shiftTimeLabel')}:</span>
+      <span>${shift.time}</span>
+    </div>
+    <div class="shift-detail-row">
+      <span class="shift-detail-label">${t('shiftStatusLabel')}:</span>
+      <span class="status-badge ${shift.status}">${t(statusKey)}</span>
+    </div>
+  `;
+
+  elements.shiftModalActions.innerHTML = '';
+
+  if (isMyShift && shift.status !== 'completed' && shift.status !== 'not_needed') {
+    if (shift.status !== 'confirmed') {
+      const btnConfirm = document.createElement('button');
+      btnConfirm.className = 'btn-secondary';
+      btnConfirm.textContent = t('confirmAttendance');
+      btnConfirm.onclick = () => {
+        elements.modalShiftDetails.classList.remove('active');
+        updateShiftStatus(shift.id, 'confirmed');
+      };
+      elements.shiftModalActions.appendChild(btnConfirm);
+    }
+
+    const btnTrade = document.createElement('button');
+    btnTrade.className = 'btn-secondary';
+    btnTrade.textContent = t('offerTrade');
+    btnTrade.onclick = () => {
+      elements.modalShiftDetails.classList.remove('active');
+      openTradeModal(shift);
+    };
+    elements.shiftModalActions.appendChild(btnTrade);
+
+    const btnFinish = document.createElement('button');
+    btnFinish.className = 'btn-primary';
+    btnFinish.textContent = t('markFinished');
+    btnFinish.onclick = () => {
+      elements.modalShiftDetails.classList.remove('active');
+      completeShift(shift);
+    };
+    elements.shiftModalActions.appendChild(btnFinish);
+  }
+
+  if ((isMyShift || amAdmin) && shift.status === 'completed') {
+    const btnUndoFinish = document.createElement('button');
+    btnUndoFinish.className = 'btn-secondary';
+    btnUndoFinish.textContent = t('unfinishShiftBtn');
+    btnUndoFinish.onclick = () => {
+      elements.modalShiftDetails.classList.remove('active');
+      unfinishShift(shift);
+    };
+    elements.shiftModalActions.appendChild(btnUndoFinish);
+  }
+
+  if (!isMyShift && (isOpenOffer || isDirectOfferToMe)) {
+    const btnTake = document.createElement('button');
+    btnTake.className = 'btn-primary';
+    btnTake.textContent = t('takeShiftBtn');
+    btnTake.onclick = () => {
+      elements.modalShiftDetails.classList.remove('active');
+      claimShift(shift.id);
+    };
+    elements.shiftModalActions.appendChild(btnTake);
+
+    if (isDirectOfferToMe) {
+      const btnDeclineTrade = document.createElement('button');
+      btnDeclineTrade.className = 'btn-secondary';
+      btnDeclineTrade.textContent = t('declineTrade');
+      btnDeclineTrade.onclick = () => {
+        elements.modalShiftDetails.classList.remove('active');
+        declineShiftTrade(shift.id);
+      };
+      elements.shiftModalActions.appendChild(btnDeclineTrade);
+    }
+  }
+
+  if (amAdmin) {
+    if (shift.status !== 'completed' && shift.status !== 'not_needed') {
+      const btnNoWork = document.createElement('button');
+      btnNoWork.className = 'btn-secondary';
+      btnNoWork.textContent = t('btnNoWork');
+      btnNoWork.onclick = () => {
+        elements.modalShiftDetails.classList.remove('active');
+        updateShiftStatus(shift.id, 'not_needed');
+      };
+      elements.shiftModalActions.appendChild(btnNoWork);
+    } else if (shift.status === 'not_needed') {
+      const btnUndoNoWork = document.createElement('button');
+      btnUndoNoWork.className = 'btn-secondary';
+      btnUndoNoWork.textContent = t('btnUndoNoWork');
+      btnUndoNoWork.onclick = () => {
+        elements.modalShiftDetails.classList.remove('active');
+        updateShiftStatus(shift.id, 'assigned');
+      };
+      elements.shiftModalActions.appendChild(btnUndoNoWork);
+    }
+
+    const btnEdit = document.createElement('button');
+    btnEdit.className = 'btn-secondary';
+    btnEdit.textContent = t('editShiftBtn');
+    btnEdit.onclick = () => {
+      elements.modalShiftDetails.classList.remove('active');
+      openEditShiftModal(shift);
+    };
+    elements.shiftModalActions.appendChild(btnEdit);
+
+    const btnDel = document.createElement('button');
+    btnDel.className = 'btn-secondary';
+    btnDel.textContent = t('deleteShift');
+    btnDel.onclick = () => {
+      elements.modalShiftDetails.classList.remove('active');
+      deleteShift(shift.id);
+    };
+    elements.shiftModalActions.appendChild(btnDel);
+  }
+
+  elements.modalShiftDetails.classList.add('active');
 }
 
 elements.btnPrevWeek.addEventListener('click', () => {
@@ -1861,7 +2003,11 @@ function renderUnavailability() {
 
   const activeUserId = getUserId(currentUser);
   const room = rooms.find(r => getRoomKey(r) === currentRoomId);
-  const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
+  if (!room || !isUserInRoom(room, activeUserId)) {
+    return;
+  }
+
+  const amAdmin = isUserAdmin(room, activeUserId);
   const unavails = localData.roomState.unavailability || [];
 
   const myEntries = unavails.filter(u => u.userId === activeUserId);
@@ -2132,11 +2278,10 @@ async function pullDmRooms() {
 function renderDmMembersList() {
   elements.dmMembersList.innerHTML = '';
   const room = rooms.find(r => getRoomKey(r) === currentRoomId);
-  if (!room) return;
-
   const activeUserId = getUserId(currentUser);
+  if (!room || !isUserInRoom(room, activeUserId)) return;
+
   const members = Array.isArray(room.members) ? room.members : [];
-  
   members.filter(m => getUserId(m) !== activeUserId).forEach(m => {
     const targetId = getUserId(m);
     const li = document.createElement('li');
@@ -2556,9 +2701,19 @@ elements.btnCalcRange.addEventListener('click', () => {
 function renderSettings(room) {
   elements.memberList.innerHTML = '';
   elements.readonlyMemberList.innerHTML = '';
-  
-  const roomId = getRoomKey(room);
+
   const activeUserId = getUserId(currentUser);
+  if (!room || !isUserInRoom(room, activeUserId)) {
+    const emptyNotice = document.createElement('li');
+    emptyNotice.className = 'empty-state-text';
+    emptyNotice.textContent = t('notInWorkspace');
+    elements.readonlyMemberList.appendChild(emptyNotice);
+    elements.adminSettings.classList.add('hidden');
+    elements.nonAdminSettings.classList.remove('hidden');
+    return;
+  }
+
+  const roomId = getRoomKey(room);
   const amAdmin = isUserAdmin(room, activeUserId);
   const members = Array.isArray(room.members) ? room.members : [];
   const admins = getRoomAdmins(room);
@@ -2666,6 +2821,13 @@ async function removeMember(roomId, userId) {
 function renderEmptyState() {
   elements.calendarGrid.innerHTML = '<div style="padding: 2rem; grid-column: 1 / -1; text-align: center; color: var(--text-muted);">' + t('selectWorkspaceFirst') + '</div>';
   elements.companyChatMessages.innerHTML = '';
+  elements.dmMembersList.innerHTML = '';
+  elements.dmChatMessages.innerHTML = '';
+  elements.memberList.innerHTML = '';
+  elements.readonlyMemberList.innerHTML = '';
+  elements.myUnavailabilityList.innerHTML = '';
+  elements.teamUnavailabilityList.innerHTML = '';
+  elements.hoursLogList.innerHTML = '';
   elements.scheduleRoleBadge.textContent = '';
   elements.btnAddShift.classList.add('hidden');
 }
