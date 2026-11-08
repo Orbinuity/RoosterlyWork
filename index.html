@@ -14,8 +14,8 @@
     
     <form id="login-form" class="active">
       <h2 data-i18n="signIn">Sign In</h2>
-      <input type="text" id="login-identifier" placeholder="Username or Email" required>
-      <input type="password" id="login-password" placeholder="Password" required>
+      <input type="text" id="login-identifier" data-i18n-placeholder="placeholderUsernameOrEmail" placeholder="Username or Email" required>
+      <input type="password" id="login-password" data-i18n-placeholder="placeholderPassword" placeholder="Password" required>
       <button type="submit" class="btn-primary" data-i18n="login">Login</button>
       <div class="auth-links">
         <p class="toggle-auth">
@@ -31,7 +31,7 @@
     <form id="tfa-form">
       <h2 data-i18n="twoFactorAuth">Two-Factor Authentication</h2>
       <p class="tfa-instructions" data-i18n="twoFactorInstructions">Enter the verification code sent to your email.</p>
-      <input type="text" id="tfa-code" placeholder="Enter 6-digit code" autocomplete="one-time-code" required>
+      <input type="text" id="tfa-code" data-i18n-placeholder="placeholderCode" placeholder="Enter 6-digit code" autocomplete="one-time-code" required>
       <button type="submit" class="btn-primary" data-i18n="verifyCode">Verify Code</button>
       <p class="toggle-auth">
         <span id="btn-cancel-tfa" data-i18n="backToLogin">Back to Login</span>
@@ -97,7 +97,7 @@
         <div id="company-chat-messages" class="chat-messages"></div>
         <form id="company-chat-form" class="chat-input-area">
           <input type="file" id="company-chat-image" accept="image/*">
-          <input type="text" id="company-chat-input" placeholder="Type a message..." required>
+          <input type="text" id="company-chat-input" data-i18n-placeholder="typeMessage" placeholder="Type a message..." required>
           <button type="submit" class="btn-primary" data-i18n="send">Send</button>
         </form>
       </div>
@@ -106,19 +106,18 @@
         <div class="dm-container">
           <aside class="dm-sidebar">
             <div class="dm-sidebar-header">
-              <h3 data-i18n="conversations">Conversations</h3>
-              <button id="btn-new-dm" class="btn-secondary btn-sm" data-i18n="newChat">New DM</button>
+              <h3 data-i18n="teamMembers">Team Members</h3>
             </div>
-            <ul id="dm-rooms-list" class="dm-rooms-list"></ul>
+            <ul id="dm-members-list" class="dm-rooms-list"></ul>
           </aside>
           <section class="dm-main">
             <div id="dm-active-header" class="dm-active-header">
-              <span id="dm-active-title" data-i18n="selectConversation">Select a conversation</span>
+              <span id="dm-active-title" data-i18n="selectMemberToChat">Select a member to chat</span>
             </div>
             <div id="dm-chat-messages" class="chat-messages"></div>
             <form id="dm-chat-form" class="chat-input-area hidden">
               <input type="file" id="dm-chat-image" accept="image/*">
-              <input type="text" id="dm-chat-input" placeholder="Type a private message..." required>
+              <input type="text" id="dm-chat-input" data-i18n-placeholder="typePrivateMessage" placeholder="Type a private message..." required>
               <button type="submit" class="btn-primary" data-i18n="send">Send</button>
             </form>
           </section>
@@ -142,6 +141,7 @@
               <option value="monthly" data-i18n="monthly">Monthly</option>
               <option value="yearly" data-i18n="yearly">Yearly</option>
             </select>
+            <input type="number" id="custom-weekly-hours-input" data-i18n-placeholder="customWeeklyHoursPlaceholder" placeholder="Weekly hours (e.g. 40)" step="0.5" min="1" max="168">
             <button id="btn-save-rate" class="btn-primary" data-i18n="saveRate">Save Rate</button>
           </div>
           <p id="effective-rate-display" class="muted-note"></p>
@@ -180,6 +180,17 @@
             </div>
             <p id="calc-week-result" class="query-result"></p>
           </div>
+
+          <div class="query-block">
+            <label data-i18n="calculateCustomRange">Calculate for custom date range:</label>
+            <div class="input-inline-range">
+              <input type="date" id="query-range-start">
+              <span class="range-separator" data-i18n="rangeTo">to</span>
+              <input type="date" id="query-range-end">
+              <button id="btn-calc-range" class="btn-secondary" data-i18n="calculate">Calculate</button>
+            </div>
+            <p id="calc-range-result" class="query-result"></p>
+          </div>
         </div>
       </div>
 
@@ -198,7 +209,7 @@
         <form id="log-hours-form" class="inline-form">
           <input type="date" id="log-date" required>
           <input type="number" id="log-duration" placeholder="Hours" step="0.25" min="0.25" max="24" required>
-          <input type="text" id="log-notes" placeholder="Notes (optional)">
+          <input type="text" id="log-notes" data-i18n-placeholder="notesOptional" placeholder="Notes (optional)">
           <button type="submit" class="btn-primary" data-i18n="logTime">Log Time</button>
         </form>
         
@@ -244,7 +255,7 @@
         <div class="card mb-2">
           <h3 data-i18n="inviteMember">Invite Member</h3>
           <form id="invite-form" class="inline-form">
-            <input type="text" id="invite-username" placeholder="Username" required>
+            <input type="text" id="invite-username" data-i18n-placeholder="usernamePlaceholder" placeholder="Username" required>
             <button type="submit" class="btn-secondary" data-i18n="invite">Invite</button>
           </form>
         </div>
@@ -268,8 +279,8 @@
   <div class="modal-content">
     <h3 data-i18n="createNewWorkspace">Create New Workspace</h3>
     <form id="create-workspace-form">
-      <input type="text" id="workspace-name" placeholder="Workspace Name" required>
-      <input type="text" id="workspace-desc" placeholder="Description">
+      <input type="text" id="workspace-name" data-i18n-placeholder="workspaceNamePlaceholder" placeholder="Workspace Name" required>
+      <input type="text" id="workspace-desc" data-i18n-placeholder="descriptionPlaceholder" placeholder="Description">
       <div class="modal-actions">
         <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
         <button type="submit" class="btn-primary" data-i18n="create">Create</button>
@@ -284,7 +295,7 @@
     <form id="add-shift-form">
       <select id="shift-user" required></select>
       <input type="date" id="shift-date" required>
-      <input type="text" id="shift-time" placeholder="e.g. 09:00 - 17:00" required>
+      <input type="text" id="shift-time" placeholder="09:00 - 17:00" required>
       <label class="checkbox-label">
         <input type="checkbox" id="shift-repeat"> <span data-i18n="repeatWeekly">Repeat Weekly</span>
       </label>
@@ -303,7 +314,7 @@
       <input type="hidden" id="edit-shift-id">
       <select id="edit-shift-user" required></select>
       <input type="date" id="edit-shift-date" required>
-      <input type="text" id="edit-shift-time" placeholder="e.g. 09:00 - 17:00" required>
+      <input type="text" id="edit-shift-time" placeholder="09:00 - 17:00" required>
       <label class="checkbox-label">
         <input type="checkbox" id="edit-shift-repeat"> <span data-i18n="repeatWeekly">Repeat Weekly</span>
       </label>
@@ -320,7 +331,7 @@
     <h3 data-i18n="markUnavailableDate">Mark Unavailable Date</h3>
     <form id="add-unavailable-form">
       <input type="date" id="unavailable-date" required>
-      <input type="text" id="unavailable-reason" placeholder="Reason (e.g. Vacation, Medical)" required>
+      <input type="text" id="unavailable-reason" data-i18n-placeholder="reasonPlaceholder" placeholder="Reason (e.g. Vacation, Medical)" required>
       <div class="modal-actions">
         <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
         <button type="submit" class="btn-primary" data-i18n="save">Save</button>
@@ -353,20 +364,6 @@
       <div class="modal-actions">
         <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
         <button type="submit" class="btn-primary" data-i18n="sendTradeOffer">Send Offer</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div id="modal-new-dm" class="modal">
-  <div class="modal-content">
-    <h3 data-i18n="startDirectMessage">Start Direct Message</h3>
-    <form id="new-dm-form">
-      <label for="dm-target-user" data-i18n="selectTeamMember">Select team member:</label>
-      <select id="dm-target-user" required></select>
-      <div class="modal-actions">
-        <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
-        <button type="submit" class="btn-primary" data-i18n="openConversation">Open Chat</button>
       </div>
     </form>
   </div>
