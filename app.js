@@ -31,6 +31,7 @@ const i18n = {
     send: 'Send',
     teamMembers: 'Team Members',
     selectMemberToChat: 'Select a member to chat',
+    attachImage: 'Image',
     timeEarningsTracker: 'Time & Earnings Tracker',
     payRateConfig: 'Pay Rate & Frequency',
     hourly: 'Hourly',
@@ -55,6 +56,10 @@ const i18n = {
     setUnavailable: 'Set Unavailable Day',
     myUnavailableDays: 'My Registered Unavailable Dates',
     teamUnavailableDays: 'Team Unavailable Dates',
+    noUnavailableDates: 'No unavailable dates registered.',
+    conflictShiftBadge: 'Shift Conflict',
+    hasShiftOnDate: 'Scheduled shift:',
+    noShiftOnDate: 'No shifts scheduled on this date',
     workspaceSettings: 'Workspace Settings',
     languageSettings: 'Application Language',
     selectLanguage: 'Select language:',
@@ -87,6 +92,7 @@ const i18n = {
     btnUndoNoWork: 'Undo (Reinstate Shift)',
     offerTrade: 'Trade Shift',
     markFinished: 'Mark Finished',
+    unfinishShiftBtn: 'Unfinish',
     takeShiftBtn: 'Take Shift',
     acceptTrade: 'Accept Trade',
     declineTrade: 'Decline Trade',
@@ -104,12 +110,16 @@ const i18n = {
     tradeShiftBroadcastTitle: 'Shift Open For Pickup',
     tradeDirectOfferTitle: 'Shift Trade Offer',
     shiftClaimedBy: 'Claimed by',
+    tradeExpired: 'Trade closed / inactive',
+    systemClaimMessage: '{claimer} accepted and claimed the shift from {owner} for {date} ({time}).',
+    systemDeclineMessage: '{decliner} declined the shift trade offer for {date} ({time}).',
+    systemTradeBroadcast: '{owner} is offering their shift on {date} ({time}) for anyone to take.',
+    systemTradeDirect: '{owner} offered their shift on {date} ({time}) to {target}.',
     placeholderUsernameOrEmail: 'Username or Email',
     placeholderPassword: 'Password',
     placeholderCode: 'Enter 6-digit code',
     typeMessage: 'Type a message...',
     typePrivateMessage: 'Type a private message...',
-    customWeeklyHoursPlaceholder: 'Weekly hours (e.g. 40)',
     notesOptional: 'Notes (optional)',
     reasonPlaceholder: 'Reason (e.g. Vacation, Medical)',
     workspaceNamePlaceholder: 'Workspace Name',
@@ -146,6 +156,7 @@ const i18n = {
     send: 'Versturen',
     teamMembers: 'Teamleden',
     selectMemberToChat: 'Selecteer een teamlid om te chatten',
+    attachImage: 'Afbeelding',
     timeEarningsTracker: 'Uren- en inkomstenregistratie',
     payRateConfig: 'Salaris en uitbetalingsperiode',
     hourly: 'Per uur',
@@ -170,6 +181,10 @@ const i18n = {
     setUnavailable: 'Afwezigheid opgeven',
     myUnavailableDays: 'Mijn opgegeven afwezigheden',
     teamUnavailableDays: 'Afwezigheden van het team',
+    noUnavailableDates: 'Geen afwezigheden geregistreerd.',
+    conflictShiftBadge: 'Dienstconflict',
+    hasShiftOnDate: 'Ingeplande dienst:',
+    noShiftOnDate: 'Geen diensten ingepland op deze datum',
     workspaceSettings: 'Werkplekinstellingen',
     languageSettings: 'Taalinstellingen',
     selectLanguage: 'Kies taal:',
@@ -202,6 +217,7 @@ const i18n = {
     btnUndoNoWork: 'Herstellen (Dienst actief)',
     offerTrade: 'Dienst ruilen',
     markFinished: 'Afronden als gewerkt',
+    unfinishShiftBtn: 'Markeer als niet afgerond',
     takeShiftBtn: 'Dienst overnemen',
     acceptTrade: 'Ruil accepteren',
     declineTrade: 'Ruil weigeren',
@@ -219,12 +235,16 @@ const i18n = {
     tradeShiftBroadcastTitle: 'Dienst ter overname',
     tradeDirectOfferTitle: 'Directe dienstovername aangeboden',
     shiftClaimedBy: 'Overgenomen door',
+    tradeExpired: 'Ruilaanbod gesloten / niet meer actief',
+    systemClaimMessage: '{claimer} heeft de dienst van {owner} voor {date} ({time}) overgenomen.',
+    systemDeclineMessage: '{decliner} heeft het ruilaanbod voor {date} ({time}) geweigerd.',
+    systemTradeBroadcast: '{owner} biedt de dienst op {date} ({time}) aan ter overname voor iedereen.',
+    systemTradeDirect: '{owner} heeft de dienst op {date} ({time}) aangeboden aan {target}.',
     placeholderUsernameOrEmail: 'Gebruikersnaam of e-mail',
     placeholderPassword: 'Wachtwoord',
     placeholderCode: 'Voer 6-cijferige code in',
     typeMessage: 'Typ een bericht...',
     typePrivateMessage: 'Typ een privébericht...',
-    customWeeklyHoursPlaceholder: 'Uren per week (bijv. 40)',
     notesOptional: 'Notities (optioneel)',
     reasonPlaceholder: 'Reden (bijv. Vakantie, Ziekte)',
     workspaceNamePlaceholder: 'Naam van werkplek',
@@ -261,6 +281,7 @@ const i18n = {
     send: 'Senden',
     teamMembers: 'Teammitglieder',
     selectMemberToChat: 'Mitglied zum Chatten auswählen',
+    attachImage: 'Bild',
     timeEarningsTracker: 'Zeit & Verdienstübersicht',
     payRateConfig: 'Lohn & Häufigkeit',
     hourly: 'Stündlich',
@@ -285,6 +306,10 @@ const i18n = {
     setUnavailable: 'Abwesenheit eintragen',
     myUnavailableDays: 'Meine Abwesenheitstage',
     teamUnavailableDays: 'Team Abwesenheitstage',
+    noUnavailableDates: 'Keine Abwesenheiten eingetragen.',
+    conflictShiftBadge: 'Schichtkonflikt',
+    hasShiftOnDate: 'Geplante Schicht:',
+    noShiftOnDate: 'Keine Schichten für dieses Datum geplant',
     workspaceSettings: 'Arbeitsbereich-Einstellungen',
     languageSettings: 'Spracheinstellungen',
     selectLanguage: 'Sprache wählen:',
@@ -317,6 +342,7 @@ const i18n = {
     btnUndoNoWork: 'Wieder aktivieren',
     offerTrade: 'Schicht tauschen',
     markFinished: 'Abschließen',
+    unfinishShiftBtn: 'Als nicht abgeschlossen markieren',
     takeShiftBtn: 'Schicht übernehmen',
     acceptTrade: 'Tausch annehmen',
     declineTrade: 'Tausch ablehnen',
@@ -334,12 +360,16 @@ const i18n = {
     tradeShiftBroadcastTitle: 'Offene Schicht zur Übernahme',
     tradeDirectOfferTitle: 'Direktes Schichtangebot',
     shiftClaimedBy: 'Übernommen von',
+    tradeExpired: 'Tauschangebot geschlossen / inaktiv',
+    systemClaimMessage: '{claimer} hat die Schicht von {owner} für {date} ({time}) übernommen.',
+    systemDeclineMessage: '{decliner} hat das Schichtangebot für {date} ({time}) abgelehnt.',
+    systemTradeBroadcast: '{owner} bietet die Schicht am {date} ({time}) zur Übernahme an.',
+    systemTradeDirect: '{owner} hat die Schicht am {date} ({time}) an {target} angeboten.',
     placeholderUsernameOrEmail: 'Benutzername oder E-Mail',
     placeholderPassword: 'Passwort',
     placeholderCode: '6-stelligen Code eingeben',
     typeMessage: 'Nachricht schreiben...',
     typePrivateMessage: 'Privatnachricht schreiben...',
-    customWeeklyHoursPlaceholder: 'Wochenstunden (z. B. 40)',
     notesOptional: 'Notizen (optional)',
     reasonPlaceholder: 'Grund (z. B. Urlaub, Krank)',
     workspaceNamePlaceholder: 'Name des Arbeitsbereichs',
@@ -376,6 +406,7 @@ const i18n = {
     send: 'Enviar',
     teamMembers: 'Miembros del equipo',
     selectMemberToChat: 'Seleccione un miembro para chatear',
+    attachImage: 'Imagen',
     timeEarningsTracker: 'Control de Horas y Ganancias',
     payRateConfig: 'Tarifa y Frecuencia de Pago',
     hourly: 'Por hora',
@@ -400,6 +431,10 @@ const i18n = {
     setUnavailable: 'Marcar no disponible',
     myUnavailableDays: 'Mis días de indisponibilidad',
     teamUnavailableDays: 'Días de indisponibilidad del equipo',
+    noUnavailableDates: 'No hay fechas no disponibles registradas.',
+    conflictShiftBadge: 'Conflicto de turno',
+    hasShiftOnDate: 'Turno programado:',
+    noShiftOnDate: 'Sin turnos programados en esta fecha',
     workspaceSettings: 'Configuración del Espacio de Trabajo',
     languageSettings: 'Idioma de la aplicación',
     selectLanguage: 'Seleccionar idioma:',
@@ -432,6 +467,7 @@ const i18n = {
     btnUndoNoWork: 'Reactivar turno',
     offerTrade: 'Cambiar turno',
     markFinished: 'Finalizar',
+    unfinishShiftBtn: 'Marcar como no finalizado',
     takeShiftBtn: 'Tomar turno',
     acceptTrade: 'Aceptar cambio',
     declineTrade: 'Rechazar cambio',
@@ -449,12 +485,16 @@ const i18n = {
     tradeShiftBroadcastTitle: 'Turno Disponible para Tomar',
     tradeDirectOfferTitle: 'Oferta directa de cambio de turno',
     shiftClaimedBy: 'Tomado por',
+    tradeExpired: 'Oferta cerrada / inactiva',
+    systemClaimMessage: '{claimer} aceptó y tomó el turno de {owner} para el {date} ({time}).',
+    systemDeclineMessage: '{decliner} rechazó la oferta de cambio para el {date} ({time}).',
+    systemTradeBroadcast: '{owner} ofrece su turno del {date} ({time}) para quien quiera tomarlo.',
+    systemTradeDirect: '{owner} ofreció su turno del {date} ({time}) a {target}.',
     placeholderUsernameOrEmail: 'Usuario o correo electrónico',
     placeholderPassword: 'Contraseña',
     placeholderCode: 'Código de 6 dígitos',
     typeMessage: 'Escribe un mensaje...',
     typePrivateMessage: 'Escribe un mensaje privado...',
-    customWeeklyHoursPlaceholder: 'Horas semanales (ej. 40)',
     notesOptional: 'Notas (opcional)',
     reasonPlaceholder: 'Motivo (ej. Vacaciones, Médico)',
     workspaceNamePlaceholder: 'Nombre del espacio',
@@ -491,6 +531,7 @@ const i18n = {
     send: 'Envoyer',
     teamMembers: 'Membres de l\'équipe',
     selectMemberToChat: 'Sélectionner un membre pour discuter',
+    attachImage: 'Image',
     timeEarningsTracker: 'Suivi des Heures et Revenus',
     payRateConfig: 'Taux de Rémunération',
     hourly: 'Horaire',
@@ -515,6 +556,10 @@ const i18n = {
     setUnavailable: 'Indiquer indisponibilité',
     myUnavailableDays: 'Mes dates d\'indisponibilité',
     teamUnavailableDays: 'Indisponibilités de l\'équipe',
+    noUnavailableDates: 'Aucune indisponibilité enregistrée.',
+    conflictShiftBadge: 'Conflit de quart',
+    hasShiftOnDate: 'Quart planifié :',
+    noShiftOnDate: 'Aucun quart planifié à cette date',
     workspaceSettings: 'Paramètres de l\'Espace',
     languageSettings: 'Paramètres de langue',
     selectLanguage: 'Sélectionner la langue :',
@@ -547,6 +592,7 @@ const i18n = {
     btnUndoNoWork: 'Rétablir le quart',
     offerTrade: 'Échanger le quart',
     markFinished: 'Terminer le quart',
+    unfinishShiftBtn: 'Marquer comme non terminé',
     takeShiftBtn: 'Prendre le quart',
     acceptTrade: 'Accepter l\'échange',
     declineTrade: 'Refuser l\'échange',
@@ -564,12 +610,16 @@ const i18n = {
     tradeShiftBroadcastTitle: 'Quart Disponible à Prendre',
     tradeDirectOfferTitle: 'Offre directe d\'échange de quart',
     shiftClaimedBy: 'Pris par',
+    tradeExpired: 'Offre clôturée / inactive',
+    systemClaimMessage: '{claimer} a accepté et pris le quart de {owner} pour le {date} ({time}).',
+    systemDeclineMessage: '{decliner} a refusé l\'offre d\'échange pour le {date} ({time}).',
+    systemTradeBroadcast: '{owner} propose son quart du {date} ({time}) à qui veut le prendre.',
+    systemTradeDirect: '{owner} a proposé son quart du {date} ({time}) à {target}.',
     placeholderUsernameOrEmail: 'Nom d\'utilisateur ou e-mail',
     placeholderPassword: 'Mot de passe',
     placeholderCode: 'Code à 6 chiffres',
     typeMessage: 'Écrire un message...',
     typePrivateMessage: 'Écrire un message privé...',
-    customWeeklyHoursPlaceholder: 'Heures / semaine (ex. 40)',
     notesOptional: 'Notes (facultatif)',
     reasonPlaceholder: 'Motif (ex. Congé, Maladie)',
     workspaceNamePlaceholder: 'Nom de l\'espace',
@@ -583,8 +633,14 @@ const i18n = {
 
 let currentLang = 'en';
 
-function t(key) {
-  return (i18n[currentLang] && i18n[currentLang][key]) || (i18n.en && i18n.en[key]) || key;
+function t(key, vars = {}) {
+  let str = (i18n[currentLang] && i18n[currentLang][key]) || (i18n.en && i18n.en[key]) || key;
+  if (typeof str === 'string') {
+    Object.keys(vars).forEach(v => {
+      str = str.replace(new RegExp(`\\{${v}\\}`, 'g'), vars[v]);
+    });
+  }
+  return str;
 }
 
 function applyLanguage(lang) {
@@ -621,7 +677,6 @@ let localData = {
   personal: {
     rate: 0,
     period: 'hourly',
-    weeklyHours: 40,
     lang: 'en'
   },
   roomState: {
@@ -670,6 +725,7 @@ const elements = {
   companyChatForm: document.getElementById('company-chat-form'),
   companyChatInput: document.getElementById('company-chat-input'),
   companyChatImage: document.getElementById('company-chat-image'),
+  companyFileIndicator: document.getElementById('company-file-indicator'),
   
   dmMembersList: document.getElementById('dm-members-list'),
   dmActiveHeader: document.getElementById('dm-active-header'),
@@ -678,10 +734,10 @@ const elements = {
   dmChatForm: document.getElementById('dm-chat-form'),
   dmChatInput: document.getElementById('dm-chat-input'),
   dmChatImage: document.getElementById('dm-chat-image'),
+  dmFileIndicator: document.getElementById('dm-file-indicator'),
   
   payRateInput: document.getElementById('pay-rate-input'),
   payPeriodSelect: document.getElementById('pay-period-select'),
-  customWeeklyHoursInput: document.getElementById('custom-weekly-hours-input'),
   btnSaveRate: document.getElementById('btn-save-rate'),
   effectiveRateDisplay: document.getElementById('effective-rate-display'),
   weekHours: document.getElementById('week-hours'),
@@ -812,6 +868,13 @@ function formatISODate(date) {
 
 function showAuthError(msg) {
   elements.authError.textContent = msg || '';
+}
+
+function scrollToBottom(container) {
+  if (!container) return;
+  requestAnimationFrame(() => {
+    container.scrollTop = container.scrollHeight;
+  });
 }
 
 async function apiCall(endpoint, method = 'GET', body = null) {
@@ -957,12 +1020,11 @@ async function pullPersonalData() {
       if (typeof payload === 'object') {
         localData.personal.rate = Number(payload.rate) || 0;
         localData.personal.period = payload.period || 'hourly';
-        localData.personal.weeklyHours = Number(payload.weeklyHours) || 40;
         localData.personal.lang = payload.lang || 'en';
       }
     }
   } catch (err) {
-    localData.personal = { rate: 0, period: 'hourly', weeklyHours: 40, lang: 'en' };
+    localData.personal = { rate: 0, period: 'hourly', lang: 'en' };
   }
 }
 
@@ -984,6 +1046,7 @@ elements.languageSelect.addEventListener('change', async (e) => {
     renderUnavailability();
     renderSettings(room);
     renderDmMembersList();
+    if (activeDmRoomId) renderDmMessages();
   }
 });
 
@@ -1118,6 +1181,10 @@ elements.navLinks.forEach(link => {
     elements.views.forEach(v => v.classList.remove('active'));
     const target = e.target.getAttribute('data-target');
     document.getElementById(target).classList.add('active');
+    if (target === 'chat-view') {
+      scrollToBottom(elements.companyChatMessages);
+      scrollToBottom(elements.dmChatMessages);
+    }
   });
 });
 
@@ -1241,6 +1308,14 @@ function renderSchedule() {
         btnFinish.textContent = t('markFinished');
         btnFinish.onclick = () => completeShift(shift);
         actionsDiv.appendChild(btnFinish);
+      }
+
+      if ((isMyShift || amAdmin) && shift.status === 'completed') {
+        const btnUndoFinish = document.createElement('button');
+        btnUndoFinish.className = 'btn-secondary';
+        btnUndoFinish.textContent = t('unfinishShiftBtn');
+        btnUndoFinish.onclick = () => unfinishShift(shift);
+        actionsDiv.appendChild(btnUndoFinish);
       }
 
       if (!isMyShift && (isOpenOffer || isDirectOfferToMe)) {
@@ -1421,6 +1496,14 @@ async function completeShift(shift) {
   renderEarnings();
 }
 
+async function unfinishShift(shift) {
+  shift.status = 'confirmed';
+  localData.roomState.timeLogs = (localData.roomState.timeLogs || []).filter(l => l.shiftId !== shift.id);
+  await pushRoomData();
+  renderSchedule();
+  renderEarnings();
+}
+
 function openTradeModal(shift) {
   activeTradeShiftId = shift.id;
   const room = rooms.find(r => getRoomKey(r) === currentRoomId);
@@ -1485,10 +1568,12 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
   if (!shift) return;
 
   const isOpenTrade = elements.tradeModeOpen.checked;
+  const offerId = 'offer_' + Date.now();
   shift.status = 'offered';
 
   if (isOpenTrade) {
     shift.tradeOffer = {
+      id: offerId,
       mode: 'open',
       fromUserId: getUserId(currentUser),
       fromDisplayName: getUserDisplayName(currentUser)
@@ -1497,6 +1582,7 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
     const sysMsg = {
       id: Date.now().toString(),
       type: 'trade_broadcast',
+      offerId: offerId,
       shiftId: shift.id,
       shiftDate: shift.date,
       shiftTime: shift.time,
@@ -1504,7 +1590,12 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
       ownerDisplayName: getUserDisplayName(currentUser),
       targetDisplayName: null,
       author: 'System',
-      text: `${getUserDisplayName(currentUser)}: ${shift.date} (${shift.time})`,
+      msgKey: 'systemTradeBroadcast',
+      msgVars: {
+        owner: getUserDisplayName(currentUser),
+        date: shift.date,
+        time: shift.time
+      },
       timestamp: new Date().toISOString()
     };
     localData.roomState.messages.push(sysMsg);
@@ -1517,6 +1608,7 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
     const targetDisplayName = targetOpt.dataset.displayName;
 
     shift.tradeOffer = {
+      id: offerId,
       mode: 'direct',
       fromUserId: getUserId(currentUser),
       fromDisplayName: getUserDisplayName(currentUser),
@@ -1543,6 +1635,7 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
       const dmSysMsg = {
         id: Date.now().toString(),
         type: 'trade_direct',
+        offerId: offerId,
         shiftId: shift.id,
         shiftDate: shift.date,
         shiftTime: shift.time,
@@ -1551,7 +1644,13 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
         targetUserId: targetUserId,
         targetDisplayName: targetDisplayName,
         author: 'System',
-        text: `${getUserDisplayName(currentUser)} -> ${targetDisplayName}: ${shift.date} (${shift.time})`,
+        msgKey: 'systemTradeDirect',
+        msgVars: {
+          owner: getUserDisplayName(currentUser),
+          target: targetDisplayName,
+          date: shift.date,
+          time: shift.time
+        },
         timestamp: new Date().toISOString()
       };
 
@@ -1599,7 +1698,13 @@ async function claimShift(shiftId) {
     id: Date.now().toString(),
     userId: getUserId(currentUser),
     author: 'System',
-    text: `${getUserDisplayName(currentUser)} - ${shift.date} (${shift.time}) [${prevOwnerName}]`,
+    msgKey: 'systemClaimMessage',
+    msgVars: {
+      claimer: getUserDisplayName(currentUser),
+      owner: prevOwnerName,
+      date: shift.date,
+      time: shift.time
+    },
     timestamp: new Date().toISOString()
   };
   localData.roomState.messages.push(claimMsg);
@@ -1613,21 +1718,51 @@ async function declineShiftTrade(shiftId) {
   const shift = localData.roomState.shifts.find(s => s.id === shiftId);
   if (!shift) return;
 
+  const claimerName = getUserDisplayName(currentUser);
+  const shiftDate = shift.date;
+  const shiftTime = shift.time;
+
   shift.tradeOffer = null;
   shift.status = 'assigned';
 
+  const declineNotice = {
+    id: Date.now().toString(),
+    userId: getUserId(currentUser),
+    author: 'System',
+    msgKey: 'systemDeclineMessage',
+    msgVars: {
+      decliner: claimerName,
+      date: shiftDate,
+      time: shiftTime
+    },
+    timestamp: new Date().toISOString()
+  };
+  localData.roomState.messages.push(declineNotice);
+
   await pushRoomData();
   renderSchedule();
+  renderCompanyChat();
 }
 
 async function acceptDirectTradeFromDm(shiftId) {
+  const shift = localData.roomState.shifts.find(s => s.id === shiftId);
+  const prevOwnerName = shift ? shift.displayName : '';
+  const shiftDate = shift ? shift.date : '';
+  const shiftTime = shift ? shift.time : '';
+
   await claimShift(shiftId);
   if (activeDmRoomId) {
     const claimNotice = {
       id: Date.now().toString(),
       userId: getUserId(currentUser),
       author: 'System',
-      text: `${getUserDisplayName(currentUser)} accepted the shift trade.`,
+      msgKey: 'systemClaimMessage',
+      msgVars: {
+        claimer: getUserDisplayName(currentUser),
+        owner: prevOwnerName,
+        date: shiftDate,
+        time: shiftTime
+      },
       timestamp: new Date().toISOString()
     };
     localData.activeDmState.messages.push(claimNotice);
@@ -1649,13 +1784,22 @@ async function acceptDirectTradeFromDm(shiftId) {
 }
 
 async function declineDirectTradeFromDm(shiftId) {
+  const shift = localData.roomState.shifts.find(s => s.id === shiftId);
+  const shiftDate = shift ? shift.date : '';
+  const shiftTime = shift ? shift.time : '';
+
   await declineShiftTrade(shiftId);
   if (activeDmRoomId) {
     const declineNotice = {
       id: Date.now().toString(),
       userId: getUserId(currentUser),
       author: 'System',
-      text: `${getUserDisplayName(currentUser)} declined the shift trade.`,
+      msgKey: 'systemDeclineMessage',
+      msgVars: {
+        decliner: getUserDisplayName(currentUser),
+        date: shiftDate,
+        time: shiftTime
+      },
       timestamp: new Date().toISOString()
     };
     localData.activeDmState.messages.push(declineNotice);
@@ -1678,8 +1822,10 @@ async function declineDirectTradeFromDm(shiftId) {
 
 async function deleteShift(shiftId) {
   localData.roomState.shifts = localData.roomState.shifts.filter(s => s.id !== shiftId);
+  localData.roomState.timeLogs = (localData.roomState.timeLogs || []).filter(l => l.shiftId !== shiftId);
   await pushRoomData();
   renderSchedule();
+  renderEarnings();
 }
 
 elements.btnAddUnavailable.addEventListener('click', () => {
@@ -1714,33 +1860,81 @@ function renderUnavailability() {
   elements.teamUnavailabilityList.innerHTML = '';
 
   const activeUserId = getUserId(currentUser);
+  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
+  const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
   const unavails = localData.roomState.unavailability || [];
 
-  unavails.slice().sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(u => {
-    const li = document.createElement('li');
-    li.className = 'log-item';
+  const myEntries = unavails.filter(u => u.userId === activeUserId);
+  const teamEntries = unavails.filter(u => u.userId !== activeUserId);
 
-    const meta = document.createElement('div');
-    meta.className = 'log-item-meta';
-    meta.innerHTML = `<strong>${u.displayName}</strong> on ${u.date}<br><span class="muted-note">${u.reason}</span>`;
-
-    const actions = document.createElement('div');
-    actions.className = 'log-item-actions';
-
-    if (u.userId === activeUserId) {
-      const btnDel = document.createElement('button');
-      btnDel.className = 'btn-secondary';
-      btnDel.textContent = t('deleteLogBtn');
-      btnDel.onclick = () => deleteUnavailable(u.id);
-      actions.appendChild(btnDel);
-      li.appendChild(meta);
-      li.appendChild(actions);
+  if (myEntries.length === 0) {
+    const emptyLi = document.createElement('li');
+    emptyLi.className = 'empty-state-text';
+    emptyLi.textContent = t('noUnavailableDates');
+    elements.myUnavailabilityList.appendChild(emptyLi);
+  } else {
+    myEntries.slice().sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(u => {
+      const li = buildUnavailabilityListItem(u, true);
       elements.myUnavailabilityList.appendChild(li);
-    } else {
-      li.appendChild(meta);
+    });
+  }
+
+  if (teamEntries.length === 0) {
+    const emptyLi = document.createElement('li');
+    emptyLi.className = 'empty-state-text';
+    emptyLi.textContent = t('noUnavailableDates');
+    elements.teamUnavailabilityList.appendChild(emptyLi);
+  } else {
+    teamEntries.slice().sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(u => {
+      const li = buildUnavailabilityListItem(u, amAdmin);
       elements.teamUnavailabilityList.appendChild(li);
+    });
+  }
+}
+
+function buildUnavailabilityListItem(u, allowDelete) {
+  const li = document.createElement('li');
+  li.className = 'log-item';
+
+  const meta = document.createElement('div');
+  meta.className = 'log-item-meta';
+
+  const unavailDate = new Date(u.date);
+  const shiftsOnDate = (localData.roomState.shifts || []).filter(s => {
+    if (s.userId !== u.userId) return false;
+    if (s.repeat) {
+      const sDate = new Date(s.date);
+      return sDate.getDay() === unavailDate.getDay() && sDate <= unavailDate;
     }
+    return s.date === u.date;
   });
+
+  let conflictMarkup = '';
+  if (shiftsOnDate.length > 0) {
+    const shiftTimes = shiftsOnDate.map(s => s.time).join(', ');
+    conflictMarkup = `<div class="conflict-badge">${t('conflictShiftBadge')}: ${t('hasShiftOnDate')} ${shiftTimes}</div>`;
+  } else {
+    conflictMarkup = `<div class="muted-note">${t('noShiftOnDate')}</div>`;
+  }
+
+  meta.innerHTML = `<strong>${u.displayName}</strong> - ${u.date}<br><span class="muted-note">${u.reason}</span>${conflictMarkup}`;
+
+  const actions = document.createElement('div');
+  actions.className = 'log-item-actions';
+
+  if (allowDelete) {
+    const btnDel = document.createElement('button');
+    btnDel.className = 'btn-secondary';
+    btnDel.textContent = t('deleteLogBtn');
+    btnDel.onclick = () => deleteUnavailable(u.id);
+    actions.appendChild(btnDel);
+  }
+
+  li.appendChild(meta);
+  if (actions.children.length > 0) {
+    li.appendChild(actions);
+  }
+  return li;
 }
 
 async function deleteUnavailable(id) {
@@ -1781,11 +1975,22 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.7) {
   });
 }
 
+elements.companyChatImage.addEventListener('change', () => {
+  const file = elements.companyChatImage.files[0];
+  elements.companyFileIndicator.textContent = file ? file.name : '';
+});
+
+elements.dmChatImage.addEventListener('change', () => {
+  const file = elements.dmChatImage.files[0];
+  elements.dmFileIndicator.textContent = file ? file.name : '';
+});
+
 elements.tabCompanyChat.addEventListener('click', () => {
   elements.tabCompanyChat.classList.add('active');
   elements.tabPrivateChat.classList.remove('active');
   elements.companyChatPanel.classList.add('active');
   elements.privateChatPanel.classList.remove('active');
+  scrollToBottom(elements.companyChatMessages);
 });
 
 elements.tabPrivateChat.addEventListener('click', () => {
@@ -1794,6 +1999,7 @@ elements.tabPrivateChat.addEventListener('click', () => {
   elements.privateChatPanel.classList.add('active');
   elements.companyChatPanel.classList.remove('active');
   pullDmRooms();
+  scrollToBottom(elements.dmChatMessages);
 });
 
 function renderCompanyChat() {
@@ -1815,14 +2021,23 @@ function renderCompanyChat() {
 
       const cardDetails = document.createElement('div');
       cardDetails.className = 'trade-card-details';
-      cardDetails.textContent = `${msg.ownerDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
+      cardDetails.textContent = t('systemTradeBroadcast', {
+        owner: msg.ownerDisplayName,
+        date: msg.shiftDate,
+        time: msg.shiftTime
+      });
       card.appendChild(cardDetails);
 
       const cardActions = document.createElement('div');
       cardActions.className = 'trade-card-actions';
 
       const correspondingShift = localData.roomState.shifts.find(s => s.id === msg.shiftId);
-      if (correspondingShift && correspondingShift.status === 'offered') {
+      const isCurrentActiveOffer = correspondingShift &&
+                                  correspondingShift.status === 'offered' &&
+                                  correspondingShift.tradeOffer &&
+                                  correspondingShift.tradeOffer.id === msg.offerId;
+
+      if (isCurrentActiveOffer) {
         if (msg.ownerId !== activeUserId) {
           const btnTake = document.createElement('button');
           btnTake.className = 'btn-primary btn-sm';
@@ -1830,11 +2045,16 @@ function renderCompanyChat() {
           btnTake.onclick = () => claimShift(msg.shiftId);
           cardActions.appendChild(btnTake);
         }
-      } else if (correspondingShift) {
+      } else if (correspondingShift && correspondingShift.status === 'confirmed') {
         const claimedSpan = document.createElement('span');
         claimedSpan.className = 'claimed-badge';
         claimedSpan.textContent = `${t('shiftClaimedBy')} ${correspondingShift.displayName}`;
         cardActions.appendChild(claimedSpan);
+      } else {
+        const expiredSpan = document.createElement('span');
+        expiredSpan.className = 'muted-note';
+        expiredSpan.textContent = t('tradeExpired');
+        cardActions.appendChild(expiredSpan);
       }
 
       card.appendChild(cardActions);
@@ -1852,7 +2072,12 @@ function renderCompanyChat() {
     
     const bubble = document.createElement('div');
     bubble.className = 'msg-bubble';
-    bubble.textContent = msg.text;
+    
+    if (msg.msgKey) {
+      bubble.textContent = t(msg.msgKey, msg.msgVars || {});
+    } else {
+      bubble.textContent = msg.text;
+    }
     
     wrapper.appendChild(author);
     wrapper.appendChild(bubble);
@@ -1866,7 +2091,7 @@ function renderCompanyChat() {
     
     elements.companyChatMessages.appendChild(wrapper);
   });
-  elements.companyChatMessages.scrollTop = elements.companyChatMessages.scrollHeight;
+  scrollToBottom(elements.companyChatMessages);
 }
 
 elements.companyChatForm.addEventListener('submit', async (e) => {
@@ -1890,6 +2115,7 @@ elements.companyChatForm.addEventListener('submit', async (e) => {
   localData.roomState.messages.push(msg);
   await pushRoomData();
   elements.companyChatForm.reset();
+  elements.companyFileIndicator.textContent = '';
   renderCompanyChat();
 });
 
@@ -1971,14 +2197,24 @@ function renderDmMessages() {
 
       const cardDetails = document.createElement('div');
       cardDetails.className = 'trade-card-details';
-      cardDetails.textContent = `${msg.ownerDisplayName} -> ${msg.targetDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
+      cardDetails.textContent = t('systemTradeDirect', {
+        owner: msg.ownerDisplayName,
+        target: msg.targetDisplayName,
+        date: msg.shiftDate,
+        time: msg.shiftTime
+      });
       card.appendChild(cardDetails);
 
       const cardActions = document.createElement('div');
       cardActions.className = 'trade-card-actions';
 
       const correspondingShift = localData.roomState.shifts.find(s => s.id === msg.shiftId);
-      if (correspondingShift && correspondingShift.status === 'offered') {
+      const isCurrentActiveOffer = correspondingShift &&
+                                  correspondingShift.status === 'offered' &&
+                                  correspondingShift.tradeOffer &&
+                                  correspondingShift.tradeOffer.id === msg.offerId;
+
+      if (isCurrentActiveOffer) {
         if (msg.targetUserId === activeUserId) {
           const btnTake = document.createElement('button');
           btnTake.className = 'btn-primary btn-sm';
@@ -1992,11 +2228,16 @@ function renderDmMessages() {
           btnDecline.onclick = () => declineDirectTradeFromDm(msg.shiftId);
           cardActions.appendChild(btnDecline);
         }
-      } else if (correspondingShift) {
+      } else if (correspondingShift && correspondingShift.status === 'confirmed') {
         const claimedSpan = document.createElement('span');
         claimedSpan.className = 'claimed-badge';
         claimedSpan.textContent = `${t('shiftClaimedBy')} ${correspondingShift.displayName}`;
         cardActions.appendChild(claimedSpan);
+      } else {
+        const expiredSpan = document.createElement('span');
+        expiredSpan.className = 'muted-note';
+        expiredSpan.textContent = t('tradeExpired');
+        cardActions.appendChild(expiredSpan);
       }
 
       card.appendChild(cardActions);
@@ -2014,7 +2255,12 @@ function renderDmMessages() {
     
     const bubble = document.createElement('div');
     bubble.className = 'msg-bubble';
-    bubble.textContent = msg.text;
+    
+    if (msg.msgKey) {
+      bubble.textContent = t(msg.msgKey, msg.msgVars || {});
+    } else {
+      bubble.textContent = msg.text;
+    }
     
     wrapper.appendChild(author);
     wrapper.appendChild(bubble);
@@ -2028,7 +2274,7 @@ function renderDmMessages() {
     
     elements.dmChatMessages.appendChild(wrapper);
   });
-  elements.dmChatMessages.scrollTop = elements.dmChatMessages.scrollHeight;
+  scrollToBottom(elements.dmChatMessages);
 }
 
 elements.dmChatForm.addEventListener('submit', async (e) => {
@@ -2068,15 +2314,15 @@ elements.dmChatForm.addEventListener('submit', async (e) => {
   });
 
   elements.dmChatForm.reset();
+  elements.dmFileIndicator.textContent = '';
   renderDmMessages();
 });
 
-function calculateEffectiveHourlyRate(rate, period, weeklyHours = 40) {
+function calculateEffectiveHourlyRate(rate, period) {
   const num = parseFloat(rate) || 0;
-  const standardHours = parseFloat(weeklyHours) || 40;
-  if (period === 'weekly') return num / standardHours;
-  if (period === 'monthly') return num / (standardHours * 4.333);
-  if (period === 'yearly') return num / (standardHours * 52);
+  if (period === 'weekly') return num / 40;
+  if (period === 'monthly') return num / 160;
+  if (period === 'yearly') return num / 2080;
   return num;
 }
 
@@ -2087,26 +2333,23 @@ function getUserRateConfig(userId) {
   if (userId === getUserId(currentUser)) {
     return {
       rate: localData.personal.rate || 0,
-      period: localData.personal.period || 'hourly',
-      weeklyHours: localData.personal.weeklyHours || 40
+      period: localData.personal.period || 'hourly'
     };
   }
-  return { rate: 0, period: 'hourly', weeklyHours: 40 };
+  return { rate: 0, period: 'hourly' };
 }
 
 elements.btnSaveRate.addEventListener('click', async () => {
   const activeUserId = getUserId(currentUser);
   const newRate = parseFloat(elements.payRateInput.value) || 0;
   const newPeriod = elements.payPeriodSelect.value;
-  const newWeeklyHours = parseFloat(elements.customWeeklyHoursInput.value) || 40;
   
   localData.personal.rate = newRate;
   localData.personal.period = newPeriod;
-  localData.personal.weeklyHours = newWeeklyHours;
   await pushPersonalData();
   
   if (!localData.roomState.userRates) localData.roomState.userRates = {};
-  localData.roomState.userRates[activeUserId] = { rate: newRate, period: newPeriod, weeklyHours: newWeeklyHours };
+  localData.roomState.userRates[activeUserId] = { rate: newRate, period: newPeriod };
   await pushRoomData();
   
   renderEarnings();
@@ -2139,20 +2382,30 @@ elements.hoursFilterSelect.addEventListener('change', () => {
   renderEarnings();
 });
 
+function getValidCompletedLogs() {
+  const allLogs = Array.isArray(localData.roomState.timeLogs) ? localData.roomState.timeLogs : [];
+  return allLogs.filter(log => {
+    if (log.shiftId) {
+      const shift = (localData.roomState.shifts || []).find(s => s.id === log.shiftId);
+      return shift && shift.status === 'completed';
+    }
+    return true;
+  });
+}
+
 function renderEarnings() {
   const activeUserId = getUserId(currentUser);
   const myRateConfig = getUserRateConfig(activeUserId);
   
   elements.payRateInput.value = myRateConfig.rate || '';
   elements.payPeriodSelect.value = myRateConfig.period || 'hourly';
-  elements.customWeeklyHoursInput.value = myRateConfig.weeklyHours || 40;
   
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
   elements.effectiveRateDisplay.textContent = `${t('effectiveRateText')} $${effectiveHourly.toFixed(2)}/hr`;
   
   elements.hoursLogList.innerHTML = '';
   
-  const allLogs = Array.isArray(localData.roomState.timeLogs) ? localData.roomState.timeLogs : [];
+  const validLogs = getValidCompletedLogs();
   const now = new Date();
   const weekStart = getMonday(now);
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -2160,7 +2413,7 @@ function renderEarnings() {
   let myWeekHours = 0;
   let myMonthHours = 0;
   
-  allLogs.forEach(log => {
+  validLogs.forEach(log => {
     if (log.userId === activeUserId) {
       const d = new Date(log.date);
       if (d >= weekStart) myWeekHours += log.duration;
@@ -2175,7 +2428,7 @@ function renderEarnings() {
   elements.monthEarnings.textContent = `$${(myMonthHours * effectiveHourly).toFixed(2)}`;
   
   const filter = elements.hoursFilterSelect.value;
-  const filteredLogs = filter === 'mine' ? allLogs.filter(l => l.userId === activeUserId) : allLogs;
+  const filteredLogs = filter === 'mine' ? validLogs.filter(l => l.userId === activeUserId) : validLogs;
   
   const room = rooms.find(r => getRoomKey(r) === currentRoomId);
   const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
@@ -2215,8 +2468,16 @@ function renderEarnings() {
 }
 
 async function deleteWorkLog(logId) {
+  const logToDelete = (localData.roomState.timeLogs || []).find(l => l.id === logId);
+  if (logToDelete && logToDelete.shiftId) {
+    const linkedShift = (localData.roomState.shifts || []).find(s => s.id === logToDelete.shiftId);
+    if (linkedShift) {
+      linkedShift.status = 'confirmed';
+    }
+  }
   localData.roomState.timeLogs = (localData.roomState.timeLogs || []).filter(l => l.id !== logId);
   await pushRoomData();
+  renderSchedule();
   renderEarnings();
 }
 
@@ -2226,10 +2487,10 @@ elements.btnCalcSince.addEventListener('click', () => {
   const startDate = new Date(startDateStr);
   const activeUserId = getUserId(currentUser);
   const myRateConfig = getUserRateConfig(activeUserId);
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
 
   let totalHrs = 0;
-  (localData.roomState.timeLogs || []).forEach(log => {
+  getValidCompletedLogs().forEach(log => {
     if (log.userId === activeUserId && new Date(log.date) >= startDate) {
       totalHrs += log.duration;
     }
@@ -2249,10 +2510,10 @@ elements.btnCalcWeek.addEventListener('click', () => {
 
   const activeUserId = getUserId(currentUser);
   const myRateConfig = getUserRateConfig(activeUserId);
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
 
   let totalHrs = 0;
-  (localData.roomState.timeLogs || []).forEach(log => {
+  getValidCompletedLogs().forEach(log => {
     if (log.userId === activeUserId) {
       const logD = new Date(log.date);
       if (logD >= targetMonday && logD <= targetSunday) {
@@ -2276,10 +2537,10 @@ elements.btnCalcRange.addEventListener('click', () => {
 
   const activeUserId = getUserId(currentUser);
   const myRateConfig = getUserRateConfig(activeUserId);
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
 
   let totalHrs = 0;
-  (localData.roomState.timeLogs || []).forEach(log => {
+  getValidCompletedLogs().forEach(log => {
     if (log.userId === activeUserId) {
       const logD = new Date(log.date);
       if (logD >= startDate && logD <= endDate) {
