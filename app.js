@@ -84,6 +84,7 @@ const i18n = {
     shiftStatusCompleted: 'Finished',
     confirmAttendance: 'Confirm Attendance',
     btnNoWork: 'You Don\'t Have to Come',
+    btnUndoNoWork: 'Undo (Reinstate Shift)',
     offerTrade: 'Trade Shift',
     markFinished: 'Mark Finished',
     takeShiftBtn: 'Take Shift',
@@ -101,7 +102,7 @@ const i18n = {
     unavailableTag: 'Unavailable',
     effectiveRateText: 'Effective rate:',
     tradeShiftBroadcastTitle: 'Shift Open For Pickup',
-    tradeDirectOfferTitle: 'Direct Shift Trade Offer',
+    tradeDirectOfferTitle: 'Shift Trade Offer',
     shiftClaimedBy: 'Claimed by',
     placeholderUsernameOrEmail: 'Username or Email',
     placeholderPassword: 'Password',
@@ -198,6 +199,7 @@ const i18n = {
     shiftStatusCompleted: 'Gewerkt',
     confirmAttendance: 'Aanwezigheid bevestigen',
     btnNoWork: 'Je hoeft niet te komen',
+    btnUndoNoWork: 'Herstellen (Dienst actief)',
     offerTrade: 'Dienst ruilen',
     markFinished: 'Afronden als gewerkt',
     takeShiftBtn: 'Dienst overnemen',
@@ -312,6 +314,7 @@ const i18n = {
     shiftStatusCompleted: 'Abgeschlossen',
     confirmAttendance: 'Teilnahme bestätigen',
     btnNoWork: 'Du musst nicht kommen',
+    btnUndoNoWork: 'Wieder aktivieren',
     offerTrade: 'Schicht tauschen',
     markFinished: 'Abschließen',
     takeShiftBtn: 'Schicht übernehmen',
@@ -426,6 +429,7 @@ const i18n = {
     shiftStatusCompleted: 'Finalizado',
     confirmAttendance: 'Confirmar asistencia',
     btnNoWork: 'No tienes que venir',
+    btnUndoNoWork: 'Reactivar turno',
     offerTrade: 'Cambiar turno',
     markFinished: 'Finalizar',
     takeShiftBtn: 'Tomar turno',
@@ -540,6 +544,7 @@ const i18n = {
     shiftStatusCompleted: 'Terminé',
     confirmAttendance: 'Confirmer présence',
     btnNoWork: 'Tu n\'as pas besoin de venir',
+    btnUndoNoWork: 'Rétablir le quart',
     offerTrade: 'Échanger le quart',
     markFinished: 'Terminer le quart',
     takeShiftBtn: 'Prendre le quart',
@@ -1261,6 +1266,12 @@ function renderSchedule() {
           btnNoWork.textContent = t('btnNoWork');
           btnNoWork.onclick = () => updateShiftStatus(shift.id, 'not_needed');
           actionsDiv.appendChild(btnNoWork);
+        } else if (shift.status === 'not_needed') {
+          const btnUndoNoWork = document.createElement('button');
+          btnUndoNoWork.className = 'btn-secondary';
+          btnUndoNoWork.textContent = t('btnUndoNoWork');
+          btnUndoNoWork.onclick = () => updateShiftStatus(shift.id, 'assigned');
+          actionsDiv.appendChild(btnUndoNoWork);
         }
 
         const btnEdit = document.createElement('button');
@@ -1426,6 +1437,7 @@ function openTradeModal(shift) {
     const opt = document.createElement('option');
     opt.value = getUserId(m);
     opt.dataset.displayName = getUserDisplayName(m);
+    opt.dataset.username = m.username || '';
     opt.textContent = `${getUserDisplayName(m)} (@${m.username})`;
     elements.tradeTargetUser.appendChild(opt);
   });
@@ -1440,6 +1452,30 @@ elements.tradeModeOpen.addEventListener('change', () => {
 elements.tradeModeDirect.addEventListener('change', () => {
   elements.tradeDirectSelectContainer.classList.remove('hidden');
 });
+
+async function getOrCreateDmRoom(targetUserId, targetUsername) {
+  const activeUserId = getUserId(currentUser);
+  await pullDmRooms();
+  let existingRoom = dmRooms.find(r => {
+    const members = Array.isArray(r.members) ? r.members : [];
+    const ids = members.map(m => getUserId(m));
+    return ids.includes(activeUserId) && ids.includes(targetUserId);
+  });
+
+  if (!existingRoom) {
+    const created = await apiCall('/external/rooms', 'POST', {
+      name: `DM_${[activeUserId, targetUserId].sort().join('_')}`,
+      description: 'Direct Message',
+      appId: DM_APP_KEY
+    });
+    existingRoom = created.room || created;
+    const newRoomId = getRoomKey(existingRoom);
+    await apiCall(`/external/rooms/${newRoomId}/members`, 'POST', { username: targetUsername });
+    await pullDmRooms();
+  }
+
+  return existingRoom;
+}
 
 elements.tradeShiftForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -1472,38 +1508,80 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
       timestamp: new Date().toISOString()
     };
     localData.roomState.messages.push(sysMsg);
+    await pushRoomData();
+    renderCompanyChat();
   } else {
     const targetOpt = elements.tradeTargetUser.options[elements.tradeTargetUser.selectedIndex];
+    const targetUserId = targetOpt.value;
+    const targetUsername = targetOpt.dataset.username;
+    const targetDisplayName = targetOpt.dataset.displayName;
+
     shift.tradeOffer = {
       mode: 'direct',
       fromUserId: getUserId(currentUser),
       fromDisplayName: getUserDisplayName(currentUser),
-      toUserId: targetOpt.value,
-      toDisplayName: targetOpt.dataset.displayName
+      toUserId: targetUserId,
+      toDisplayName: targetDisplayName
     };
 
-    const sysMsg = {
-      id: Date.now().toString(),
-      type: 'trade_direct',
-      shiftId: shift.id,
-      shiftDate: shift.date,
-      shiftTime: shift.time,
-      ownerId: getUserId(currentUser),
-      ownerDisplayName: getUserDisplayName(currentUser),
-      targetUserId: targetOpt.value,
-      targetDisplayName: targetOpt.dataset.displayName,
-      author: 'System',
-      text: `${getUserDisplayName(currentUser)} -> ${targetOpt.dataset.displayName}: ${shift.date} (${shift.time})`,
-      timestamp: new Date().toISOString()
-    };
-    localData.roomState.messages.push(sysMsg);
+    await pushRoomData();
+
+    try {
+      const dmRoom = await getOrCreateDmRoom(targetUserId, targetUsername);
+      const dmRoomId = getRoomKey(dmRoom);
+
+      let dmMessages = [];
+      if (dmRoom.cases && dmRoom.cases.length > 0 && dmRoom.cases[0].blocks && dmRoom.cases[0].blocks[0]) {
+        try {
+          const parsed = JSON.parse(dmRoom.cases[0].blocks[0]);
+          dmMessages = Array.isArray(parsed.messages) ? parsed.messages : [];
+        } catch (err) {
+          dmMessages = [];
+        }
+      }
+
+      const dmSysMsg = {
+        id: Date.now().toString(),
+        type: 'trade_direct',
+        shiftId: shift.id,
+        shiftDate: shift.date,
+        shiftTime: shift.time,
+        ownerId: getUserId(currentUser),
+        ownerDisplayName: getUserDisplayName(currentUser),
+        targetUserId: targetUserId,
+        targetDisplayName: targetDisplayName,
+        author: 'System',
+        text: `${getUserDisplayName(currentUser)} -> ${targetDisplayName}: ${shift.date} (${shift.time})`,
+        timestamp: new Date().toISOString()
+      };
+
+      dmMessages.push(dmSysMsg);
+
+      const cases = [{
+        id: `dm_data_${dmRoomId}`,
+        folderId: dmRoomId,
+        title: 'DMState',
+        blocks: [JSON.stringify({ messages: dmMessages })]
+      }];
+
+      await apiCall(`/external/rooms/${dmRoomId}`, 'PUT', {
+        name: dmRoom.name || 'Direct Message',
+        description: 'DM Conversation',
+        cases
+      });
+
+      if (activeDmRoomId === dmRoomId) {
+        localData.activeDmState.messages = dmMessages;
+        renderDmMessages();
+      }
+    } catch (err) {
+      alert(err.message);
+    }
   }
 
-  await pushRoomData();
   elements.modalTradeShift.classList.remove('active');
   activeTradeShiftId = null;
   renderSchedule();
-  renderCompanyChat();
 });
 
 async function claimShift(shiftId) {
@@ -1540,6 +1618,62 @@ async function declineShiftTrade(shiftId) {
 
   await pushRoomData();
   renderSchedule();
+}
+
+async function acceptDirectTradeFromDm(shiftId) {
+  await claimShift(shiftId);
+  if (activeDmRoomId) {
+    const claimNotice = {
+      id: Date.now().toString(),
+      userId: getUserId(currentUser),
+      author: 'System',
+      text: `${getUserDisplayName(currentUser)} accepted the shift trade.`,
+      timestamp: new Date().toISOString()
+    };
+    localData.activeDmState.messages.push(claimNotice);
+
+    const cases = [{
+      id: `dm_data_${activeDmRoomId}`,
+      folderId: activeDmRoomId,
+      title: 'DMState',
+      blocks: [JSON.stringify(localData.activeDmState)]
+    }];
+
+    await apiCall(`/external/rooms/${activeDmRoomId}`, 'PUT', {
+      name: 'Direct Message',
+      description: 'DM Conversation',
+      cases
+    });
+    renderDmMessages();
+  }
+}
+
+async function declineDirectTradeFromDm(shiftId) {
+  await declineShiftTrade(shiftId);
+  if (activeDmRoomId) {
+    const declineNotice = {
+      id: Date.now().toString(),
+      userId: getUserId(currentUser),
+      author: 'System',
+      text: `${getUserDisplayName(currentUser)} declined the shift trade.`,
+      timestamp: new Date().toISOString()
+    };
+    localData.activeDmState.messages.push(declineNotice);
+
+    const cases = [{
+      id: `dm_data_${activeDmRoomId}`,
+      folderId: activeDmRoomId,
+      title: 'DMState',
+      blocks: [JSON.stringify(localData.activeDmState)]
+    }];
+
+    await apiCall(`/external/rooms/${activeDmRoomId}`, 'PUT', {
+      name: 'Direct Message',
+      description: 'DM Conversation',
+      cases
+    });
+    renderDmMessages();
+  }
 }
 
 async function deleteShift(shiftId) {
@@ -1669,24 +1803,19 @@ function renderCompanyChat() {
   (localData.roomState.messages || []).forEach(msg => {
     const wrapper = document.createElement('div');
 
-    if (msg.type === 'trade_broadcast' || msg.type === 'trade_direct') {
+    if (msg.type === 'trade_broadcast') {
       wrapper.className = 'chat-msg system';
       const card = document.createElement('div');
       card.className = 'trade-broadcast-card';
 
       const cardHead = document.createElement('div');
       cardHead.className = 'trade-card-header';
-      const titleText = msg.type === 'trade_broadcast' ? t('tradeShiftBroadcastTitle') : t('tradeDirectOfferTitle');
-      cardHead.innerHTML = `<strong>${titleText}</strong><span class="muted-note">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+      cardHead.innerHTML = `<strong>${t('tradeShiftBroadcastTitle')}</strong><span class="muted-note">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
       card.appendChild(cardHead);
 
       const cardDetails = document.createElement('div');
       cardDetails.className = 'trade-card-details';
-      if (msg.type === 'trade_broadcast') {
-        cardDetails.textContent = `${msg.ownerDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
-      } else {
-        cardDetails.textContent = `${msg.ownerDisplayName} -> ${msg.targetDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
-      }
+      cardDetails.textContent = `${msg.ownerDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
       card.appendChild(cardDetails);
 
       const cardActions = document.createElement('div');
@@ -1694,11 +1823,10 @@ function renderCompanyChat() {
 
       const correspondingShift = localData.roomState.shifts.find(s => s.id === msg.shiftId);
       if (correspondingShift && correspondingShift.status === 'offered') {
-        const canTake = msg.type === 'trade_broadcast' ? (msg.ownerId !== activeUserId) : (msg.targetUserId === activeUserId);
-        if (canTake) {
+        if (msg.ownerId !== activeUserId) {
           const btnTake = document.createElement('button');
           btnTake.className = 'btn-primary btn-sm';
-          btnTake.textContent = msg.type === 'trade_broadcast' ? t('takeShiftBtn') : t('acceptTrade');
+          btnTake.textContent = t('takeShiftBtn');
           btnTake.onclick = () => claimShift(msg.shiftId);
           cardActions.appendChild(btnTake);
         }
@@ -1801,30 +1929,7 @@ async function openDmWithUser(targetMember) {
   elements.dmActiveTitle.textContent = `${getUserDisplayName(targetMember)} (@${targetMember.username})`;
   elements.dmChatForm.classList.remove('hidden');
 
-  const activeUserId = getUserId(currentUser);
-  let existingRoom = dmRooms.find(r => {
-    const members = Array.isArray(r.members) ? r.members : [];
-    const ids = members.map(m => getUserId(m));
-    return ids.includes(activeUserId) && ids.includes(targetId);
-  });
-
-  if (!existingRoom) {
-    try {
-      const created = await apiCall('/external/rooms', 'POST', {
-        name: `DM_${[activeUserId, targetId].sort().join('_')}`,
-        description: 'Direct Message',
-        appId: DM_APP_KEY
-      });
-      existingRoom = created.room || created;
-      const newRoomId = getRoomKey(existingRoom);
-      await apiCall(`/external/rooms/${newRoomId}/members`, 'POST', { username: targetMember.username });
-      await pullDmRooms();
-    } catch (err) {
-      alert(err.message);
-      return;
-    }
-  }
-
+  const existingRoom = await getOrCreateDmRoom(targetId, targetMember.username);
   activeDmRoomId = getRoomKey(existingRoom);
   selectDmRoom(activeDmRoomId);
 }
@@ -1853,7 +1958,55 @@ function renderDmMessages() {
   const activeUserId = getUserId(currentUser);
   (localData.activeDmState.messages || []).forEach(msg => {
     const wrapper = document.createElement('div');
-    wrapper.className = `chat-msg ${msg.userId === activeUserId ? 'self' : ''}`;
+
+    if (msg.type === 'trade_direct') {
+      wrapper.className = 'chat-msg system';
+      const card = document.createElement('div');
+      card.className = 'trade-broadcast-card';
+
+      const cardHead = document.createElement('div');
+      cardHead.className = 'trade-card-header';
+      cardHead.innerHTML = `<strong>${t('tradeDirectOfferTitle')}</strong><span class="muted-note">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+      card.appendChild(cardHead);
+
+      const cardDetails = document.createElement('div');
+      cardDetails.className = 'trade-card-details';
+      cardDetails.textContent = `${msg.ownerDisplayName} -> ${msg.targetDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
+      card.appendChild(cardDetails);
+
+      const cardActions = document.createElement('div');
+      cardActions.className = 'trade-card-actions';
+
+      const correspondingShift = localData.roomState.shifts.find(s => s.id === msg.shiftId);
+      if (correspondingShift && correspondingShift.status === 'offered') {
+        if (msg.targetUserId === activeUserId) {
+          const btnTake = document.createElement('button');
+          btnTake.className = 'btn-primary btn-sm';
+          btnTake.textContent = t('acceptTrade');
+          btnTake.onclick = () => acceptDirectTradeFromDm(msg.shiftId);
+          cardActions.appendChild(btnTake);
+
+          const btnDecline = document.createElement('button');
+          btnDecline.className = 'btn-secondary btn-sm';
+          btnDecline.textContent = t('declineTrade');
+          btnDecline.onclick = () => declineDirectTradeFromDm(msg.shiftId);
+          cardActions.appendChild(btnDecline);
+        }
+      } else if (correspondingShift) {
+        const claimedSpan = document.createElement('span');
+        claimedSpan.className = 'claimed-badge';
+        claimedSpan.textContent = `${t('shiftClaimedBy')} ${correspondingShift.displayName}`;
+        cardActions.appendChild(claimedSpan);
+      }
+
+      card.appendChild(cardActions);
+      wrapper.appendChild(card);
+      elements.dmChatMessages.appendChild(wrapper);
+      return;
+    }
+
+    const isSystem = msg.author === 'System';
+    wrapper.className = `chat-msg ${msg.userId === activeUserId && !isSystem ? 'self' : ''} ${isSystem ? 'system' : ''}`;
     
     const author = document.createElement('span');
     author.className = 'msg-author';
