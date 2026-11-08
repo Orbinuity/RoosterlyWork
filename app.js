@@ -22,6 +22,7 @@ const i18n = {
     logout: 'Logout',
     weeklySchedule: 'Weekly Schedule',
     addShift: 'Add Shift',
+    editShift: 'Edit Shift',
     prevWeek: 'Prev',
     nextWeek: 'Next',
     communicationHub: 'Communication Hub',
@@ -66,10 +67,12 @@ const i18n = {
     assignShift: 'Assign Shift',
     repeatWeekly: 'Repeat Weekly',
     assign: 'Assign',
-    markUnavailableDate: 'Mark Unavailable Date',
     save: 'Save',
+    markUnavailableDate: 'Mark Unavailable Date',
     tradeShiftTitle: 'Offer / Trade Shift',
-    offerToMember: 'Offer this shift to member:',
+    postToTeamChat: 'Broadcast to Workspace Chat (Open for anyone to take)',
+    offerToSpecificMember: 'Offer to specific member',
+    offerToMember: 'Select member:',
     sendTradeOffer: 'Send Offer',
     startDirectMessage: 'Start Direct Message',
     selectTeamMember: 'Select team member:',
@@ -84,9 +87,11 @@ const i18n = {
     cantCome: 'Cannot Attend',
     offerTrade: 'Trade Shift',
     markFinished: 'Mark Finished',
+    takeShiftBtn: 'Take Shift',
     acceptTrade: 'Accept Trade',
     declineTrade: 'Decline Trade',
     deleteShift: 'Delete Shift',
+    editShiftBtn: 'Edit Shift',
     makeAdmin: 'Make Admin',
     revokeAdmin: 'Revoke Admin',
     removeMemberBtn: 'Remove',
@@ -95,7 +100,9 @@ const i18n = {
     adminMinWarning: 'Cannot remove admin role. A minimum of 1 admin must remain.',
     adminSoleDeleteWarning: 'Cannot remove this member because they are the sole admin.',
     unavailableTag: 'Unavailable',
-    effectiveRateText: 'Effective rate:'
+    effectiveRateText: 'Effective rate:',
+    tradeShiftBroadcastTitle: 'Shift Open For Pickup',
+    shiftClaimedBy: 'Claimed by'
   },
   nl: {
     signIn: 'Inloggen',
@@ -115,6 +122,7 @@ const i18n = {
     logout: 'Uitloggen',
     weeklySchedule: 'Weekrooster',
     addShift: 'Dienst toevoegen',
+    editShift: 'Dienst bewerken',
     prevWeek: 'Vorige',
     nextWeek: 'Volgende',
     communicationHub: 'Communicatiehub',
@@ -159,10 +167,12 @@ const i18n = {
     assignShift: 'Dienst toewijzen',
     repeatWeekly: 'Wekelijks herhalen',
     assign: 'Toewijzen',
-    markUnavailableDate: 'Niet-beschikbare datum opslaan',
     save: 'Opslaan',
+    markUnavailableDate: 'Niet-beschikbare datum opslaan',
     tradeShiftTitle: 'Dienst ruilen / aanbieden',
-    offerToMember: 'Dienst aanbieden aan lid:',
+    postToTeamChat: 'Plaats in Werkplek Chat (Iedereen kan deze overnemen)',
+    offerToSpecificMember: 'Aan specifiek lid aanbieden',
+    offerToMember: 'Kies lid:',
     sendTradeOffer: 'Aanbod verzenden',
     startDirectMessage: 'Start direct bericht',
     selectTeamMember: 'Kies teamlid:',
@@ -177,9 +187,11 @@ const i18n = {
     cantCome: 'Kan niet komen',
     offerTrade: 'Dienst ruilen',
     markFinished: 'Afronden',
+    takeShiftBtn: 'Dienst overnemen',
     acceptTrade: 'Ruil accepteren',
     declineTrade: 'Ruil weigeren',
     deleteShift: 'Dienst wissen',
+    editShiftBtn: 'Bewerken',
     makeAdmin: 'Maak beheerder',
     revokeAdmin: 'Beheerder intrekken',
     removeMemberBtn: 'Verwijderen',
@@ -188,7 +200,9 @@ const i18n = {
     adminMinWarning: 'Kan beheerder niet verwijderen. Er moet minimaal 1 beheerder overblijven.',
     adminSoleDeleteWarning: 'Dit lid kan niet verwijderd worden omdat dit de enige beheerder is.',
     unavailableTag: 'Afwezig',
-    effectiveRateText: 'Effectief uurtarief:'
+    effectiveRateText: 'Effectief uurtarief:',
+    tradeShiftBroadcastTitle: 'Beschikbare Dienst ter overname',
+    shiftClaimedBy: 'Overgenomen door'
   },
   de: {
     signIn: 'Anmelden',
@@ -208,6 +222,7 @@ const i18n = {
     logout: 'Abmelden',
     weeklySchedule: 'Wochenplan',
     addShift: 'Schicht hinzufügen',
+    editShift: 'Schicht bearbeiten',
     prevWeek: 'Zurück',
     nextWeek: 'Weiter',
     communicationHub: 'Kommunikationszentrale',
@@ -252,10 +267,12 @@ const i18n = {
     assignShift: 'Schicht zuweisen',
     repeatWeekly: 'Wöchentlich wiederholen',
     assign: 'Zuweisen',
-    markUnavailableDate: 'Abwesenheit speichern',
     save: 'Speichern',
+    markUnavailableDate: 'Abwesenheit speichern',
     tradeShiftTitle: 'Schicht tauschen / anbieten',
-    offerToMember: 'Schicht anbieten an:',
+    postToTeamChat: 'Im Team-Chat posten (Frei für jeden zur Übernahme)',
+    offerToSpecificMember: 'Bestimmtem Mitglied anbieten',
+    offerToMember: 'Mitglied wählen:',
     sendTradeOffer: 'Angebot senden',
     startDirectMessage: 'Direktnachricht starten',
     selectTeamMember: 'Mitglied wählen:',
@@ -270,9 +287,11 @@ const i18n = {
     cantCome: 'Kann nicht kommen',
     offerTrade: 'Schicht tauschen',
     markFinished: 'Abschließen',
+    takeShiftBtn: 'Schicht übernehmen',
     acceptTrade: 'Tausch annehmen',
     declineTrade: 'Tausch ablehnen',
     deleteShift: 'Schicht löschen',
+    editShiftBtn: 'Bearbeiten',
     makeAdmin: 'Zum Admin machen',
     revokeAdmin: 'Admin entziehen',
     removeMemberBtn: 'Entfernen',
@@ -281,7 +300,9 @@ const i18n = {
     adminMinWarning: 'Mindestens 1 Administrator muss verbleiben.',
     adminSoleDeleteWarning: 'Dieses Mitglied ist der einzige Administrator und kann nicht entfernt werden.',
     unavailableTag: 'Abwesend',
-    effectiveRateText: 'Effektiver Stundensatz:'
+    effectiveRateText: 'Effektiver Stundensatz:',
+    tradeShiftBroadcastTitle: 'Offene Schicht zur Übernahme',
+    shiftClaimedBy: 'Übernommen von'
   },
   es: {
     signIn: 'Iniciar sesión',
@@ -301,6 +322,7 @@ const i18n = {
     logout: 'Cerrar sesión',
     weeklySchedule: 'Horario Semanal',
     addShift: 'Añadir turno',
+    editShift: 'Editar turno',
     prevWeek: 'Anterior',
     nextWeek: 'Siguiente',
     communicationHub: 'Centro de Comunicación',
@@ -345,10 +367,12 @@ const i18n = {
     assignShift: 'Asignar turno',
     repeatWeekly: 'Repetir semanalmente',
     assign: 'Asignar',
-    markUnavailableDate: 'Guardar fecha no disponible',
     save: 'Guardar',
+    markUnavailableDate: 'Guardar fecha no disponible',
     tradeShiftTitle: 'Ofrecer / Cambiar turno',
-    offerToMember: 'Ofrecer turno al miembro:',
+    postToTeamChat: 'Publicar en Chat de Trabajo (Cualquiera puede tomarlo)',
+    offerToSpecificMember: 'Ofrecer a miembro específico',
+    offerToMember: 'Seleccionar miembro:',
     sendTradeOffer: 'Enviar oferta',
     startDirectMessage: 'Iniciar mensaje directo',
     selectTeamMember: 'Seleccionar miembro:',
@@ -363,9 +387,11 @@ const i18n = {
     cantCome: 'No puedo asistir',
     offerTrade: 'Cambiar turno',
     markFinished: 'Finalizar',
+    takeShiftBtn: 'Tomar turno',
     acceptTrade: 'Aceptar cambio',
     declineTrade: 'Rechazar cambio',
     deleteShift: 'Eliminar turno',
+    editShiftBtn: 'Editar',
     makeAdmin: 'Hacer administrador',
     revokeAdmin: 'Revocar administrador',
     removeMemberBtn: 'Eliminar',
@@ -374,7 +400,9 @@ const i18n = {
     adminMinWarning: 'Debe quedar un mínimo de 1 administrador.',
     adminSoleDeleteWarning: 'No se puede eliminar al único administrador.',
     unavailableTag: 'No disponible',
-    effectiveRateText: 'Tarifa efectiva por hora:'
+    effectiveRateText: 'Tarifa efectiva por hora:',
+    tradeShiftBroadcastTitle: 'Turno Disponible para Tomar',
+    shiftClaimedBy: 'Tomado por'
   },
   fr: {
     signIn: 'Connexion',
@@ -394,6 +422,7 @@ const i18n = {
     logout: 'Déconnexion',
     weeklySchedule: 'Planning Hebdomadaire',
     addShift: 'Ajouter un quart',
+    editShift: 'Modifier un quart',
     prevWeek: 'Précédent',
     nextWeek: 'Suivant',
     communicationHub: 'Hub de Communication',
@@ -438,10 +467,12 @@ const i18n = {
     assignShift: 'Attribuer un quart',
     repeatWeekly: 'Répéter chaque semaine',
     assign: 'Attribuer',
-    markUnavailableDate: 'Enregistrer indisponibilité',
     save: 'Enregistrer',
+    markUnavailableDate: 'Enregistrer indisponibilité',
     tradeShiftTitle: 'Échanger / Proposer un quart',
-    offerToMember: 'Proposer ce quart à :',
+    postToTeamChat: 'Diffuser dans le Chat d\'Équipe (Libre à qui veut le prendre)',
+    offerToSpecificMember: 'Proposer à un membre précis',
+    offerToMember: 'Choisir le membre :',
     sendTradeOffer: 'Envoyer l\'offre',
     startDirectMessage: 'Nouveau message privé',
     selectTeamMember: 'Choisir le membre :',
@@ -456,9 +487,11 @@ const i18n = {
     cantCome: 'Ne peut pas venir',
     offerTrade: 'Échanger le quart',
     markFinished: 'Terminer le quart',
+    takeShiftBtn: 'Prendre le quart',
     acceptTrade: 'Accepter l\'échange',
     declineTrade: 'Refuser l\'échange',
     deleteShift: 'Supprimer',
+    editShiftBtn: 'Modifier',
     makeAdmin: 'Nommer administrateur',
     revokeAdmin: 'Révoquer administrateur',
     removeMemberBtn: 'Retirer',
@@ -467,7 +500,9 @@ const i18n = {
     adminMinWarning: 'Au moins 1 administrateur doit être conservé.',
     adminSoleDeleteWarning: 'Impossible de supprimer le seul administrateur restant.',
     unavailableTag: 'Indisponible',
-    effectiveRateText: 'Taux horaire effectif :'
+    effectiveRateText: 'Taux horaire effectif :',
+    tradeShiftBroadcastTitle: 'Quart Disponible à Prendre',
+    shiftClaimedBy: 'Pris par'
   }
 };
 
@@ -607,6 +642,14 @@ const elements = {
   shiftDate: document.getElementById('shift-date'),
   shiftTime: document.getElementById('shift-time'),
   shiftRepeat: document.getElementById('shift-repeat'),
+
+  modalEditShift: document.getElementById('modal-edit-shift'),
+  editShiftForm: document.getElementById('edit-shift-form'),
+  editShiftId: document.getElementById('edit-shift-id'),
+  editShiftUser: document.getElementById('edit-shift-user'),
+  editShiftDate: document.getElementById('edit-shift-date'),
+  editShiftTime: document.getElementById('edit-shift-time'),
+  editShiftRepeat: document.getElementById('edit-shift-repeat'),
   
   modalAddUnavailable: document.getElementById('modal-add-unavailable'),
   addUnavailableForm: document.getElementById('add-unavailable-form'),
@@ -616,6 +659,9 @@ const elements = {
   modalTradeShift: document.getElementById('modal-trade-shift'),
   tradeShiftForm: document.getElementById('trade-shift-form'),
   tradeShiftInfo: document.getElementById('trade-shift-info'),
+  tradeModeOpen: document.getElementById('trade-mode-open'),
+  tradeModeDirect: document.getElementById('trade-mode-direct'),
+  tradeDirectSelectContainer: document.getElementById('trade-direct-select-container'),
   tradeTargetUser: document.getElementById('trade-target-user'),
   
   modalNewDm: document.getElementById('modal-new-dm'),
@@ -939,7 +985,6 @@ function updateRoleUI(room) {
     elements.btnAddShift.classList.remove('hidden');
     elements.adminSettings.classList.remove('hidden');
     elements.nonAdminSettings.classList.add('hidden');
-    populateShiftUserSelect(room);
   } else {
     elements.btnAddShift.classList.add('hidden');
     elements.adminSettings.classList.add('hidden');
@@ -995,6 +1040,7 @@ elements.closeModals.forEach(btn => {
   btn.addEventListener('click', () => {
     elements.modalCreateWorkspace.classList.remove('active');
     elements.modalAddShift.classList.remove('active');
+    elements.modalEditShift.classList.remove('active');
     elements.modalAddUnavailable.classList.remove('active');
     elements.modalTradeShift.classList.remove('active');
     elements.modalNewDm.classList.remove('active');
@@ -1086,7 +1132,8 @@ function renderSchedule() {
       actionsDiv.className = 'shift-actions';
 
       const isMyShift = shift.userId === activeUserId;
-      const isOfferedToMe = shift.tradeOffer && shift.tradeOffer.toUserId === activeUserId;
+      const isOpenOffer = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.mode === 'open';
+      const isDirectOfferToMe = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.toUserId === activeUserId;
 
       if (isMyShift && shift.status !== 'completed') {
         if (shift.status !== 'confirmed') {
@@ -1118,21 +1165,29 @@ function renderSchedule() {
         actionsDiv.appendChild(btnFinish);
       }
 
-      if (isOfferedToMe && shift.status === 'offered') {
-        const btnAcceptTrade = document.createElement('button');
-        btnAcceptTrade.className = 'btn-primary';
-        btnAcceptTrade.textContent = t('acceptTrade');
-        btnAcceptTrade.onclick = () => acceptShiftTrade(shift.id);
-        actionsDiv.appendChild(btnAcceptTrade);
+      if (!isMyShift && (isOpenOffer || isDirectOfferToMe)) {
+        const btnTake = document.createElement('button');
+        btnTake.className = 'btn-primary';
+        btnTake.textContent = t('takeShiftBtn');
+        btnTake.onclick = () => claimShift(shift.id);
+        actionsDiv.appendChild(btnTake);
 
-        const btnDeclineTrade = document.createElement('button');
-        btnDeclineTrade.className = 'btn-secondary';
-        btnDeclineTrade.textContent = t('declineTrade');
-        btnDeclineTrade.onclick = () => declineShiftTrade(shift.id);
-        actionsDiv.appendChild(btnDeclineTrade);
+        if (isDirectOfferToMe) {
+          const btnDeclineTrade = document.createElement('button');
+          btnDeclineTrade.className = 'btn-secondary';
+          btnDeclineTrade.textContent = t('declineTrade');
+          btnDeclineTrade.onclick = () => declineShiftTrade(shift.id);
+          actionsDiv.appendChild(btnDeclineTrade);
+        }
       }
 
       if (amAdmin) {
+        const btnEdit = document.createElement('button');
+        btnEdit.className = 'btn-secondary';
+        btnEdit.textContent = t('editShiftBtn');
+        btnEdit.onclick = () => openEditShiftModal(shift);
+        actionsDiv.appendChild(btnEdit);
+
         const btnDel = document.createElement('button');
         btnDel.className = 'btn-secondary';
         btnDel.textContent = t('deleteShift');
@@ -1161,22 +1216,33 @@ elements.btnNextWeek.addEventListener('click', () => {
   renderSchedule();
 });
 
-elements.btnAddShift.addEventListener('click', () => {
-  elements.modalAddShift.classList.add('active');
-});
+function populateUserSelect(selectEl, selectedUserId = null) {
+  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
+  if (!room) return;
 
-function populateShiftUserSelect(room) {
-  elements.shiftUser.innerHTML = '';
+  const currentVal = selectedUserId || selectEl.value;
+  selectEl.innerHTML = '';
   const members = Array.isArray(room.members) ? room.members : [];
+  
   members.forEach(m => {
     const opt = document.createElement('option');
     opt.value = getUserId(m);
     opt.dataset.displayName = getUserDisplayName(m);
     opt.dataset.username = m.username || '';
     opt.textContent = `${getUserDisplayName(m)} (@${m.username})`;
-    elements.shiftUser.appendChild(opt);
+    selectEl.appendChild(opt);
   });
+
+  if (currentVal && members.some(m => getUserId(m) === currentVal)) {
+    selectEl.value = currentVal;
+  }
 }
+
+elements.btnAddShift.addEventListener('click', () => {
+  populateUserSelect(elements.shiftUser);
+  elements.addShiftForm.reset();
+  elements.modalAddShift.classList.add('active');
+});
 
 elements.addShiftForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -1197,7 +1263,34 @@ elements.addShiftForm.addEventListener('submit', async (e) => {
   await pushRoomData();
   
   elements.modalAddShift.classList.remove('active');
-  elements.addShiftForm.reset();
+  renderSchedule();
+});
+
+function openEditShiftModal(shift) {
+  elements.editShiftId.value = shift.id;
+  populateUserSelect(elements.editShiftUser, shift.userId);
+  elements.editShiftDate.value = shift.date;
+  elements.editShiftTime.value = shift.time;
+  elements.editShiftRepeat.checked = !!shift.repeat;
+  elements.modalEditShift.classList.add('active');
+}
+
+elements.editShiftForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const shiftId = elements.editShiftId.value;
+  const shift = localData.roomState.shifts.find(s => s.id === shiftId);
+  if (!shift) return;
+
+  const selectedOpt = elements.editShiftUser.options[elements.editShiftUser.selectedIndex];
+  shift.userId = selectedOpt.value;
+  shift.displayName = selectedOpt.dataset.displayName;
+  shift.username = selectedOpt.dataset.username;
+  shift.date = elements.editShiftDate.value;
+  shift.time = elements.editShiftTime.value;
+  shift.repeat = elements.editShiftRepeat.checked;
+
+  await pushRoomData();
+  elements.modalEditShift.classList.remove('active');
   renderSchedule();
 });
 
@@ -1242,6 +1335,8 @@ function openTradeModal(shift) {
   if (!room) return;
 
   elements.tradeShiftInfo.textContent = `${shift.date} (${shift.time})`;
+  elements.tradeModeOpen.checked = true;
+  elements.tradeDirectSelectContainer.classList.add('hidden');
   elements.tradeTargetUser.innerHTML = '';
   
   const activeUserId = getUserId(currentUser);
@@ -1257,6 +1352,14 @@ function openTradeModal(shift) {
   elements.modalTradeShift.classList.add('active');
 }
 
+elements.tradeModeOpen.addEventListener('change', () => {
+  elements.tradeDirectSelectContainer.classList.add('hidden');
+});
+
+elements.tradeModeDirect.addEventListener('change', () => {
+  elements.tradeDirectSelectContainer.classList.remove('hidden');
+});
+
 elements.tradeShiftForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!activeTradeShiftId) return;
@@ -1264,31 +1367,70 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
   const shift = localData.roomState.shifts.find(s => s.id === activeTradeShiftId);
   if (!shift) return;
 
-  const targetOpt = elements.tradeTargetUser.options[elements.tradeTargetUser.selectedIndex];
+  const isOpenTrade = elements.tradeModeOpen.checked;
   shift.status = 'offered';
-  shift.tradeOffer = {
-    toUserId: targetOpt.value,
-    toDisplayName: targetOpt.dataset.displayName
-  };
+
+  if (isOpenTrade) {
+    shift.tradeOffer = {
+      mode: 'open',
+      fromUserId: getUserId(currentUser),
+      fromDisplayName: getUserDisplayName(currentUser)
+    };
+
+    const sysMsg = {
+      id: Date.now().toString(),
+      type: 'trade_broadcast',
+      shiftId: shift.id,
+      shiftDate: shift.date,
+      shiftTime: shift.time,
+      ownerId: getUserId(currentUser),
+      ownerDisplayName: getUserDisplayName(currentUser),
+      author: 'System',
+      text: `${getUserDisplayName(currentUser)} put their shift on ${shift.date} (${shift.time}) up for grabs!`,
+      timestamp: new Date().toISOString()
+    };
+    localData.roomState.messages.push(sysMsg);
+  } else {
+    const targetOpt = elements.tradeTargetUser.options[elements.tradeTargetUser.selectedIndex];
+    shift.tradeOffer = {
+      mode: 'direct',
+      fromUserId: getUserId(currentUser),
+      fromDisplayName: getUserDisplayName(currentUser),
+      toUserId: targetOpt.value,
+      toDisplayName: targetOpt.dataset.displayName
+    };
+  }
 
   await pushRoomData();
   elements.modalTradeShift.classList.remove('active');
   activeTradeShiftId = null;
   renderSchedule();
+  renderCompanyChat();
 });
 
-async function acceptShiftTrade(shiftId) {
+async function claimShift(shiftId) {
   const shift = localData.roomState.shifts.find(s => s.id === shiftId);
   if (!shift) return;
 
+  const prevOwnerName = shift.displayName;
   shift.userId = getUserId(currentUser);
   shift.username = currentUser.username;
   shift.displayName = getUserDisplayName(currentUser);
   shift.tradeOffer = null;
   shift.status = 'confirmed';
 
+  const claimMsg = {
+    id: Date.now().toString(),
+    userId: getUserId(currentUser),
+    author: 'System',
+    text: `${getUserDisplayName(currentUser)} accepted and claimed the shift from ${prevOwnerName} for ${shift.date} (${shift.time}).`,
+    timestamp: new Date().toISOString()
+  };
+  localData.roomState.messages.push(claimMsg);
+
   await pushRoomData();
   renderSchedule();
+  renderCompanyChat();
 }
 
 async function declineShiftTrade(shiftId) {
@@ -1425,9 +1567,52 @@ elements.tabPrivateChat.addEventListener('click', () => {
 function renderCompanyChat() {
   elements.companyChatMessages.innerHTML = '';
   const activeUserId = getUserId(currentUser);
+
   (localData.roomState.messages || []).forEach(msg => {
     const wrapper = document.createElement('div');
-    wrapper.className = `chat-msg ${msg.userId === activeUserId ? 'self' : ''}`;
+
+    if (msg.type === 'trade_broadcast') {
+      wrapper.className = 'chat-msg system';
+      const card = document.createElement('div');
+      card.className = 'trade-broadcast-card';
+
+      const cardHead = document.createElement('div');
+      cardHead.className = 'trade-card-header';
+      cardHead.innerHTML = `<strong>${t('tradeShiftBroadcastTitle')}</strong><span class="muted-note">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+      card.appendChild(cardHead);
+
+      const cardDetails = document.createElement('div');
+      cardDetails.className = 'trade-card-details';
+      cardDetails.textContent = `${msg.ownerDisplayName} is offering their shift on ${msg.shiftDate} (${msg.shiftTime}).`;
+      card.appendChild(cardDetails);
+
+      const cardActions = document.createElement('div');
+      cardActions.className = 'trade-card-actions';
+
+      const correspondingShift = localData.roomState.shifts.find(s => s.id === msg.shiftId);
+      if (correspondingShift && correspondingShift.status === 'offered') {
+        if (msg.ownerId !== activeUserId) {
+          const btnTake = document.createElement('button');
+          btnTake.className = 'btn-primary btn-sm';
+          btnTake.textContent = t('takeShiftBtn');
+          btnTake.onclick = () => claimShift(msg.shiftId);
+          cardActions.appendChild(btnTake);
+        }
+      } else if (correspondingShift) {
+        const claimedSpan = document.createElement('span');
+        claimedSpan.className = 'claimed-badge';
+        claimedSpan.textContent = `${t('shiftClaimedBy')} ${correspondingShift.displayName}`;
+        cardActions.appendChild(claimedSpan);
+      }
+
+      card.appendChild(cardActions);
+      wrapper.appendChild(card);
+      elements.companyChatMessages.appendChild(wrapper);
+      return;
+    }
+
+    const isSystem = msg.author === 'System';
+    wrapper.className = `chat-msg ${msg.userId === activeUserId && !isSystem ? 'self' : ''} ${isSystem ? 'system' : ''}`;
     
     const author = document.createElement('span');
     author.className = 'msg-author';
