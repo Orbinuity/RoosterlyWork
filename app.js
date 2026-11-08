@@ -84,7 +84,7 @@ const i18n = {
     roleAdmin: 'Admin',
     roleMember: 'Member',
     shiftDetails: 'Shift Details',
-    manageShift: 'Manage Shift',
+    manageShift: 'Manage',
     assignedToLabel: 'Assigned to',
     shiftDateLabel: 'Date',
     shiftTimeLabel: 'Time',
@@ -216,7 +216,7 @@ const i18n = {
     roleAdmin: 'Beheerder',
     roleMember: 'Medewerker',
     shiftDetails: 'Dienstdetails',
-    manageShift: 'Dienst beheren',
+    manageShift: 'Beheren',
     assignedToLabel: 'Toegewezen aan',
     shiftDateLabel: 'Datum',
     shiftTimeLabel: 'Tijd',
@@ -348,7 +348,7 @@ const i18n = {
     roleAdmin: 'Administrator',
     roleMember: 'Mitarbeiter',
     shiftDetails: 'Schichtdetails',
-    manageShift: 'Schicht verwalten',
+    manageShift: 'Verwalten',
     assignedToLabel: 'Zugewiesen an',
     shiftDateLabel: 'Datum',
     shiftTimeLabel: 'Zeit',
@@ -480,7 +480,7 @@ const i18n = {
     roleAdmin: 'Administrador',
     roleMember: 'Miembro',
     shiftDetails: 'Detalles del turno',
-    manageShift: 'Gestionar turno',
+    manageShift: 'Gestionar',
     assignedToLabel: 'Asignado a',
     shiftDateLabel: 'Fecha',
     shiftTimeLabel: 'Horario',
@@ -612,7 +612,7 @@ const i18n = {
     roleAdmin: 'Administrateur',
     roleMember: 'Membre',
     shiftDetails: 'Détails du quart',
-    manageShift: 'Gérer le quart',
+    manageShift: 'Gérer',
     assignedToLabel: 'Attribué à',
     shiftDateLabel: 'Date',
     shiftTimeLabel: 'Heure',
@@ -1296,6 +1296,9 @@ elements.createWorkspaceForm.addEventListener('submit', async (e) => {
 function renderSchedule() {
   elements.calendarGrid.innerHTML = '';
   const days = t('daysList') || ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const activeUserId = getUserId(currentUser);
+  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
+  const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
   
   const weekEnd = new Date(currentWeekStart);
   weekEnd.setDate(currentWeekStart.getDate() + 6);
@@ -1341,6 +1344,10 @@ function renderSchedule() {
       nameSpan.className = 'shift-card-name';
       nameSpan.textContent = shift.displayName;
 
+      const timeSpan = document.createElement('span');
+      timeSpan.className = 'shift-card-time';
+      timeSpan.textContent = shift.time;
+
       const statusBadge = document.createElement('span');
       const statusKey = shift.status === 'confirmed' ? 'shiftStatusConfirmed' :
                         shift.status === 'not_needed' ? 'shiftStatusNotNeeded' :
@@ -1350,22 +1357,53 @@ function renderSchedule() {
       statusBadge.textContent = t(statusKey);
 
       cardHeader.appendChild(nameSpan);
+      cardHeader.appendChild(timeSpan);
       cardHeader.appendChild(statusBadge);
       card.appendChild(cardHeader);
 
-      const timeSpan = document.createElement('span');
-      timeSpan.className = 'shift-card-time';
-      timeSpan.textContent = shift.time;
-      card.appendChild(timeSpan);
+      const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'shift-card-actions';
 
-      const manageBtn = document.createElement('button');
-      manageBtn.className = 'btn-shift-manage';
-      manageBtn.textContent = t('manageShift');
-      manageBtn.onclick = (e) => {
-        e.stopPropagation();
-        openShiftDetailsModal(shift);
-      };
-      card.appendChild(manageBtn);
+      const isMyShift = shift.userId === activeUserId;
+      const isOpenOffer = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.mode === 'open';
+      const isDirectOfferToMe = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.toUserId === activeUserId;
+
+      if (!isMyShift && (isOpenOffer || isDirectOfferToMe)) {
+        const btnTake = document.createElement('button');
+        btnTake.className = 'btn-primary btn-sm';
+        btnTake.textContent = t('takeShiftBtn');
+        btnTake.onclick = (e) => {
+          e.stopPropagation();
+          claimShift(shift.id);
+        };
+        actionsDiv.appendChild(btnTake);
+
+        if (isDirectOfferToMe) {
+          const btnDecline = document.createElement('button');
+          btnDecline.className = 'btn-secondary btn-sm';
+          btnDecline.textContent = t('declineTrade');
+          btnDecline.onclick = (e) => {
+            e.stopPropagation();
+            declineShiftTrade(shift.id);
+          };
+          actionsDiv.appendChild(btnDecline);
+        }
+      }
+
+      if (isMyShift || amAdmin) {
+        const manageBtn = document.createElement('button');
+        manageBtn.className = 'btn-secondary btn-sm';
+        manageBtn.textContent = t('manageShift');
+        manageBtn.onclick = (e) => {
+          e.stopPropagation();
+          openShiftDetailsModal(shift);
+        };
+        actionsDiv.appendChild(manageBtn);
+      }
+
+      if (actionsDiv.children.length > 0) {
+        card.appendChild(actionsDiv);
+      }
 
       dayDiv.appendChild(card);
     });
@@ -2070,7 +2108,7 @@ function buildUnavailabilityListItem(u, allowDelete) {
 
   if (allowDelete) {
     const btnDel = document.createElement('button');
-    btnDel.className = 'btn-secondary';
+    btnDel.className = 'btn-secondary btn-sm';
     btnDel.textContent = t('deleteLogBtn');
     btnDel.onclick = () => deleteUnavailable(u.id);
     actions.appendChild(btnDel);
@@ -2600,7 +2638,7 @@ function renderEarnings() {
     
     if (log.userId === activeUserId || amAdmin) {
       const btnDel = document.createElement('button');
-      btnDel.className = 'btn-secondary';
+      btnDel.className = 'btn-secondary btn-sm';
       btnDel.textContent = t('deleteLogBtn');
       btnDel.onclick = () => deleteWorkLog(log.id);
       actions.appendChild(btnDel);
@@ -2744,14 +2782,14 @@ function renderSettings(room) {
       controls.className = 'member-admin-controls';
       
       const toggleAdminBtn = document.createElement('button');
-      toggleAdminBtn.className = 'btn-secondary';
+      toggleAdminBtn.className = 'btn-secondary btn-sm';
       toggleAdminBtn.textContent = mIsAdmin ? t('revokeAdmin') : t('makeAdmin');
       toggleAdminBtn.onclick = () => toggleMemberAdmin(room, memberId);
       controls.appendChild(toggleAdminBtn);
       
       if (memberId !== activeUserId) {
         const removeBtn = document.createElement('button');
-        removeBtn.className = 'btn-secondary';
+        removeBtn.className = 'btn-secondary btn-sm';
         removeBtn.textContent = t('removeMemberBtn');
         removeBtn.onclick = () => removeMember(roomId, memberId);
         controls.appendChild(removeBtn);
