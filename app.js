@@ -68,6 +68,11 @@ const i18n = {
     membersPermissions: 'Workspace Members & Permissions',
     workspaceMembers: 'Workspace Members',
     notInWorkspace: 'You are not a member of this workspace.',
+    dangerZone: 'Danger Zone',
+    deleteWorkspaceWarning: 'Deleting this workspace will permanently erase all shifts, messages, and settings for all members.',
+    deleteWorkspace: 'Delete Workspace',
+    confirmDeleteWorkspaceTitle: 'Delete Workspace',
+    confirmDeleteWorkspaceText: 'Are you sure you want to permanently delete this workspace? This action cannot be undone.',
     createNewWorkspace: 'Create New Workspace',
     cancel: 'Cancel',
     create: 'Create',
@@ -200,6 +205,11 @@ const i18n = {
     membersPermissions: 'Leden & Beheerdersrechten',
     workspaceMembers: 'Leden van deze werkplek',
     notInWorkspace: 'Je bent geen lid van deze werkplek.',
+    dangerZone: 'Gevarenzone',
+    deleteWorkspaceWarning: 'Het verwijderen van deze werkplek wist definitief alle diensten, berichten en instellingen voor alle leden.',
+    deleteWorkspace: 'Werkplek verwijderen',
+    confirmDeleteWorkspaceTitle: 'Werkplek verwijderen',
+    confirmDeleteWorkspaceText: 'Weet je zeker dat je deze werkplek permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt.',
     createNewWorkspace: 'Nieuwe werkplek aanmaken',
     cancel: 'Annuleren',
     create: 'Aanmaken',
@@ -332,6 +342,11 @@ const i18n = {
     membersPermissions: 'Mitglieder & Berechtigungen',
     workspaceMembers: 'Mitglieder',
     notInWorkspace: 'Sie sind kein Mitglied dieses Arbeitsbereichs.',
+    dangerZone: 'Gefahrenzone',
+    deleteWorkspaceWarning: 'Das Löschen dieses Arbeitsbereichs entfernt alle Schichten, Nachrichten und Einstellungen für alle Mitglieder endgültig.',
+    deleteWorkspace: 'Arbeitsbereich löschen',
+    confirmDeleteWorkspaceTitle: 'Arbeitsbereich löschen',
+    confirmDeleteWorkspaceText: 'Möchten Sie diesen Arbeitsbereich wirklich dauerhaft löschen? Dies kann nicht rückgängig gemacht werden.',
     createNewWorkspace: 'Neuen Arbeitsbereich erstellen',
     cancel: 'Abbrechen',
     create: 'Erstellen',
@@ -464,6 +479,11 @@ const i18n = {
     membersPermissions: 'Miembros y Permisos',
     workspaceMembers: 'Miembros del espacio',
     notInWorkspace: 'No eres miembro de este espacio de trabajo.',
+    dangerZone: 'Zona de peligro',
+    deleteWorkspaceWarning: 'Eliminar este espacio de trabajo borrará permanentemente todos los turnos, mensajes y ajustes de todos los miembros.',
+    deleteWorkspace: 'Eliminar espacio',
+    confirmDeleteWorkspaceTitle: 'Eliminar espacio',
+    confirmDeleteWorkspaceText: '¿Estás seguro de que deseas eliminar permanentemente este espacio de trabajo? Esta acción no se puede deshacer.',
     createNewWorkspace: 'Crear nuevo espacio',
     cancel: 'Cancelar',
     create: 'Crear',
@@ -596,6 +616,11 @@ const i18n = {
     membersPermissions: 'Membres et Permissions',
     workspaceMembers: 'Membres de l\'espace',
     notInWorkspace: 'Vous n\'êtes pas membre de cet espace.',
+    dangerZone: 'Zone de danger',
+    deleteWorkspaceWarning: 'La suppression de cet espace effacera définitivement tous les quarts, messages et paramètres pour tous les membres.',
+    deleteWorkspace: 'Supprimer l\'espace',
+    confirmDeleteWorkspaceTitle: 'Supprimer l\'espace',
+    confirmDeleteWorkspaceText: 'Êtes-vous sûr de vouloir supprimer définitivement cet espace ? Cette action est irréversible.',
     createNewWorkspace: 'Nouvel espace',
     cancel: 'Annuler',
     create: 'Créer',
@@ -809,6 +834,9 @@ const elements = {
   inviteUsername: document.getElementById('invite-username'),
   memberList: document.getElementById('member-list'),
   readonlyMemberList: document.getElementById('readonly-member-list'),
+  btnDeleteWorkspace: document.getElementById('btn-delete-workspace'),
+  modalDeleteWorkspace: document.getElementById('modal-delete-workspace'),
+  btnConfirmDeleteWorkspace: document.getElementById('btn-confirm-delete-workspace'),
   
   modalCreateWorkspace: document.getElementById('modal-create-workspace'),
   createWorkspaceForm: document.getElementById('create-workspace-form'),
@@ -1260,9 +1288,31 @@ elements.btnCreateWorkspace.addEventListener('click', () => {
   elements.modalCreateWorkspace.classList.add('active');
 });
 
+elements.btnDeleteWorkspace.addEventListener('click', () => {
+  elements.modalDeleteWorkspace.classList.add('active');
+});
+
+elements.btnConfirmDeleteWorkspace.addEventListener('click', async () => {
+  if (!currentRoomId) return;
+  try {
+    await apiCall(`/external/rooms/${currentRoomId}`, 'DELETE');
+    elements.modalDeleteWorkspace.classList.remove('active');
+    currentRoomId = null;
+    await pullRooms();
+    if (rooms.length > 0) {
+      selectRoom(getRoomKey(rooms[0]));
+    } else {
+      renderEmptyState();
+    }
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
 elements.closeModals.forEach(btn => {
   btn.addEventListener('click', () => {
     elements.modalCreateWorkspace.classList.remove('active');
+    elements.modalDeleteWorkspace.classList.remove('active');
     elements.modalAddShift.classList.remove('active');
     elements.modalEditShift.classList.remove('active');
     elements.modalShiftDetails.classList.remove('active');
