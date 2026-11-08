@@ -323,7 +323,7 @@ input:focus, select:focus {
   border: 1px solid var(--success);
 }
 
-.status-badge.declined {
+.status-badge.not_needed {
   background-color: rgba(239, 68, 68, 0.2);
   color: var(--error);
   border: 1px solid var(--error);
@@ -399,6 +399,11 @@ input:focus, select:focus {
 
 .shift-card.completed {
   border-left-color: var(--info);
+  opacity: 0.85;
+}
+
+.shift-card.not_needed {
+  border-left-color: var(--error);
   opacity: 0.85;
 }
 
@@ -592,7 +597,7 @@ input:focus, select:focus {
 
 .rate-config-group {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1.2fr auto;
   gap: 0.5rem;
 }
 
@@ -615,7 +620,7 @@ input:focus, select:focus {
 
 .custom-query-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
@@ -628,6 +633,18 @@ input:focus, select:focus {
 .input-inline {
   display: flex;
   gap: 0.5rem;
+}
+
+.input-inline-range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.range-separator {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: lowercase;
 }
 
 .query-result {
@@ -810,6 +827,13 @@ input:focus, select:focus {
   }
   .rate-config-group {
     grid-template-columns: 1fr;
+  }
+  .input-inline-range {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .range-separator {
+    text-align: center;
   }
   .log-item {
     flex-direction: column;
