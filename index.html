@@ -296,6 +296,25 @@
   </div>
 </div>
 
+<div id="modal-edit-shift" class="modal">
+  <div class="modal-content">
+    <h3 data-i18n="editShift">Edit Shift</h3>
+    <form id="edit-shift-form">
+      <input type="hidden" id="edit-shift-id">
+      <select id="edit-shift-user" required></select>
+      <input type="date" id="edit-shift-date" required>
+      <input type="text" id="edit-shift-time" placeholder="e.g. 09:00 - 17:00" required>
+      <label class="checkbox-label">
+        <input type="checkbox" id="edit-shift-repeat"> <span data-i18n="repeatWeekly">Repeat Weekly</span>
+      </label>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
+        <button type="submit" class="btn-primary" data-i18n="save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div id="modal-add-unavailable" class="modal">
   <div class="modal-content">
     <h3 data-i18n="markUnavailableDate">Mark Unavailable Date</h3>
@@ -315,8 +334,22 @@
     <h3 data-i18n="tradeShiftTitle">Offer / Trade Shift</h3>
     <p id="trade-shift-info" class="muted-note mb-1"></p>
     <form id="trade-shift-form">
-      <label for="trade-target-user" data-i18n="offerToMember">Offer this shift to member:</label>
-      <select id="trade-target-user" required></select>
+      <div class="radio-option-group">
+        <label class="radio-label">
+          <input type="radio" name="trade-mode" id="trade-mode-open" value="open" checked>
+          <span data-i18n="postToTeamChat">Broadcast to Workspace Chat (Open for anyone to take)</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="trade-mode" id="trade-mode-direct" value="direct">
+          <span data-i18n="offerToSpecificMember">Offer to specific member</span>
+        </label>
+      </div>
+
+      <div id="trade-direct-select-container" class="hidden mt-1">
+        <label for="trade-target-user" data-i18n="offerToMember">Select member:</label>
+        <select id="trade-target-user"></select>
+      </div>
+
       <div class="modal-actions">
         <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
         <button type="submit" class="btn-primary" data-i18n="sendTradeOffer">Send Offer</button>
