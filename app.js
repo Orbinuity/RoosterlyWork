@@ -29,9 +29,8 @@ const i18n = {
     companyChat: 'Workspace Chat',
     directMessages: 'Direct Messages',
     send: 'Send',
-    conversations: 'Conversations',
-    newChat: 'New DM',
-    selectConversation: 'Select a conversation',
+    teamMembers: 'Team Members',
+    selectMemberToChat: 'Select a member to chat',
     timeEarningsTracker: 'Time & Earnings Tracker',
     payRateConfig: 'Pay Rate & Frequency',
     hourly: 'Hourly',
@@ -44,6 +43,8 @@ const i18n = {
     customCalculations: 'Custom Timeframe Calculations',
     calculateEarningsSince: 'Calculate earnings since start date:',
     calculateSpecificWeek: 'Calculate for specific week (choose day):',
+    calculateCustomRange: 'Calculate for custom date range:',
+    rangeTo: 'to',
     calculate: 'Calculate',
     workHoursLog: 'Work Hours Log',
     displayLabel: 'Display:',
@@ -74,17 +75,15 @@ const i18n = {
     offerToSpecificMember: 'Offer to specific member',
     offerToMember: 'Select member:',
     sendTradeOffer: 'Send Offer',
-    startDirectMessage: 'Start Direct Message',
-    selectTeamMember: 'Select team member:',
-    openConversation: 'Open Chat',
     roleAdmin: 'Admin',
     roleMember: 'Member',
+    shiftStatusAssigned: 'Assigned',
     shiftStatusConfirmed: 'Attending',
-    shiftStatusDeclined: 'Declined',
+    shiftStatusNotNeeded: 'You Don\'t Have to Come',
     shiftStatusOffered: 'Trade Offered',
     shiftStatusCompleted: 'Finished',
     confirmAttendance: 'Confirm Attendance',
-    cantCome: 'Cannot Attend',
+    btnNoWork: 'You Don\'t Have to Come',
     offerTrade: 'Trade Shift',
     markFinished: 'Mark Finished',
     takeShiftBtn: 'Take Shift',
@@ -102,38 +101,52 @@ const i18n = {
     unavailableTag: 'Unavailable',
     effectiveRateText: 'Effective rate:',
     tradeShiftBroadcastTitle: 'Shift Open For Pickup',
-    shiftClaimedBy: 'Claimed by'
+    tradeDirectOfferTitle: 'Direct Shift Trade Offer',
+    shiftClaimedBy: 'Claimed by',
+    placeholderUsernameOrEmail: 'Username or Email',
+    placeholderPassword: 'Password',
+    placeholderCode: 'Enter 6-digit code',
+    typeMessage: 'Type a message...',
+    typePrivateMessage: 'Type a private message...',
+    customWeeklyHoursPlaceholder: 'Weekly hours (e.g. 40)',
+    notesOptional: 'Notes (optional)',
+    reasonPlaceholder: 'Reason (e.g. Vacation, Medical)',
+    workspaceNamePlaceholder: 'Workspace Name',
+    descriptionPlaceholder: 'Description',
+    usernamePlaceholder: 'Username',
+    hoursUnit: 'hrs',
+    daysList: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    selectWorkspaceFirst: 'Please select or create a workspace first.'
   },
   nl: {
     signIn: 'Inloggen',
-    login: 'Log in',
+    login: 'Inloggen',
     forgotPassword: 'Wachtwoord vergeten?',
     needAccount: 'Nog geen account?',
-    registerHere: 'Hier registreren',
+    registerHere: 'Registreer hier',
     twoFactorAuth: 'Tweeledige verificatie',
-    twoFactorInstructions: 'Voer de 6-cijferige code in die naar uw e-mail is gestuurd.',
-    verifyCode: 'Verifieer code',
+    twoFactorInstructions: 'Voer de 6-cijferige verificatiecode in die naar je e-mailadres is verzonden.',
+    verifyCode: 'Code verifiëren',
     backToLogin: 'Terug naar inloggen',
     navSchedule: 'Rooster',
     navChat: 'Chat & Berichten',
     navEarnings: 'Uren & Inkomsten',
-    navUnavailability: 'Beschikbaarheid',
+    navUnavailability: 'Niet beschikbaar',
     navSettings: 'Instellingen',
     logout: 'Uitloggen',
     weeklySchedule: 'Weekrooster',
     addShift: 'Dienst toevoegen',
     editShift: 'Dienst bewerken',
-    prevWeek: 'Vorige',
-    nextWeek: 'Volgende',
+    prevWeek: 'Vorige week',
+    nextWeek: 'Volgende week',
     communicationHub: 'Communicatiehub',
-    companyChat: 'Werkplek Chat',
+    companyChat: 'Bedrijfschat',
     directMessages: 'Privéberichten',
     send: 'Versturen',
-    conversations: 'Gesprekken',
-    newChat: 'Nieuw bericht',
-    selectConversation: 'Selecteer een gesprek',
-    timeEarningsTracker: 'Uren & Salarisregistratie',
-    payRateConfig: 'Tarieven & Frequentie',
+    teamMembers: 'Teamleden',
+    selectMemberToChat: 'Selecteer een teamlid om te chatten',
+    timeEarningsTracker: 'Uren- en inkomstenregistratie',
+    payRateConfig: 'Salaris en uitbetalingsperiode',
     hourly: 'Per uur',
     weekly: 'Per week',
     monthly: 'Per maand',
@@ -141,27 +154,29 @@ const i18n = {
     saveRate: 'Tarief opslaan',
     thisCurrentWeek: 'Deze week',
     thisCurrentMonth: 'Deze maand',
-    customCalculations: 'Aangepaste Berekeningen',
+    customCalculations: 'Aangepaste berekeningen',
     calculateEarningsSince: 'Bereken inkomsten vanaf startdatum:',
-    calculateSpecificWeek: 'Bereken voor specifieke week (kies dag):',
+    calculateSpecificWeek: 'Bereken voor een specifieke week:',
+    calculateCustomRange: 'Bereken voor aangepast datumbereik:',
+    rangeTo: 'tot',
     calculate: 'Berekenen',
-    workHoursLog: 'Gewerkte Uren Logboek',
+    workHoursLog: 'Geregistreerde werkuren',
     displayLabel: 'Weergave:',
     myLoggedHours: 'Mijn gewerkte uren',
-    teamLoggedHours: 'Team gewerkte uren',
-    logTime: 'Uren opslaan',
-    unavailabilityTitle: 'Niet-beschikbare Dagen & Verlof',
+    teamLoggedHours: 'Werkuren van het hele team',
+    logTime: 'Uren registreren',
+    unavailabilityTitle: 'Niet-beschikbare dagen & verlof',
     setUnavailable: 'Afwezigheid opgeven',
-    myUnavailableDays: 'Mijn geregistreerde afwezigheden',
-    teamUnavailableDays: 'Team afwezigheden',
+    myUnavailableDays: 'Mijn opgegeven afwezigheden',
+    teamUnavailableDays: 'Afwezigheden van het team',
     workspaceSettings: 'Werkplekinstellingen',
-    languageSettings: 'Taal van de applicatie',
+    languageSettings: 'Taalinstellingen',
     selectLanguage: 'Kies taal:',
     inviteMember: 'Lid uitnodigen',
     invite: 'Uitnodigen',
-    membersPermissions: 'Leden & Rechten',
-    workspaceMembers: 'Werkplek Leden',
-    createNewWorkspace: 'Nieuwe werkplek maken',
+    membersPermissions: 'Leden & Beheerdersrechten',
+    workspaceMembers: 'Leden van deze werkplek',
+    createNewWorkspace: 'Nieuwe werkplek aanmaken',
     cancel: 'Annuleren',
     create: 'Aanmaken',
     assignShift: 'Dienst toewijzen',
@@ -169,40 +184,53 @@ const i18n = {
     assign: 'Toewijzen',
     save: 'Opslaan',
     markUnavailableDate: 'Niet-beschikbare datum opslaan',
-    tradeShiftTitle: 'Dienst ruilen / aanbieden',
-    postToTeamChat: 'Plaats in Werkplek Chat (Iedereen kan deze overnemen)',
-    offerToSpecificMember: 'Aan specifiek lid aanbieden',
-    offerToMember: 'Kies lid:',
-    sendTradeOffer: 'Aanbod verzenden',
-    startDirectMessage: 'Start direct bericht',
-    selectTeamMember: 'Kies teamlid:',
-    openConversation: 'Gesprek openen',
+    tradeShiftTitle: 'Dienst aanbieden / ruilen',
+    postToTeamChat: 'In bedrijfschat plaatsen (iedereen kan overnemen)',
+    offerToSpecificMember: 'Aanbieden aan een specifiek lid',
+    offerToMember: 'Selecteer lid:',
+    sendTradeOffer: 'Aanbod versturen',
     roleAdmin: 'Beheerder',
     roleMember: 'Medewerker',
+    shiftStatusAssigned: 'Ingepland',
     shiftStatusConfirmed: 'Aanwezig',
-    shiftStatusDeclined: 'Afgemeld',
-    shiftStatusOffered: 'Ruil aangeboden',
-    shiftStatusCompleted: 'Afgerond',
+    shiftStatusNotNeeded: 'Je hoeft niet te komen',
+    shiftStatusOffered: 'Ter overname aangeboden',
+    shiftStatusCompleted: 'Gewerkt',
     confirmAttendance: 'Aanwezigheid bevestigen',
-    cantCome: 'Kan niet komen',
+    btnNoWork: 'Je hoeft niet te komen',
     offerTrade: 'Dienst ruilen',
-    markFinished: 'Afronden',
+    markFinished: 'Afronden als gewerkt',
     takeShiftBtn: 'Dienst overnemen',
     acceptTrade: 'Ruil accepteren',
     declineTrade: 'Ruil weigeren',
-    deleteShift: 'Dienst wissen',
+    deleteShift: 'Dienst verwijderen',
     editShiftBtn: 'Bewerken',
-    makeAdmin: 'Maak beheerder',
+    makeAdmin: 'Beheerder maken',
     revokeAdmin: 'Beheerder intrekken',
     removeMemberBtn: 'Verwijderen',
-    deleteLogBtn: 'Wissen',
-    hoursPrompt: 'Voer gewerkte uren in voor deze voltooide dienst:',
-    adminMinWarning: 'Kan beheerder niet verwijderen. Er moet minimaal 1 beheerder overblijven.',
+    deleteLogBtn: 'Verwijderen',
+    hoursPrompt: 'Voer het aantal gewerkte uren in:',
+    adminMinWarning: 'Kan beheerdersrol niet intrekken. Er moet minimaal 1 beheerder overblijven.',
     adminSoleDeleteWarning: 'Dit lid kan niet verwijderd worden omdat dit de enige beheerder is.',
-    unavailableTag: 'Afwezig',
+    unavailableTag: 'Niet beschikbaar',
     effectiveRateText: 'Effectief uurtarief:',
-    tradeShiftBroadcastTitle: 'Beschikbare Dienst ter overname',
-    shiftClaimedBy: 'Overgenomen door'
+    tradeShiftBroadcastTitle: 'Dienst ter overname',
+    tradeDirectOfferTitle: 'Directe dienstovername aangeboden',
+    shiftClaimedBy: 'Overgenomen door',
+    placeholderUsernameOrEmail: 'Gebruikersnaam of e-mail',
+    placeholderPassword: 'Wachtwoord',
+    placeholderCode: 'Voer 6-cijferige code in',
+    typeMessage: 'Typ een bericht...',
+    typePrivateMessage: 'Typ een privébericht...',
+    customWeeklyHoursPlaceholder: 'Uren per week (bijv. 40)',
+    notesOptional: 'Notities (optioneel)',
+    reasonPlaceholder: 'Reden (bijv. Vakantie, Ziekte)',
+    workspaceNamePlaceholder: 'Naam van werkplek',
+    descriptionPlaceholder: 'Omschrijving',
+    usernamePlaceholder: 'Gebruikersnaam',
+    hoursUnit: 'uur',
+    daysList: ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag'],
+    selectWorkspaceFirst: 'Selecteer of maak eerst een werkplek aan.'
   },
   de: {
     signIn: 'Anmelden',
@@ -223,15 +251,14 @@ const i18n = {
     weeklySchedule: 'Wochenplan',
     addShift: 'Schicht hinzufügen',
     editShift: 'Schicht bearbeiten',
-    prevWeek: 'Zurück',
-    nextWeek: 'Weiter',
+    prevWeek: 'Vorige Woche',
+    nextWeek: 'Nächste Woche',
     communicationHub: 'Kommunikationszentrale',
     companyChat: 'Team-Chat',
     directMessages: 'Direktnachrichten',
     send: 'Senden',
-    conversations: 'Unterhaltungen',
-    newChat: 'Neue Nachricht',
-    selectConversation: 'Unterhaltung wählen',
+    teamMembers: 'Teammitglieder',
+    selectMemberToChat: 'Mitglied zum Chatten auswählen',
     timeEarningsTracker: 'Zeit & Verdienstübersicht',
     payRateConfig: 'Lohn & Häufigkeit',
     hourly: 'Stündlich',
@@ -244,6 +271,8 @@ const i18n = {
     customCalculations: 'Benutzerdefinierte Berechnungen',
     calculateEarningsSince: 'Verdienst berechnen ab Datum:',
     calculateSpecificWeek: 'Berechnen für Kalenderwoche:',
+    calculateCustomRange: 'Berechnen für benutzerdefinierten Zeitraum:',
+    rangeTo: 'bis',
     calculate: 'Berechnen',
     workHoursLog: 'Arbeitszeitprotokoll',
     displayLabel: 'Anzeige:',
@@ -255,7 +284,7 @@ const i18n = {
     myUnavailableDays: 'Meine Abwesenheitstage',
     teamUnavailableDays: 'Team Abwesenheitstage',
     workspaceSettings: 'Arbeitsbereich-Einstellungen',
-    languageSettings: 'Sprache der Anwendung',
+    languageSettings: 'Spracheinstellungen',
     selectLanguage: 'Sprache wählen:',
     inviteMember: 'Mitglied einladen',
     invite: 'Einladen',
@@ -274,17 +303,15 @@ const i18n = {
     offerToSpecificMember: 'Bestimmtem Mitglied anbieten',
     offerToMember: 'Mitglied wählen:',
     sendTradeOffer: 'Angebot senden',
-    startDirectMessage: 'Direktnachricht starten',
-    selectTeamMember: 'Mitglied wählen:',
-    openConversation: 'Chat öffnen',
     roleAdmin: 'Administrator',
     roleMember: 'Mitarbeiter',
+    shiftStatusAssigned: 'Eingeteilt',
     shiftStatusConfirmed: 'Bestätigt',
-    shiftStatusDeclined: 'Abgelehnt',
+    shiftStatusNotNeeded: 'Du musst nicht kommen',
     shiftStatusOffered: 'Angeboten',
     shiftStatusCompleted: 'Abgeschlossen',
     confirmAttendance: 'Teilnahme bestätigen',
-    cantCome: 'Kann nicht kommen',
+    btnNoWork: 'Du musst nicht kommen',
     offerTrade: 'Schicht tauschen',
     markFinished: 'Abschließen',
     takeShiftBtn: 'Schicht übernehmen',
@@ -302,7 +329,22 @@ const i18n = {
     unavailableTag: 'Abwesend',
     effectiveRateText: 'Effektiver Stundensatz:',
     tradeShiftBroadcastTitle: 'Offene Schicht zur Übernahme',
-    shiftClaimedBy: 'Übernommen von'
+    tradeDirectOfferTitle: 'Direktes Schichtangebot',
+    shiftClaimedBy: 'Übernommen von',
+    placeholderUsernameOrEmail: 'Benutzername oder E-Mail',
+    placeholderPassword: 'Passwort',
+    placeholderCode: '6-stelligen Code eingeben',
+    typeMessage: 'Nachricht schreiben...',
+    typePrivateMessage: 'Privatnachricht schreiben...',
+    customWeeklyHoursPlaceholder: 'Wochenstunden (z. B. 40)',
+    notesOptional: 'Notizen (optional)',
+    reasonPlaceholder: 'Grund (z. B. Urlaub, Krank)',
+    workspaceNamePlaceholder: 'Name des Arbeitsbereichs',
+    descriptionPlaceholder: 'Beschreibung',
+    usernamePlaceholder: 'Benutzername',
+    hoursUnit: 'Std.',
+    daysList: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+    selectWorkspaceFirst: 'Bitte wählen oder erstellen Sie zuerst einen Arbeitsbereich.'
   },
   es: {
     signIn: 'Iniciar sesión',
@@ -323,15 +365,14 @@ const i18n = {
     weeklySchedule: 'Horario Semanal',
     addShift: 'Añadir turno',
     editShift: 'Editar turno',
-    prevWeek: 'Anterior',
-    nextWeek: 'Siguiente',
+    prevWeek: 'Semana anterior',
+    nextWeek: 'Semana siguiente',
     communicationHub: 'Centro de Comunicación',
     companyChat: 'Chat de Trabajo',
     directMessages: 'Mensajes Directos',
     send: 'Enviar',
-    conversations: 'Conversaciones',
-    newChat: 'Nuevo mensaje',
-    selectConversation: 'Seleccione conversación',
+    teamMembers: 'Miembros del equipo',
+    selectMemberToChat: 'Seleccione un miembro para chatear',
     timeEarningsTracker: 'Control de Horas y Ganancias',
     payRateConfig: 'Tarifa y Frecuencia de Pago',
     hourly: 'Por hora',
@@ -344,6 +385,8 @@ const i18n = {
     customCalculations: 'Cálculos Personalizados',
     calculateEarningsSince: 'Calcular ganancias desde fecha:',
     calculateSpecificWeek: 'Calcular semana específica:',
+    calculateCustomRange: 'Calcular para rango personalizado:',
+    rangeTo: 'hasta',
     calculate: 'Calcular',
     workHoursLog: 'Registro de Horas Trabajadas',
     displayLabel: 'Mostrar:',
@@ -374,17 +417,15 @@ const i18n = {
     offerToSpecificMember: 'Ofrecer a miembro específico',
     offerToMember: 'Seleccionar miembro:',
     sendTradeOffer: 'Enviar oferta',
-    startDirectMessage: 'Iniciar mensaje directo',
-    selectTeamMember: 'Seleccionar miembro:',
-    openConversation: 'Abrir chat',
     roleAdmin: 'Administrador',
     roleMember: 'Miembro',
+    shiftStatusAssigned: 'Asignado',
     shiftStatusConfirmed: 'Confirmado',
-    shiftStatusDeclined: 'Declinado',
+    shiftStatusNotNeeded: 'No tienes que venir',
     shiftStatusOffered: 'Ofrecido',
     shiftStatusCompleted: 'Finalizado',
     confirmAttendance: 'Confirmar asistencia',
-    cantCome: 'No puedo asistir',
+    btnNoWork: 'No tienes que venir',
     offerTrade: 'Cambiar turno',
     markFinished: 'Finalizar',
     takeShiftBtn: 'Tomar turno',
@@ -402,7 +443,22 @@ const i18n = {
     unavailableTag: 'No disponible',
     effectiveRateText: 'Tarifa efectiva por hora:',
     tradeShiftBroadcastTitle: 'Turno Disponible para Tomar',
-    shiftClaimedBy: 'Tomado por'
+    tradeDirectOfferTitle: 'Oferta directa de cambio de turno',
+    shiftClaimedBy: 'Tomado por',
+    placeholderUsernameOrEmail: 'Usuario o correo electrónico',
+    placeholderPassword: 'Contraseña',
+    placeholderCode: 'Código de 6 dígitos',
+    typeMessage: 'Escribe un mensaje...',
+    typePrivateMessage: 'Escribe un mensaje privado...',
+    customWeeklyHoursPlaceholder: 'Horas semanales (ej. 40)',
+    notesOptional: 'Notas (opcional)',
+    reasonPlaceholder: 'Motivo (ej. Vacaciones, Médico)',
+    workspaceNamePlaceholder: 'Nombre del espacio',
+    descriptionPlaceholder: 'Descripción',
+    usernamePlaceholder: 'Nombre de usuario',
+    hoursUnit: 'hs',
+    daysList: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+    selectWorkspaceFirst: 'Por favor seleccione o cree un espacio primero.'
   },
   fr: {
     signIn: 'Connexion',
@@ -423,15 +479,14 @@ const i18n = {
     weeklySchedule: 'Planning Hebdomadaire',
     addShift: 'Ajouter un quart',
     editShift: 'Modifier un quart',
-    prevWeek: 'Précédent',
-    nextWeek: 'Suivant',
+    prevWeek: 'Semaine précédente',
+    nextWeek: 'Semaine suivante',
     communicationHub: 'Hub de Communication',
     companyChat: 'Chat d\'Équipe',
     directMessages: 'Messages Privés',
     send: 'Envoyer',
-    conversations: 'Conversations',
-    newChat: 'Nouveau message',
-    selectConversation: 'Sélectionner une conversation',
+    teamMembers: 'Membres de l\'équipe',
+    selectMemberToChat: 'Sélectionner un membre pour discuter',
     timeEarningsTracker: 'Suivi des Heures et Revenus',
     payRateConfig: 'Taux de Rémunération',
     hourly: 'Horaire',
@@ -444,6 +499,8 @@ const i18n = {
     customCalculations: 'Calculs Personnalisés',
     calculateEarningsSince: 'Calculer les revenus depuis le :',
     calculateSpecificWeek: 'Calculer pour une semaine spécifique :',
+    calculateCustomRange: 'Calculer pour une période personnalisée :',
+    rangeTo: 'à',
     calculate: 'Calculer',
     workHoursLog: 'Journal des Heures Travaillées',
     displayLabel: 'Affichage :',
@@ -455,7 +512,7 @@ const i18n = {
     myUnavailableDays: 'Mes dates d\'indisponibilité',
     teamUnavailableDays: 'Indisponibilités de l\'équipe',
     workspaceSettings: 'Paramètres de l\'Espace',
-    languageSettings: 'Langue de l\'application',
+    languageSettings: 'Paramètres de langue',
     selectLanguage: 'Sélectionner la langue :',
     inviteMember: 'Inviter un membre',
     invite: 'Inviter',
@@ -474,17 +531,15 @@ const i18n = {
     offerToSpecificMember: 'Proposer à un membre précis',
     offerToMember: 'Choisir le membre :',
     sendTradeOffer: 'Envoyer l\'offre',
-    startDirectMessage: 'Nouveau message privé',
-    selectTeamMember: 'Choisir le membre :',
-    openConversation: 'Ouvrir la discussion',
     roleAdmin: 'Administrateur',
     roleMember: 'Membre',
+    shiftStatusAssigned: 'Planifié',
     shiftStatusConfirmed: 'Présent',
-    shiftStatusDeclined: 'Absent',
+    shiftStatusNotNeeded: 'Tu n\'as pas besoin de venir',
     shiftStatusOffered: 'Échange proposé',
     shiftStatusCompleted: 'Terminé',
     confirmAttendance: 'Confirmer présence',
-    cantCome: 'Ne peut pas venir',
+    btnNoWork: 'Tu n\'as pas besoin de venir',
     offerTrade: 'Échanger le quart',
     markFinished: 'Terminer le quart',
     takeShiftBtn: 'Prendre le quart',
@@ -502,7 +557,22 @@ const i18n = {
     unavailableTag: 'Indisponible',
     effectiveRateText: 'Taux horaire effectif :',
     tradeShiftBroadcastTitle: 'Quart Disponible à Prendre',
-    shiftClaimedBy: 'Pris par'
+    tradeDirectOfferTitle: 'Offre directe d\'échange de quart',
+    shiftClaimedBy: 'Pris par',
+    placeholderUsernameOrEmail: 'Nom d\'utilisateur ou e-mail',
+    placeholderPassword: 'Mot de passe',
+    placeholderCode: 'Code à 6 chiffres',
+    typeMessage: 'Écrire un message...',
+    typePrivateMessage: 'Écrire un message privé...',
+    customWeeklyHoursPlaceholder: 'Heures / semaine (ex. 40)',
+    notesOptional: 'Notes (facultatif)',
+    reasonPlaceholder: 'Motif (ex. Congé, Maladie)',
+    workspaceNamePlaceholder: 'Nom de l\'espace',
+    descriptionPlaceholder: 'Description',
+    usernamePlaceholder: 'Nom d\'utilisateur',
+    hoursUnit: 'h',
+    daysList: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+    selectWorkspaceFirst: 'Veuillez d\'abord sélectionner ou créer un espace.'
   }
 };
 
@@ -521,6 +591,13 @@ function applyLanguage(lang) {
     }
   });
 
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (key && i18n[lang] && i18n[lang][key]) {
+      el.setAttribute('placeholder', i18n[lang][key]);
+    }
+  });
+
   if (elements.languageSelect) {
     elements.languageSelect.value = lang;
   }
@@ -531,6 +608,7 @@ let currentUser = null;
 let currentRoomId = null;
 let rooms = [];
 let dmRooms = [];
+let activeDmTargetUserId = null;
 let activeDmRoomId = null;
 let activeTradeShiftId = null;
 
@@ -538,6 +616,7 @@ let localData = {
   personal: {
     rate: 0,
     period: 'hourly',
+    weeklyHours: 40,
     lang: 'en'
   },
   roomState: {
@@ -587,8 +666,7 @@ const elements = {
   companyChatInput: document.getElementById('company-chat-input'),
   companyChatImage: document.getElementById('company-chat-image'),
   
-  dmRoomsList: document.getElementById('dm-rooms-list'),
-  btnNewDm: document.getElementById('btn-new-dm'),
+  dmMembersList: document.getElementById('dm-members-list'),
   dmActiveHeader: document.getElementById('dm-active-header'),
   dmActiveTitle: document.getElementById('dm-active-title'),
   dmChatMessages: document.getElementById('dm-chat-messages'),
@@ -598,6 +676,7 @@ const elements = {
   
   payRateInput: document.getElementById('pay-rate-input'),
   payPeriodSelect: document.getElementById('pay-period-select'),
+  customWeeklyHoursInput: document.getElementById('custom-weekly-hours-input'),
   btnSaveRate: document.getElementById('btn-save-rate'),
   effectiveRateDisplay: document.getElementById('effective-rate-display'),
   weekHours: document.getElementById('week-hours'),
@@ -611,6 +690,10 @@ const elements = {
   querySpecificWeek: document.getElementById('query-specific-week'),
   btnCalcWeek: document.getElementById('btn-calc-week'),
   calcWeekResult: document.getElementById('calc-week-result'),
+  queryRangeStart: document.getElementById('query-range-start'),
+  queryRangeEnd: document.getElementById('query-range-end'),
+  btnCalcRange: document.getElementById('btn-calc-range'),
+  calcRangeResult: document.getElementById('calc-range-result'),
   
   hoursFilterSelect: document.getElementById('hours-filter-select'),
   logHoursForm: document.getElementById('log-hours-form'),
@@ -663,10 +746,6 @@ const elements = {
   tradeModeDirect: document.getElementById('trade-mode-direct'),
   tradeDirectSelectContainer: document.getElementById('trade-direct-select-container'),
   tradeTargetUser: document.getElementById('trade-target-user'),
-  
-  modalNewDm: document.getElementById('modal-new-dm'),
-  newDmForm: document.getElementById('new-dm-form'),
-  dmTargetUser: document.getElementById('dm-target-user'),
   
   closeModals: document.querySelectorAll('.close-modal')
 };
@@ -820,6 +899,7 @@ function handleLogout() {
   rooms = [];
   dmRooms = [];
   currentRoomId = null;
+  activeDmTargetUserId = null;
   activeDmRoomId = null;
   elements.appContainer.classList.remove('active');
   elements.authContainer.classList.add('active');
@@ -872,11 +952,12 @@ async function pullPersonalData() {
       if (typeof payload === 'object') {
         localData.personal.rate = Number(payload.rate) || 0;
         localData.personal.period = payload.period || 'hourly';
+        localData.personal.weeklyHours = Number(payload.weeklyHours) || 40;
         localData.personal.lang = payload.lang || 'en';
       }
     }
   } catch (err) {
-    localData.personal = { rate: 0, period: 'hourly', lang: 'en' };
+    localData.personal = { rate: 0, period: 'hourly', weeklyHours: 40, lang: 'en' };
   }
 }
 
@@ -893,9 +974,11 @@ elements.languageSelect.addEventListener('change', async (e) => {
   if (room) {
     updateRoleUI(room);
     renderSchedule();
+    renderCompanyChat();
     renderEarnings();
     renderUnavailability();
     renderSettings(room);
+    renderDmMembersList();
   }
 });
 
@@ -972,6 +1055,7 @@ function selectRoom(roomId) {
   renderEarnings();
   renderUnavailability();
   renderSettings(room);
+  renderDmMembersList();
 }
 
 function updateRoleUI(room) {
@@ -1043,7 +1127,6 @@ elements.closeModals.forEach(btn => {
     elements.modalEditShift.classList.remove('active');
     elements.modalAddUnavailable.classList.remove('active');
     elements.modalTradeShift.classList.remove('active');
-    elements.modalNewDm.classList.remove('active');
     activeTradeShiftId = null;
   });
 });
@@ -1071,7 +1154,7 @@ elements.createWorkspaceForm.addEventListener('submit', async (e) => {
 
 function renderSchedule() {
   elements.calendarGrid.innerHTML = '';
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = t('daysList') || ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const activeUserId = getUserId(currentUser);
   const room = rooms.find(r => getRoomKey(r) === currentRoomId);
   const amAdmin = room ? isUserAdmin(room, activeUserId) : false;
@@ -1111,7 +1194,7 @@ function renderSchedule() {
 
     dayShifts.forEach(shift => {
       const card = document.createElement('div');
-      card.className = `shift-card ${shift.status === 'completed' ? 'completed' : ''}`;
+      card.className = `shift-card ${shift.status}`;
       
       const titleSpan = document.createElement('span');
       titleSpan.innerHTML = `<strong>${shift.displayName}</strong><br>${shift.time}`;
@@ -1119,14 +1202,12 @@ function renderSchedule() {
 
       const statusBadge = document.createElement('span');
       const statusKey = shift.status === 'confirmed' ? 'shiftStatusConfirmed' :
-                        shift.status === 'declined' ? 'shiftStatusDeclined' :
+                        shift.status === 'not_needed' ? 'shiftStatusNotNeeded' :
                         shift.status === 'offered' ? 'shiftStatusOffered' :
-                        shift.status === 'completed' ? 'shiftStatusCompleted' : '';
-      if (statusKey) {
-        statusBadge.className = `status-badge ${shift.status}`;
-        statusBadge.textContent = t(statusKey);
-        card.appendChild(statusBadge);
-      }
+                        shift.status === 'completed' ? 'shiftStatusCompleted' : 'shiftStatusAssigned';
+      statusBadge.className = `status-badge ${shift.status}`;
+      statusBadge.textContent = t(statusKey);
+      card.appendChild(statusBadge);
 
       const actionsDiv = document.createElement('div');
       actionsDiv.className = 'shift-actions';
@@ -1135,21 +1216,13 @@ function renderSchedule() {
       const isOpenOffer = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.mode === 'open';
       const isDirectOfferToMe = shift.status === 'offered' && shift.tradeOffer && shift.tradeOffer.toUserId === activeUserId;
 
-      if (isMyShift && shift.status !== 'completed') {
+      if (isMyShift && shift.status !== 'completed' && shift.status !== 'not_needed') {
         if (shift.status !== 'confirmed') {
           const btnConfirm = document.createElement('button');
           btnConfirm.className = 'btn-secondary';
           btnConfirm.textContent = t('confirmAttendance');
           btnConfirm.onclick = () => updateShiftStatus(shift.id, 'confirmed');
           actionsDiv.appendChild(btnConfirm);
-        }
-
-        if (shift.status !== 'declined') {
-          const btnDecline = document.createElement('button');
-          btnDecline.className = 'btn-secondary';
-          btnDecline.textContent = t('cantCome');
-          btnDecline.onclick = () => updateShiftStatus(shift.id, 'declined');
-          actionsDiv.appendChild(btnDecline);
         }
 
         const btnTrade = document.createElement('button');
@@ -1182,6 +1255,14 @@ function renderSchedule() {
       }
 
       if (amAdmin) {
+        if (shift.status !== 'completed' && shift.status !== 'not_needed') {
+          const btnNoWork = document.createElement('button');
+          btnNoWork.className = 'btn-secondary';
+          btnNoWork.textContent = t('btnNoWork');
+          btnNoWork.onclick = () => updateShiftStatus(shift.id, 'not_needed');
+          actionsDiv.appendChild(btnNoWork);
+        }
+
         const btnEdit = document.createElement('button');
         btnEdit.className = 'btn-secondary';
         btnEdit.textContent = t('editShiftBtn');
@@ -1315,7 +1396,7 @@ async function completeShift(shift) {
     displayName: shift.displayName,
     date: shift.date,
     duration: duration,
-    notes: `Shift: ${shift.time}`,
+    notes: `${t('navSchedule')}: ${shift.time}`,
     shiftId: shift.id
   };
 
@@ -1385,8 +1466,9 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
       shiftTime: shift.time,
       ownerId: getUserId(currentUser),
       ownerDisplayName: getUserDisplayName(currentUser),
+      targetDisplayName: null,
       author: 'System',
-      text: `${getUserDisplayName(currentUser)} put their shift on ${shift.date} (${shift.time}) up for grabs!`,
+      text: `${getUserDisplayName(currentUser)}: ${shift.date} (${shift.time})`,
       timestamp: new Date().toISOString()
     };
     localData.roomState.messages.push(sysMsg);
@@ -1399,6 +1481,22 @@ elements.tradeShiftForm.addEventListener('submit', async (e) => {
       toUserId: targetOpt.value,
       toDisplayName: targetOpt.dataset.displayName
     };
+
+    const sysMsg = {
+      id: Date.now().toString(),
+      type: 'trade_direct',
+      shiftId: shift.id,
+      shiftDate: shift.date,
+      shiftTime: shift.time,
+      ownerId: getUserId(currentUser),
+      ownerDisplayName: getUserDisplayName(currentUser),
+      targetUserId: targetOpt.value,
+      targetDisplayName: targetOpt.dataset.displayName,
+      author: 'System',
+      text: `${getUserDisplayName(currentUser)} -> ${targetOpt.dataset.displayName}: ${shift.date} (${shift.time})`,
+      timestamp: new Date().toISOString()
+    };
+    localData.roomState.messages.push(sysMsg);
   }
 
   await pushRoomData();
@@ -1423,7 +1521,7 @@ async function claimShift(shiftId) {
     id: Date.now().toString(),
     userId: getUserId(currentUser),
     author: 'System',
-    text: `${getUserDisplayName(currentUser)} accepted and claimed the shift from ${prevOwnerName} for ${shift.date} (${shift.time}).`,
+    text: `${getUserDisplayName(currentUser)} - ${shift.date} (${shift.time}) [${prevOwnerName}]`,
     timestamp: new Date().toISOString()
   };
   localData.roomState.messages.push(claimMsg);
@@ -1571,19 +1669,24 @@ function renderCompanyChat() {
   (localData.roomState.messages || []).forEach(msg => {
     const wrapper = document.createElement('div');
 
-    if (msg.type === 'trade_broadcast') {
+    if (msg.type === 'trade_broadcast' || msg.type === 'trade_direct') {
       wrapper.className = 'chat-msg system';
       const card = document.createElement('div');
       card.className = 'trade-broadcast-card';
 
       const cardHead = document.createElement('div');
       cardHead.className = 'trade-card-header';
-      cardHead.innerHTML = `<strong>${t('tradeShiftBroadcastTitle')}</strong><span class="muted-note">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+      const titleText = msg.type === 'trade_broadcast' ? t('tradeShiftBroadcastTitle') : t('tradeDirectOfferTitle');
+      cardHead.innerHTML = `<strong>${titleText}</strong><span class="muted-note">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
       card.appendChild(cardHead);
 
       const cardDetails = document.createElement('div');
       cardDetails.className = 'trade-card-details';
-      cardDetails.textContent = `${msg.ownerDisplayName} is offering their shift on ${msg.shiftDate} (${msg.shiftTime}).`;
+      if (msg.type === 'trade_broadcast') {
+        cardDetails.textContent = `${msg.ownerDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
+      } else {
+        cardDetails.textContent = `${msg.ownerDisplayName} -> ${msg.targetDisplayName}: ${msg.shiftDate} (${msg.shiftTime})`;
+      }
       card.appendChild(cardDetails);
 
       const cardActions = document.createElement('div');
@@ -1591,10 +1694,11 @@ function renderCompanyChat() {
 
       const correspondingShift = localData.roomState.shifts.find(s => s.id === msg.shiftId);
       if (correspondingShift && correspondingShift.status === 'offered') {
-        if (msg.ownerId !== activeUserId) {
+        const canTake = msg.type === 'trade_broadcast' ? (msg.ownerId !== activeUserId) : (msg.targetUserId === activeUserId);
+        if (canTake) {
           const btnTake = document.createElement('button');
           btnTake.className = 'btn-primary btn-sm';
-          btnTake.textContent = t('takeShiftBtn');
+          btnTake.textContent = msg.type === 'trade_broadcast' ? t('takeShiftBtn') : t('acceptTrade');
           btnTake.onclick = () => claimShift(msg.shiftId);
           cardActions.appendChild(btnTake);
         }
@@ -1665,40 +1769,70 @@ async function pullDmRooms() {
   try {
     const res = await apiCall(`/external/rooms?appId=${DM_APP_KEY}`);
     dmRooms = Array.isArray(res) ? res : (res && res.rooms) ? res.rooms : [];
-    renderDmRoomsList();
+    renderDmMembersList();
   } catch (err) {
     dmRooms = [];
   }
 }
 
-function renderDmRoomsList() {
-  elements.dmRoomsList.innerHTML = '';
+function renderDmMembersList() {
+  elements.dmMembersList.innerHTML = '';
+  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
+  if (!room) return;
+
   const activeUserId = getUserId(currentUser);
-
-  dmRooms.forEach(room => {
-    const roomId = getRoomKey(room);
-    const otherMembers = (room.members || []).filter(m => getUserId(m) !== activeUserId);
-    const title = otherMembers.length > 0 ? getUserDisplayName(otherMembers[0]) : room.name;
-
+  const members = Array.isArray(room.members) ? room.members : [];
+  
+  members.filter(m => getUserId(m) !== activeUserId).forEach(m => {
+    const targetId = getUserId(m);
     const li = document.createElement('li');
-    li.className = `dm-room-item ${roomId === activeDmRoomId ? 'active' : ''}`;
-    li.textContent = title;
-    li.onclick = () => selectDmRoom(roomId);
-    elements.dmRoomsList.appendChild(li);
+    li.className = `dm-room-item ${targetId === activeDmTargetUserId ? 'active' : ''}`;
+    li.textContent = `${getUserDisplayName(m)} (@${m.username})`;
+    li.onclick = () => openDmWithUser(m);
+    elements.dmMembersList.appendChild(li);
   });
+}
+
+async function openDmWithUser(targetMember) {
+  const targetId = getUserId(targetMember);
+  activeDmTargetUserId = targetId;
+  renderDmMembersList();
+
+  elements.dmActiveTitle.textContent = `${getUserDisplayName(targetMember)} (@${targetMember.username})`;
+  elements.dmChatForm.classList.remove('hidden');
+
+  const activeUserId = getUserId(currentUser);
+  let existingRoom = dmRooms.find(r => {
+    const members = Array.isArray(r.members) ? r.members : [];
+    const ids = members.map(m => getUserId(m));
+    return ids.includes(activeUserId) && ids.includes(targetId);
+  });
+
+  if (!existingRoom) {
+    try {
+      const created = await apiCall('/external/rooms', 'POST', {
+        name: `DM_${[activeUserId, targetId].sort().join('_')}`,
+        description: 'Direct Message',
+        appId: DM_APP_KEY
+      });
+      existingRoom = created.room || created;
+      const newRoomId = getRoomKey(existingRoom);
+      await apiCall(`/external/rooms/${newRoomId}/members`, 'POST', { username: targetMember.username });
+      await pullDmRooms();
+    } catch (err) {
+      alert(err.message);
+      return;
+    }
+  }
+
+  activeDmRoomId = getRoomKey(existingRoom);
+  selectDmRoom(activeDmRoomId);
 }
 
 async function selectDmRoom(roomId) {
   activeDmRoomId = roomId;
-  renderDmRoomsList();
-  
   const room = dmRooms.find(r => getRoomKey(r) === roomId);
   if (!room) return;
-
-  const activeUserId = getUserId(currentUser);
-  const otherMembers = (room.members || []).filter(m => getUserId(m) !== activeUserId);
-  elements.dmActiveTitle.textContent = otherMembers.length > 0 ? getUserDisplayName(otherMembers[0]) : room.name;
-  elements.dmChatForm.classList.remove('hidden');
 
   if (room.cases && room.cases.length > 0 && room.cases[0].blocks && room.cases[0].blocks[0]) {
     try {
@@ -1784,51 +1918,12 @@ elements.dmChatForm.addEventListener('submit', async (e) => {
   renderDmMessages();
 });
 
-elements.btnNewDm.addEventListener('click', () => {
-  const room = rooms.find(r => getRoomKey(r) === currentRoomId);
-  if (!room) {
-    alert('Please join or select a workspace first.');
-    return;
-  }
-
-  elements.dmTargetUser.innerHTML = '';
-  const activeUserId = getUserId(currentUser);
-  const members = Array.isArray(room.members) ? room.members : [];
-  members.filter(m => getUserId(m) !== activeUserId).forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m.username;
-    opt.textContent = `${getUserDisplayName(m)} (@${m.username})`;
-    elements.dmTargetUser.appendChild(opt);
-  });
-
-  elements.modalNewDm.classList.add('active');
-});
-
-elements.newDmForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const targetUsername = elements.dmTargetUser.value;
-  try {
-    const newRoom = await apiCall('/external/rooms', 'POST', {
-      name: `DM: ${targetUsername}`,
-      description: 'Direct Message',
-      appId: DM_APP_KEY
-    });
-    const newRoomId = getRoomKey(newRoom) || (newRoom.room && getRoomKey(newRoom.room));
-    await apiCall(`/external/rooms/${newRoomId}/members`, 'POST', { username: targetUsername });
-    
-    elements.modalNewDm.classList.remove('active');
-    await pullDmRooms();
-    selectDmRoom(newRoomId);
-  } catch (err) {
-    alert(err.message);
-  }
-});
-
-function calculateEffectiveHourlyRate(rate, period) {
+function calculateEffectiveHourlyRate(rate, period, weeklyHours = 40) {
   const num = parseFloat(rate) || 0;
-  if (period === 'weekly') return num / 40;
-  if (period === 'monthly') return num / 160;
-  if (period === 'yearly') return num / 2080;
+  const standardHours = parseFloat(weeklyHours) || 40;
+  if (period === 'weekly') return num / standardHours;
+  if (period === 'monthly') return num / (standardHours * 4.333);
+  if (period === 'yearly') return num / (standardHours * 52);
   return num;
 }
 
@@ -1839,23 +1934,26 @@ function getUserRateConfig(userId) {
   if (userId === getUserId(currentUser)) {
     return {
       rate: localData.personal.rate || 0,
-      period: localData.personal.period || 'hourly'
+      period: localData.personal.period || 'hourly',
+      weeklyHours: localData.personal.weeklyHours || 40
     };
   }
-  return { rate: 0, period: 'hourly' };
+  return { rate: 0, period: 'hourly', weeklyHours: 40 };
 }
 
 elements.btnSaveRate.addEventListener('click', async () => {
   const activeUserId = getUserId(currentUser);
   const newRate = parseFloat(elements.payRateInput.value) || 0;
   const newPeriod = elements.payPeriodSelect.value;
+  const newWeeklyHours = parseFloat(elements.customWeeklyHoursInput.value) || 40;
   
   localData.personal.rate = newRate;
   localData.personal.period = newPeriod;
+  localData.personal.weeklyHours = newWeeklyHours;
   await pushPersonalData();
   
   if (!localData.roomState.userRates) localData.roomState.userRates = {};
-  localData.roomState.userRates[activeUserId] = { rate: newRate, period: newPeriod };
+  localData.roomState.userRates[activeUserId] = { rate: newRate, period: newPeriod, weeklyHours: newWeeklyHours };
   await pushRoomData();
   
   renderEarnings();
@@ -1894,8 +1992,9 @@ function renderEarnings() {
   
   elements.payRateInput.value = myRateConfig.rate || '';
   elements.payPeriodSelect.value = myRateConfig.period || 'hourly';
+  elements.customWeeklyHoursInput.value = myRateConfig.weeklyHours || 40;
   
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
   elements.effectiveRateDisplay.textContent = `${t('effectiveRateText')} $${effectiveHourly.toFixed(2)}/hr`;
   
   elements.hoursLogList.innerHTML = '';
@@ -1916,10 +2015,10 @@ function renderEarnings() {
     }
   });
   
-  elements.weekHours.textContent = `${myWeekHours} hrs`;
+  elements.weekHours.textContent = `${myWeekHours} ${t('hoursUnit')}`;
   elements.weekEarnings.textContent = `$${(myWeekHours * effectiveHourly).toFixed(2)}`;
   
-  elements.monthHours.textContent = `${myMonthHours} hrs`;
+  elements.monthHours.textContent = `${myMonthHours} ${t('hoursUnit')}`;
   elements.monthEarnings.textContent = `$${(myMonthHours * effectiveHourly).toFixed(2)}`;
   
   const filter = elements.hoursFilterSelect.value;
@@ -1936,11 +2035,11 @@ function renderEarnings() {
     meta.className = 'log-item-meta';
     
     const title = document.createElement('span');
-    title.innerHTML = `<strong>${log.displayName}</strong> on ${log.date}`;
+    title.innerHTML = `<strong>${log.displayName}</strong> - ${log.date}`;
     
     const duration = document.createElement('span');
     duration.className = 'muted-note';
-    duration.textContent = `${log.duration} hrs ${log.notes ? `(${log.notes})` : ''}`;
+    duration.textContent = `${log.duration} ${t('hoursUnit')} ${log.notes ? `(${log.notes})` : ''}`;
     
     meta.appendChild(title);
     meta.appendChild(duration);
@@ -1974,7 +2073,7 @@ elements.btnCalcSince.addEventListener('click', () => {
   const startDate = new Date(startDateStr);
   const activeUserId = getUserId(currentUser);
   const myRateConfig = getUserRateConfig(activeUserId);
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
 
   let totalHrs = 0;
   (localData.roomState.timeLogs || []).forEach(log => {
@@ -1984,7 +2083,7 @@ elements.btnCalcSince.addEventListener('click', () => {
   });
 
   const totalEarnings = (totalHrs * effectiveHourly).toFixed(2);
-  elements.calcSinceResult.textContent = `${totalHrs} hrs = $${totalEarnings}`;
+  elements.calcSinceResult.textContent = `${totalHrs} ${t('hoursUnit')} = $${totalEarnings}`;
 });
 
 elements.btnCalcWeek.addEventListener('click', () => {
@@ -1997,7 +2096,7 @@ elements.btnCalcWeek.addEventListener('click', () => {
 
   const activeUserId = getUserId(currentUser);
   const myRateConfig = getUserRateConfig(activeUserId);
-  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
 
   let totalHrs = 0;
   (localData.roomState.timeLogs || []).forEach(log => {
@@ -2010,7 +2109,34 @@ elements.btnCalcWeek.addEventListener('click', () => {
   });
 
   const totalEarnings = (totalHrs * effectiveHourly).toFixed(2);
-  elements.calcWeekResult.textContent = `${totalHrs} hrs = $${totalEarnings}`;
+  elements.calcWeekResult.textContent = `${totalHrs} ${t('hoursUnit')} = $${totalEarnings}`;
+});
+
+elements.btnCalcRange.addEventListener('click', () => {
+  const startStr = elements.queryRangeStart.value;
+  const endStr = elements.queryRangeEnd.value;
+  if (!startStr || !endStr) return;
+
+  const startDate = new Date(startStr);
+  const endDate = new Date(endStr);
+  endDate.setHours(23, 59, 59, 999);
+
+  const activeUserId = getUserId(currentUser);
+  const myRateConfig = getUserRateConfig(activeUserId);
+  const effectiveHourly = calculateEffectiveHourlyRate(myRateConfig.rate, myRateConfig.period, myRateConfig.weeklyHours);
+
+  let totalHrs = 0;
+  (localData.roomState.timeLogs || []).forEach(log => {
+    if (log.userId === activeUserId) {
+      const logD = new Date(log.date);
+      if (logD >= startDate && logD <= endDate) {
+        totalHrs += log.duration;
+      }
+    }
+  });
+
+  const totalEarnings = (totalHrs * effectiveHourly).toFixed(2);
+  elements.calcRangeResult.textContent = `${totalHrs} ${t('hoursUnit')} = $${totalEarnings}`;
 });
 
 function renderSettings(room) {
@@ -2124,7 +2250,7 @@ async function removeMember(roomId, userId) {
 }
 
 function renderEmptyState() {
-  elements.calendarGrid.innerHTML = '<div style="padding: 2rem; grid-column: 1 / -1; text-align: center; color: var(--text-muted);">No workspace selected. Create or join one.</div>';
+  elements.calendarGrid.innerHTML = '<div style="padding: 2rem; grid-column: 1 / -1; text-align: center; color: var(--text-muted);">' + t('selectWorkspaceFirst') + '</div>';
   elements.companyChatMessages.innerHTML = '';
   elements.scheduleRoleBadge.textContent = '';
   elements.btnAddShift.classList.add('hidden');
