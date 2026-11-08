@@ -266,9 +266,14 @@
             <button type="submit" class="btn-secondary" data-i18n="invite">Invite</button>
           </form>
         </div>
-        <div class="card">
+        <div class="card mb-2">
           <h3 data-i18n="membersPermissions">Workspace Members & Permissions</h3>
           <ul id="member-list" class="log-list"></ul>
+        </div>
+        <div class="card danger-zone">
+          <h3 data-i18n="dangerZone">Danger Zone</h3>
+          <p class="muted-note mb-1" data-i18n="deleteWorkspaceWarning">Deleting this workspace will permanently erase all shifts, messages, and settings for all members.</p>
+          <button id="btn-delete-workspace" class="btn-danger" data-i18n="deleteWorkspace">Delete Workspace</button>
         </div>
       </div>
 
@@ -293,6 +298,17 @@
         <button type="submit" class="btn-primary" data-i18n="create">Create</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div id="modal-delete-workspace" class="modal">
+  <div class="modal-content">
+    <h3 data-i18n="confirmDeleteWorkspaceTitle">Delete Workspace</h3>
+    <p class="mb-2" data-i18n="confirmDeleteWorkspaceText">Are you sure you want to permanently delete this workspace? This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary close-modal" data-i18n="cancel">Cancel</button>
+      <button type="button" id="btn-confirm-delete-workspace" class="btn-danger" data-i18n="deleteWorkspace">Delete Workspace</button>
+    </div>
   </div>
 </div>
 
